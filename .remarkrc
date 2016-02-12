@@ -1,0 +1,7 @@
+{
+  "plugins": {
+    "lint": {
+      "first-heading-level": false
+    }
+  }
+}
