@@ -91,7 +91,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;]">
+  <body class="index" data-languages="[&quot;http&quot;,&quot;javascript&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -101,9 +101,8 @@
     <div class="tocify-wrapper">
       <img src="images/logo.png" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
+              <a href="#" data-language-name="http">REST</a>
+              <a href="#" data-language-name="javascript">JavaScript</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -112,158 +111,216 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+            <li><a href='https://isaac10.com'>isaac10.com</a></li>
+            <li><a href='http://isaac10ui-demo.herokuapp.com'>isaac10 UI Demo</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="introduction">Introduction</h1>
+        
+          <h1 id="isaac10-api-documentation">isaac10 API Documentation</h1>
 
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p>Welcome the the <em>isaac10</em> documentation.</p>
 
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+          <h2 id="overview">Overview</h2>
 
-<p>This example API documentation page was created with <a href="https://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&rsquo;s documentation.</p>
+<p><em>isaac10</em> offers four ways for integration. Please consult us to find out the
+best fitting solution for you.</p>
 
-<h1 id="authentication">Authentication</h1>
+<h3 id="hosted-pages">Hosted Pages</h3>
 
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
-
-<blockquote>
-<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
-</blockquote>
-
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
+<p><em>isaac10</em> will host the forms for registering new customers and edit customer
+accounts. Customers can log in independently from your website. You will get
+notified about changes via configurable webhooks.</p>
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+We are currently working on the documentation for the hosted pages. Please be
+patient.
 </aside>
 
-<h1 id="kittens">Kittens</h1>
+<h3 id="rest-api">REST API</h3>
 
-<h2 id="get-all-kittens">Get All Kittens</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<p>The REST API marks the lowest integration level. It is meant for integration
+with backend systems.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
+<h3 id="javascript-api">JavaScript API</h3>
+
+<p>The JavaScript library wraps the REST API. Use the JavaScript API to integrate
+<em>isaac10</em> into your website.</p>
+
+<h3 id="isaac10-ui">isaac10 UI</h3>
+
+<p>The <em>issac10 UI</em> is an embeddable Ember.js application. Using the <em>isaac10 UI</em>
+is the easiest way to integrate <em>isaac10</em> into your website.</p>
+
+          <h2 id="api-integration">API Integration</h2>
+
+<h3 id="rest-api">REST API</h3>
+
+<p>The REST API can be used with any HTTP client. All API request must use HTTPS
+and need to be send to:</p>
+
+<p><code class="prettyprint">https://your-subdomain.isaac10.com</code></p>
+
+<p>Replace <code class="prettyprint">your-subdomain</code> with&hellip; well&hellip; you subdomain.</p>
+
+<aside class="notice">
+All <code>PATCH</code> requests may also be called as <code>PUT</code>
+requests. This does not change the functionality: Although <code>PUT</code>
+is meant to be used for replacing an entity, only the submitted data will be
+altered. Present and non-submitted data will stay in place.
+</aside>
+
+<p>All REST API calls will respond with the JSON content described in the right
+panel.</p>
+
+<h3 id="javascript-api">JavaScript API</h3>
+
+<p>Load the JavaScript library into the page and initialize the <code class="prettyprint">isaac10</code>
+JavaScript object as shown on the right side.</p>
+
+<p><code class="prettyprint">&lt;script type=&quot;text/javascript&quot; src=&quot;https://app.issac10.com/api/v1/isaac10_api.js&quot;&gt;&lt;/script&gt;</code></p>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">isaac10</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Isaac10</span><span class="p">(</span><span class="s2">"your-subdomain"</span><span class="p">);</span>
 </code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<p>All API functions are called on this object and return a Promise which passes
+the JSON response of the API call to <code class="prettyprint">success</code> and <code class="prettyprint">failure</code>.</p>
+
+          <h1 id="authentication">Authentication</h1>
+
+          <h2 id="login">Login</h2>
+
+<aside class="notice">
+There is no equivalent function for authenticating you as merchant.
+</aside>
+
+          <h2 id="customer-authentication">Customer Authentication</h2>
+
+          
+          <h1 id="customer-registration">Customer Registration</h1>
+
+<p>Customer registration is done in four steps:</p>
+
+<ol>
+<li><p><a href="#request-plan-data">Request the plan data</a> to receive all data that is
+needed to display the registration form.</p></li>
+<li><p>(optional) When the customer entered a coupon code, you may
+<a href="#check-coupon-code">check if the entered coupon code is valid</a>.</p></li>
+<li><p><a href="#register">Register the customer</a> the customer by submitting the entered
+data for the customer account, subscription, billing address and payment
+information.</p></li>
+<li><p><a href="#confirm-subscription">Confirm the subscription</a> of the customer. <strong>This
+step is mandatory.</strong> As long as a subscription is not confirmed, it will not
+show up in your subscription overview and will not be accessible.</p></li>
+</ol>
+
+          <h2 id="request-plan-data">Request Plan Data</h2>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1/register/plan_nid</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 </code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">getPlan</span><span class="p">(</span><span class="s1">'plan_nid'</span><span class="p">);</span>
 </code></pre>
 
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-
-<p>This endpoint retrieves all kittens.</p>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET http://example.com/api/kittens</code></p>
-
-<h3 id="query-parameters">Query Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
-<tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
-</tr>
-</tbody></table>
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-<h2 id="get-a-specific-kitten">Get a Specific Kitten</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
-
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Response</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+  </span><span class="nt">"plan"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"nid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;plan_nid&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"product_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name of the product"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"plan_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name of the plan"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"public"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"logo_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://path/to/merchant/logo.png"</span><span class="p">,</span><span class="w">
+
+    </span><span class="nt">"imprint_url_de"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/imprint_de"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"terms_of_use_url_de"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/terms_of_use_de"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"privacy_notice_url_de"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/privacy_notice_de"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"withdrawal_notice_url_de"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/withdrawal_notice_de"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"imprint_url_en"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/imprint_en"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"terms_of_use_url_en"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/terms_of_use_en"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"privacy_notice_url_en"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/privacy_notice_en"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"withdrawal_notice_url_en"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://example.com/withdrawal_notice_en"</span><span class="p">,</span><span class="w">
+
+    </span><span class="nt">"success_redirect_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"instant_redirect"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+
+    </span><span class="nt">"pricing"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brutto"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monthly"</span><span class="p">,</span><span class="w"> </span><span class="nt">"cents"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"quarterly"</span><span class="p">,</span><span class="w"> </span><span class="nt">"cents"</span><span class="p">:</span><span class="w"> </span><span class="mi">3000</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yearly"</span><span class="p">,</span><span class="w"> </span><span class="nt">"cents"</span><span class="p">:</span><span class="w"> </span><span class="mi">12000</span><span class="w"> </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"setup_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+
+    </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your API data you entered in the product configration"</span><span class="p">,</span><span class="w">
+
+    </span><span class="nt">"always_ask_for_billing_and_payment_data"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+
+    </span><span class="nt">"vat_b2c"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DE"</span><span class="p">,</span><span class="w"> </span><span class="nt">"percent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19.0"</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CH"</span><span class="p">,</span><span class="w"> </span><span class="nt">"percent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11.0"</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BE"</span><span class="p">,</span><span class="w"> </span><span class="nt">"percent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19.0"</span><span class="w"> </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+
+    </span><span class="nt">"vat_b2c"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DE"</span><span class="p">,</span><span class="w"> </span><span class="nt">"percent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19.0"</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CH"</span><span class="p">,</span><span class="w"> </span><span class="nt">"percent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"11.0"</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BE"</span><span class="p">,</span><span class="w"> </span><span class="nt">"percent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19.0"</span><span class="w"> </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"merchant_country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DE"</span><span class="p">,</span><span class="w">
+
+    </span><span class="nt">"additions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"nid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NID of addition 1"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name of addition 1"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w"> </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monthly"</span><span class="p">,</span><span class="w"> </span><span class="nt">"cents"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w"> </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"quarterly"</span><span class="p">,</span><span class="w"> </span><span class="nt">"cents"</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w"> </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yearly"</span><span class="p">,</span><span class="w"> </span><span class="nt">"cents"</span><span class="p">:</span><span class="w"> </span><span class="mi">1200</span><span class="w"> </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"quantifiable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"nid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NID of addition 2"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name of addition 2"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w"> </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monthly"</span><span class="p">,</span><span class="w"> </span><span class="nt">"cents"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w"> </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"quarterly"</span><span class="p">,</span><span class="w"> </span><span class="nt">"cents"</span><span class="p">:</span><span class="w"> </span><span class="mi">600</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w"> </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yearly"</span><span class="p">,</span><span class="w"> </span><span class="nt">"cents"</span><span class="p">:</span><span class="w"> </span><span class="mi">2400</span><span class="w"> </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"quantifiable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"payment_data_logos"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"visa"</span><span class="p">,</span><span class="w"> </span><span class="s2">"mastercard"</span><span class="p">],</span><span class="w">
+    </span><span class="nt">"payment_data_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"invoice"</span><span class="p">,</span><span class="w"> </span><span class="s2">"elv_dtaus"</span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint retrieves a specific kitten.</p>
+<p>Request the data neccessary to display the registration form.</p>
 
-<aside class="warning">Inside HTML code blocks like this one, you can&rsquo;t use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+<h3 id="params">Params</h3>
 
-<h3 id="http-request">HTTP Request</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Validations</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>plan_nid</strong> (in URL)</td>
+<td>no validations, but 404 error if plan not found or disabled</td>
+<td>The NID of the plan</td>
+</tr>
+</tbody></table>
 
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
+<h3 id="response">Response</h3>
 
-<h3 id="url-parameters">URL Parameters</h3>
+<aside class="notice">
+A description for all parameters will follow.
+</aside>
 
 <table><thead>
 <tr>
@@ -272,75 +329,125 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td><strong>vat_b2b</strong></td>
+<td>This key is only included when a B2B VAT list is assigned to the product of the plan.</td>
 </tr>
 </tbody></table>
 
-          <h1 id="errors">Errors</h1>
+          <h2 id="check-coupon-code">Check Coupon Code</h2>
 
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&rsquo;s frontmatter. Files are included in the order listed.</aside>
+          <h2 id="register">Register</h2>
+<pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/v1/register</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="nx">params</span><span class="p">);</span>
+</code></pre>
 
-<p>The Kittn API uses the following error codes:</p>
+<blockquote>
+<p>Request Body / Params</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"register"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"plan_nid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NID of the plan"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"billing_interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yearly"</span><span class="p">,</span><span class="w">
+
+    </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"female"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dr."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Firstname"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lastname"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Company"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Street 42"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"City"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DE"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ustid"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+
+    </span><span class="nt">"payment_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invoice"</span><span class="p">,</span><span class="w">
+
+    </span><span class="nt">"additions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="nt">"nid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NID addition 1"</span><span class="p">,</span><span class="w"> </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="nt">"nid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NID addition 2"</span><span class="p">,</span><span class="w"> </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+
+    </span><span class="nt">"coupon_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email@example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"double_opt_in"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="parameters">Parameters</h3>
+
+<table>
+  <tr>
+    <th>Parameter</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><strong>plan_nid</strong></td>
+    <td>
+      The NID of the plan.
+      <ul>
+        <li>required</li>
+        <li>plan must exist for this this merchant</li>
+        <li>plan must be enabled</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>billing_interval</strong></td>
+    <td>
+      The billing interval for the subscription.
+      <ul>
+        <li>required if plan is with costs</li>
+        <li>allowed values: <em>monthly, quarterly, yearly</em></li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>payment_method</strong></td>
+    <td>
+      The payment method to use. The example shows <code>invoice</code>. For all
+      payment methods and the instructions to integrate them, see
+      <a href="#payment_methods">Payment Methods</a>.
+      <ul>
+        <li>required if plan is with costs</li>
+        <li>
+          for allowed values see <a href="#payment_methods">Payment Methods</a>
+        </li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+<h3 id="response">Response</h3>
 
 <table><thead>
 <tr>
-<th>Error Code</th>
-<th>Meaning</th>
+<th>Parameter</th>
+<th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>400</td>
-<td>Bad Request &ndash; Your request sucks</td>
+<td><strong>customer_number, customer_token</strong></td>
+<td>The customer number and customer token of the newly created account. Unless you want to <a href="#customer-login">use the login function of <em>isaac10</em> for authenticating your users</a>, you need to save these in your database for <a href="#customer-authentication">authenticating your customers</a>.</td>
 </tr>
 <tr>
-<td>401</td>
-<td>Unauthorized &ndash; Your API key is wrong</td>
+<td><strong>plan_nid</strong></td>
+<td>The NID of the subscribed plan.</td>
 </tr>
 <tr>
-<td>403</td>
-<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found &ndash; The specified kitten could not be found</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
+<td><strong>subscription_id</strong></td>
+<td>The ID of the newly created subscription. You need it as a parameter for <a href="#confirming-the-subscription-after-register">confirming the subscription</a>.</td>
 </tr>
 </tbody></table>
 
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
+                <a href="#" data-language-name="http">REST</a>
+                <a href="#" data-language-name="javascript">JavaScript</a>
           </div>
       </div>
     </div>
