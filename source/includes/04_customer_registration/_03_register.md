@@ -89,6 +89,8 @@ isaac10.register(params);
 
 ### Response
 
+> Response
+
 ```json
 {
   "customer_number": "000001",
