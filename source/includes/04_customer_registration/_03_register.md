@@ -89,6 +89,15 @@ isaac10.register(params);
 
 ### Response
 
+```json
+{
+  "customer_number": "000001",
+  "customer_token": "abc123",
+  "plan_nid": "abc123",
+  "subscription_id": 42
+}
+```
+
 Parameter | Description
 ----------|------------
 **customer_number, customer_token** | The customer number and customer token of the newly created account. Unless you want to [use the login function of _isaac10_ for authenticating your users](#customer-login), you need to save these in your database for [authenticating your customers](#customer-authentication).
