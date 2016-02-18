@@ -194,6 +194,59 @@ the JSON response of the API call to <code class="prettyprint">success</code> an
 <aside class="notice">
 There is no equivalent function for authenticating you as merchant.
 </aside>
+<pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/v1/authenticate</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+
+{
+  "email": "you@example.com",
+  "password": "customer password"
+}
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">login</span><span class="p">(</span><span class="s1">'email'</span><span class="p">,</span> <span class="s1">'password'</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"customer_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100001"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"customer_token"</span><span class="p">:</span><span class="w">  </span><span class="s2">"abc123"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="params">Params</h3>
+
+<table>
+  <tr>
+    <th>Parameter</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><strong>email</strong></td>
+    <td>
+      Mail of the customer
+      <ul>
+        <li> required </li>
+      </ul>  
+    </td>
+   </tr>
+   <tr>
+     <td><strong>password</strong></td>
+     <td>
+       Password of the customer
+       <ul>
+         <li> required </li>
+       </ul>  
+     </td>
+    </tr>
+  </table>
+
+<p>If <code class="prettyprint">email</code> and <code class="prettyprint">password</code> are not matching, error 404 will be returned.</p>
+
+<p>If you wish to outsource the authentication entirely with isaac10, you can request customer number and API token, asked for the authorize header or JavaScript function <code class="prettyprint">.authenticateCustomer</code> by this API call.</p>
+
+<p>After the request, <code class="prettyprint">.authenticateCustomer</code> together with transferred customer number and customer token will be called automatically.</p>
 
           <h2 id="customer-authentication">Customer Authentication</h2>
 
@@ -251,61 +304,6 @@ There is no equivalent function for authenticating you as merchant.
 <aside class="notice">
 Both methods of authentication can be operated independently one of another. Both, customer and merchant API token can be set at the same time.
 </aside>
-
-          <h2 id="authenticate-customer-login">authenticate - Customer Login</h2>
-<pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/v1/authenticate</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-
-{
-  "email": "you@example.com",
-  "password": "customer password"
-}
-</code></pre>
-<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">login</span><span class="p">(</span><span class="s1">'email'</span><span class="p">,</span> <span class="s1">'password'</span><span class="p">);</span>
-</code></pre>
-
-<blockquote>
-<p>Response</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"customer_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100001"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"customer_token"</span><span class="p">:</span><span class="w">  </span><span class="s2">"abc123"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h3 id="params">Params</h3>
-
-<table>
-  <tr>
-    <th>Parameter</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td><strong>email</strong></td>
-    <td>
-      Mail of the customer
-      <ul>
-        <li> required </li>
-      </ul>  
-    </td>
-   </tr>
-   <tr>
-     <td><strong>password</strong></td>
-     <td>
-       Password of the customer
-       <ul>
-         <li> required </li>
-       </ul>  
-     </td>
-    </tr>
-  </table>
-
-<p>If <code class="prettyprint">email</code> and <code class="prettyprint">password</code> are not matching, error 404 will be returned.</p>
-
-<p>If you wish to outsource the authentication entirely with isaac10, you can request customer number and API token, asked for the authorize header or JavaScript function <code class="prettyprint">.authenticateCustomer</code> by this API call.</p>
-
-<p>After the request, <code class="prettyprint">.authenticateCustomer</code> together with transferred customer number and customer token will be called automatically.</p>
 
           <h1 id="public-functions">Public Functions</h1>
 
@@ -668,7 +666,7 @@ A description for all parameters will follow.
     <td>
       Gender of the subscribing customer.
       <ul>
-        <li>requested, when plan is with costs</li>
+        <li>required, when plan is with costs</li>
         <li>allowed values: <em>male, female</em></li>
       </ul>
     </td>
@@ -678,7 +676,7 @@ A description for all parameters will follow.
     <td>
       First name of the customer.
       <ul>
-        <li>requested, when plan is with costs</li>
+        <li>required, when plan is with costs</li>
       </ul>
     </td>
   </tr>
@@ -687,7 +685,7 @@ A description for all parameters will follow.
     <td>
       Last name of the customer.
       <ul>
-        <li>requested, when plan is with costs</li>
+        <li>required, when plan is with costs</li>
       </ul>
     </td>
   </tr>
@@ -696,7 +694,7 @@ A description for all parameters will follow.
     <td>
       Street name of the customer&rsquo;s address.
       <ul>
-        <li>requested, when plan is with costs</li>
+        <li>required, when plan is with costs</li>
       </ul>
     </td>
   </tr>
@@ -705,7 +703,7 @@ A description for all parameters will follow.
     <td>
       Zip code of the customer&rsquo;s address.
       <ul>
-        <li>requested, when plan is with costs</li>
+        <li>required, when plan is with costs</li>
       </ul>
     </td>
   </tr>
@@ -714,7 +712,7 @@ A description for all parameters will follow.
     <td>
       City of the customer&rsquo;s address.
       <ul>
-        <li>requested, when plan is with costs</li>
+        <li>required, when plan is with costs</li>
       </ul>
     </td>
   </tr>
@@ -723,7 +721,7 @@ A description for all parameters will follow.
     <td>
       Name of the country of the customer&rsquo;s address.
       <ul>
-        <li>requested, when plan is with costs</li>
+        <li>required, when plan is with costs</li>
         <li>must be a double-digit country code</li>
         <li>must be included in the tax list</li>
       </ul>
@@ -911,7 +909,7 @@ All kind of emails for new registrations, double-opt-in and Downgrade confirmati
 </span></code></pre>
 
 <aside class="success">
-Before the function request, the customer must be authenticated.
+Before the function request, the <a href= "#customer-authentication"> customer must be authenticated</a>.
 </aside>
 
 <h3 id="params">Params</h3>
@@ -994,7 +992,7 @@ Before the function request, the customer must be authenticated.
 </span></code></pre>
 
 <aside class="success">
-Before the function request, the customer must be authenticated.
+Before the function request, the <a href= "#customer-authentication"> customer must be authenticated</a>.
 </aside>
 
 <h3 id="params">Params</h3>
@@ -1107,7 +1105,7 @@ Before the function request, the customer must be authenticated.
 </span></code></pre>
 
 <aside class="success">
-Before the function request, the customer must be authenticated.
+Before the function request, the <a href= "#customer-authentication"> customer must be authenticated</a>.
 </aside>
 
 <h3 id="params">Params</h3>
@@ -1185,7 +1183,7 @@ Before the function request, the customer must be authenticated.
 </span></code></pre>
 
 <aside class="success">
-Before the function request, the customer must be authenticated.
+Before the function request, the <a href= "#customer-authentication"> customer must be authenticated</a>.
 </aside>
 
 <h3 id="params">Params</h3>
@@ -1262,7 +1260,7 @@ Before the function request, the customer must be authenticated.
 </span></code></pre>
 
 <aside class="success">
-Before the function request, the customer must be authenticated.
+Before the function request, the <a href= "#customer-authentication"> customer must be authenticated</a>.
 </aside>
 
 <h3 id="params">Params</h3>
@@ -1301,7 +1299,7 @@ Before the function request, the customer must be authenticated.
 </tr>
 </tbody></table>
 
-          <h2 id="upgradedowngradesubscription-upgrading-downgrading-a-subscription">upgradeDowngradeSubscription - Upgrading/Downgrading a Subscription</h2>
+          <h2 id="upgrading-downgrading-a-subscription">Upgrading/Downgrading a Subscription</h2>
 <pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/v1/customer/customer_number/subscriptions/subscription_id/upgrade_downgrade</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 </code></pre>
 <pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">upgradeDowngradeSubscription</span><span class="p">(</span><span class="nx">subscription_id</span><span class="p">,</span> <span class="nx">params</span><span class="p">);</span>
@@ -1352,7 +1350,7 @@ Before the function request, the customer must be authenticated.
 </span></code></pre>
 
 <aside class="success">
-Before the function request, the customer must be authenticated.
+Before the function request, the <a href= "#customer-authentication"> customer must be authenticated</a>.
 </aside>
 
 <h3 id="params">Params</h3>
@@ -1375,7 +1373,7 @@ Before the function request, the customer must be authenticated.
 
 <h3 id="validations">Validations</h3>
 
-<p>The validations and conditions for an upgrade/downgrade are the same as mentioned in chapter <a href="#add_subscription">addSubscription() - Add a Subscription</a>.</p>
+<p>The validations and conditions for an upgrade/downgrade are the same as mentioned in chapter <a href="#adding-a-new-subscription">Adding a new Subscription</a>.</p>
 
 <p>The conditions for billing address and billing method as mentioned below are the same for this call and, if necessary, must be transferred.</p>
 
@@ -1397,7 +1395,7 @@ Before the function request, the customer must be authenticated.
 </span></code></pre>
 
 <aside class="success">
-Before the function request, the customer must be authenticated.
+Before the function request, the <a href= "#customer-authentication"> customer must be authenticated</a>.
 </aside>
 
 <h3 id="params">Params</h3>
@@ -1438,7 +1436,7 @@ Before the function request, the customer must be authenticated.
 
 <p>As described in <a href="#confirmation_after_registration">thankYouAfterRegister - Confirmation after Registration</a> the function <a href="#upgrade_downgrade">upgradeDowngradeSubscription - Upgrading/Downgrading a Subscription</a> creates a new data record for a subscription, not yet been confirmed. The created ID of this subscription will be used here, in order to confirm the newly created record.</p>
 
-          <h2 id="addsubscription-adding-a-new-subscription">addSubscription - Adding a new Subscription</h2>
+          <h2 id="adding-a-new-subscription">Adding a new Subscription</h2>
 <pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/v1/customer/customer_number/subscriptions</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 </code></pre>
 <pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">addSubscription</span><span class="p">(</span><span class="nx">params</span><span class="p">);</span>
@@ -1503,7 +1501,7 @@ Before the function request, the customer must be authenticated.
 </span></code></pre>
 
 <aside class="success">
-Before the function request, the customer must be authenticated.
+Before the function request, the <a href= "#customer-authentication"> customer must be authenticated</a>.
 </aside>
 
 <h3 id="params">Params</h3>
@@ -1573,7 +1571,7 @@ If billing address and payment method already given by the customer, this inform
     <td>
       Gender of the subscribing customer.
       <ul>
-        <li>requested, when plan is with costs</li>
+        <li>required, when plan is with costs</li>
         <li>allowed values: <em>male, female</em></li>
       </ul>
     </td>
@@ -1583,7 +1581,7 @@ If billing address and payment method already given by the customer, this inform
     <td>
       First name of the customer.
       <ul>
-        <li>requested, when plan is with costs</li>
+        <li>required, when plan is with costs</li>
       </ul>
     </td>
   </tr>
@@ -1592,7 +1590,7 @@ If billing address and payment method already given by the customer, this inform
     <td>
       Last name of the customer.
       <ul>
-        <li>requested, when plan is with costs</li>
+        <li>required, when plan is with costs</li>
       </ul>
     </td>
   </tr>
@@ -1601,7 +1599,7 @@ If billing address and payment method already given by the customer, this inform
     <td>
       Street name of the customer&rsquo;s address.
       <ul>
-        <li>requested, when plan is with costs</li>
+        <li>required, when plan is with costs</li>
       </ul>
     </td>
   </tr>
@@ -1610,7 +1608,7 @@ If billing address and payment method already given by the customer, this inform
     <td>
       Zip code of the customer&rsquo;s address.
       <ul>
-        <li>requested, when plan is with costs</li>
+        <li>required, when plan is with costs</li>
       </ul>
     </td>
   </tr>
@@ -1619,7 +1617,7 @@ If billing address and payment method already given by the customer, this inform
     <td>
       City of the customer&rsquo;s address.
       <ul>
-        <li>requested, when plan is with costs</li>
+        <li>required, when plan is with costs</li>
       </ul>
     </td>
   </tr>
@@ -1628,7 +1626,7 @@ If billing address and payment method already given by the customer, this inform
     <td>
       Name of the country of the customer&rsquo;s address.
       <ul>
-        <li>requested, when plan is with costs</li>
+        <li>required, when plan is with costs</li>
         <li>must be a double-digit country code</li>
         <li>must be included in the tax list</li>
       </ul>
@@ -1668,7 +1666,7 @@ If billing address and payment method already given by the customer, this inform
 </span></code></pre>
 
 <aside class="success">
-Before the function request, the customer must be authenticated.
+Before the function request, the <a href= "#customer-authentication"> customer must be authenticated</a>.
 </aside>
 
 <h3 id="params">Params</h3>
@@ -1711,7 +1709,7 @@ Before the function request, the customer must be authenticated.
 
           <h2 id="modify-subscription">Modify Subscription</h2>
 
-<p>The modification of a subscription is identical to <a href="#add_subscription">addSubscription - Adding a Subscription</a>. isaac10 verifies if a subscription for this product is already existing for the customer.</p>
+<p>The modification of a subscription is identical to <a href="#adding-a-new-subscription">Adding a Subscription</a>. isaac10 verifies if a subscription for this product is already existing for the customer.</p>
 
 <p>When upgrading, the plan modification becomes effective immediately whereas when downgrading the plan modification just starts at the end of the respective contract period.</p>
 
@@ -1730,7 +1728,7 @@ Before the function request, the customer must be authenticated.
 </span></code></pre>
 
 <aside class="success">
-Before the function request, the customer must be authenticated.
+Before the function request, the <a href= "#customer-authentication"> customer must be authenticated</a>.
 </aside>
 
 <h3 id="params">Params</h3>
@@ -1766,7 +1764,7 @@ Before the function request, the customer must be authenticated.
 </span></code></pre>
 
 <aside class="success">
-Before the function request, the customer must be authenticated.
+Before the function request, the <a href= "#customer-authentication"> customer must be authenticated</a>.
 </aside>
 
 <h3 id="params">Params</h3>
@@ -1929,7 +1927,7 @@ Before the function request, the customer must be authenticated.
 </tbody></table>
 
           <h2 id="updatepassword-updating-the-customer-39-s-password">updatePassword - Updating the Customer&rsquo;s Password</h2>
-<pre class="highlight http"><code><span class="nf">PATCH</span> <span class="nn">/api/v1/cstomer/customer_number/account/password</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<pre class="highlight http"><code><span class="nf">PATCH</span> <span class="nn">/api/v1/customer/customer_number/account/password</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 </code></pre>
 <pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">updatePassword</span><span class="p">(</span><span class="nx">params</span><span class="p">);</span>
 </code></pre>
@@ -1985,7 +1983,7 @@ Before the function request, the customer must be authenticated.
 </tbody></table>
 
           <h2 id="updatebillingdata-updating-the-customer-39-s-billing-address">updateBillingData - Updating the Customer&rsquo;s Billing Address</h2>
-<pre class="highlight http"><code><span class="nf">PATCH</span> <span class="nn">/api/v1/cstomer/customer_number/account/billing_data</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<pre class="highlight http"><code><span class="nf">PATCH</span> <span class="nn">/api/v1/customer/customer_number/account/billing_data</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 </code></pre>
 <pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">updateBillingData</span><span class="p">(</span><span class="nx">params</span><span class="p">);</span>
 </code></pre>
@@ -2069,7 +2067,7 @@ Before the function request, the customer must be authenticated.
 </tbody></table>
 
           <h2 id="updatepaymentdata-updating-the-customer-39-s-payment-method">updatePaymentData - Updating the Customer&rsquo;s Payment Method</h2>
-<pre class="highlight http"><code><span class="nf">PATCH</span> <span class="nn">/api/v1/cstomer/customer_number/account/billing_data</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<pre class="highlight http"><code><span class="nf">PATCH</span> <span class="nn">/api/v1/customer/customer_number/account/billing_data</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 </code></pre>
 <pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">updatePaymentData</span><span class="p">(</span><span class="nx">params</span><span class="p">);</span>
 </code></pre>
@@ -2093,7 +2091,7 @@ Before the function request, the customer must be authenticated.
 </span></code></pre>
 
 <aside class="success">
-Before the function request, the customer must be authenticated.
+Before the function request, the <a href= "#customer_authentication"> customer must be authenticated</a>.
 </aside>
 
 <h3 id="params">Params</h3>
@@ -2126,9 +2124,8 @@ Before the function request, the customer must be authenticated.
 
           <h1 id="billing">Billing</h1>
 
-          
-          <h2 id="getbills-calling-the-customer-39-s-bills">getBills - Calling the Customer&rsquo;s Bills</h2>
-<pre class="highlight http"><code><span class="nf">PATCH</span> <span class="nn">/api/v1/cstomer/customer_number/bills</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+          <h2 id="calling-the-customer-39-s-bills">Calling the Customer&rsquo;s Bills</h2>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1/customer/customer_number/bills</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 </code></pre>
 <pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">getBills</span><span class="p">();</span>
 </code></pre>
@@ -2175,11 +2172,10 @@ Before the function request, the customer must be authenticated.
       </span><span class="p">]</span><span class="w">
     </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-
 </span></code></pre>
 
 <aside class="success">
-Before the function request, the customer must be authenticated.
+Before the function request, the <a href= "#customer-authentication"> customer must be authenticated</a>.
 </aside>
 
 <h3 id="params">Params</h3>
@@ -2196,7 +2192,27 @@ Before the function request, the customer must be authenticated.
 </tr>
 </tbody></table>
 
-<h4 id="type_name">TYPE_NAME</h4>
+<h3 id="response">Response</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>type_name</strong></td>
+<td>The status of a bill or dunning. Possible types see below.</td>
+</tr>
+<tr>
+<td><strong>cents</strong></td>
+<td>Exposure the gross amount of an invoice in cents.</td>
+</tr>
+<tr>
+<td><strong>url</strong></td>
+<td>Contains the URL, displaying the download link for the bill. This is according to the API call <a href="#download-of-a-pdf-bill">Download of a PDF bill</a>.</td>
+</tr>
+</tbody></table>
 
 <p>The field <code class="prettyprint">type_name</code>is according to the dunning level and other states a bill/dunning can have. Possible types are:</p>
 
@@ -2214,11 +2230,157 @@ Before the function request, the customer must be authenticated.
 <td><strong>first reminder</strong> <br> <strong>second reminder</strong></td>
 <td>payment reminder</td>
 </tr>
+<tr>
+<td><strong>first_dunning</strong>  <br> <strong>second_dunning</strong>  <br> <strong>third_dunning</strong></td>
+<td>dunning</td>
+</tr>
+<tr>
+<td><strong>bill_cancelation</strong> <br> <strong>first_dunning_cancelation</strong> <br> <strong>second_dunning_cancelation</strong> <br> <strong>third_dunning_cancelation</strong></td>
+<td>Cancelation of a bill or dunning</td>
+</tr>
 </tbody></table>
+
+<aside class="notice">
+<strong>Why so complicated?</strong> <br>
+To protect privacy, PDF files can&rsquo;t be downloaded directly. Before each download, a temporary URL has to be created. For system performance reasons we refrain from creating temporary URLs for each and every bill at each API call. The API call <a href "#download_bills"> Download of a PDF bill </a>  will be creating a temporary URL.
+</aside>
+
+<aside class="warning"> <strong> Please note:</strong> <br>
+</aside>
+
+<p>If the PDF file is not rendered yet, the returned hash <em>won&rsquo;t</em> contain an <code class="prettyprint">url</code>-key. This happens just in case, the customer opens this webpage briefly after the bill was released.</p>
+
+          <h2 id="download-of-a-pdf-bill">Download of a PDF Bill</h2>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1/customer/customer_number/bills/bill_slug/type_name</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">downloadBill</span><span class="p">(</span><span class="nx">url</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://..."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<aside class="success">
+Before the function request, the <a href= "#customer-authentication"> customer must be authenticated</a>.
+</aside>
+
+<h3 id="params">Params</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>customer_number</strong> (in URL)</td>
+<td>The number identifying the customer.</td>
+</tr>
+<tr>
+<td><strong>bill_slug</strong></td>
+<td>Designation of the bill.</td>
+</tr>
+<tr>
+<td><strong>type_name</strong></td>
+<td>Type of the bill.</td>
+</tr>
+</tbody></table>
+
+<h3 id="rest-api">REST API</h3>
+
+<p>The return value contains a temporary URL for the PDF file. It&rsquo;s validity is about one hour. A call of this temporary URL by a <code class="prettyprint">get</code> request returns a bill as PDF file.</p>
+
+<h3 id="javascript-api">JavaScript API</h3>
+
+<p>The call of the JavaScript function by calling the REST API creates a temporary URL. <strong>Subsequently the bill as PDF file is downloading.</strong> The temporary URL won&rsquo;t be returned.</p>
 
           <h1 id="further-merchant-functions">Further merchant functions</h1>
 
-          
+          <h2 id="creating-an-extra-bill-item">Creating an extra bill item</h2>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1/bill_items</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">createBillItem</span><span class="p">(</span><span class="nx">params</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>Request body/ params</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"bill_item"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"customer_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100001"</span><span class="p">,</span><span class="w">                                
+    </span><span class="nt">"product_name"</span><span class="p">:</span><span class="w">    </span><span class="s2">"product_name"</span><span class="p">,</span><span class="w">                           
+    </span><span class="nt">"invoice_text"</span><span class="p">:</span><span class="w">    </span><span class="s2">"Text, being displayed on the bill"</span><span class="p">,</span><span class="w">  
+    </span><span class="nt">"amount_cents"</span><span class="p">:</span><span class="w">    </span><span class="s2">"2000"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">2000</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">20,00</span><span class="w"> </span><span class="err">€</span><span class="w">                  
+    </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w">        </span><span class="s2">"1"</span><span class="p">,</span><span class="w">                                    
+    </span><span class="nt">"vat"</span><span class="p">:</span><span class="w">             </span><span class="s2">"19.0"</span><span class="p">,</span><span class="w">                                  
+    </span><span class="nt">"bill_from"</span><span class="p">:</span><span class="w">       </span><span class="s2">"2015-03-12"</span><span class="p">,</span><span class="w">                            
+    </span><span class="nt">"bill_to"</span><span class="p">:</span><span class="w">         </span><span class="s2">"2015-04-11"</span><span class="w">                            
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<aside class="success">
+Before the function request, you must <a href= "#merchant-authentication"> authenticate yourself</a>.
+</aside>
+
+<h3 id="validation">Validation</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>customer_number</strong></td>
+<td><ul> <li>required </li> <li>must exist and be linked to one of your customers </li>  </ul></td>
+</tr>
+<tr>
+<td><strong>product_name</strong></td>
+<td><ul> <li>required </li> <li>must exist and be linked to one of your products </li>  </ul></td>
+</tr>
+<tr>
+<td><strong>invoice_text</strong></td>
+<td><ul> <li>required </li> </ul></td>
+</tr>
+<tr>
+<td><strong>amount_cents</strong></td>
+<td><ul> <li>required </li> <li> must be in form of a whole number </li> </ul></td>
+</tr>
+<tr>
+<td><strong>quantity</strong></td>
+<td><ul> <li>required </li> <li> must be in form of a whole number and be greater than zero</li> </ul></td>
+</tr>
+<tr>
+<td><strong>vat</strong></td>
+<td><ul> <li>required </li> <li> must be in form of a decimal number, containing a point as decimal separator and be greater than zero</li> </ul></td>
+</tr>
+<tr>
+<td><strong>bill_from</strong></td>
+<td><ul> <li>required </li> <li> must be in form of a date according to ISO-8601 (YYYY-MM-DD)</li> </ul></td>
+</tr>
+<tr>
+<td><strong>bill_to</strong></td>
+<td><ul> <li> must be in form of a date according to ISO-8601 (YYYY-MM-DD)</li> <li>must lie after the <code class="prettyprint">bill_from</code>date </li> </ul></td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+<strong> How to create a </a>.
+</aside>
+
           <h1 id="payment-methods">Payment Methods</h1>
 
           
