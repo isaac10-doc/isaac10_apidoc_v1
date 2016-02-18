@@ -158,12 +158,12 @@ is the easiest way to integrate <em>isaac10</em> into your website.</p>
 
 <h3 id="rest-api">REST API</h3>
 
-<p>The REST API can be used with any HTTP client. All API request must use HTTPS
+<p>The REST API can be used with any HTTP client. All API requests must use HTTPS
 and need to be send to:</p>
 
 <p><code class="prettyprint">https://your-subdomain.isaac10.com</code></p>
 
-<p>Replace <code class="prettyprint">your-subdomain</code> with&hellip; well&hellip; you subdomain.</p>
+<p>Replace <code class="prettyprint">your-subdomain</code> with&hellip; well&hellip; your subdomain.</p>
 
 <aside class="notice">
 All <code>PATCH</code> requests may also be called as <code>PUT</code>
@@ -197,7 +197,223 @@ There is no equivalent function for authenticating you as merchant.
 
           <h2 id="customer-authentication">Customer Authentication</h2>
 
-          
+<p>For using the functions regarding customer specific data, the customer has to be authenticated. The data required for authentication of the customer (API token, customer number) after a register request are returned as <code class="prettyprint">customer_token</code> and <code class="prettyprint">customer_number</code> and have to be stored in your system.</p>
+
+<p>If you wish to outsource the authentication process entirely to our isaac10 system, you need to embed the API call <a href="#login">authenticate - login of customer</a>, returning token and customer number.</p>
+
+<h3 id="rest-api">REST API</h3>
+
+<p>If a request requires the authentication of the customer, the customer&rsquo;s API token has to be sent within the <code class="prettyprint">Authorize</code> Header. The customer number, as part of the URL, has to be transferred as well.</p>
+
+<p><code class="prettyprint">Authorization: Token token=&quot;&lt;customer_token&gt;&quot;</code></p>
+
+<h3 id="javascript-api">JavaScript API</h3>
+
+<p>When using the JavaScript API the customer has to be authenticated <em>before</em> his first request of a protected function by using his customer number and his API token. The authentication itself works by the method <code class="prettyprint">authenticateCustomer()</code> with an instance of the isaac10 object:</p>
+
+<p><code class="prettyprint">isaac10.authenticateCustomer(&quot;&lt;customer_number&gt;&quot;, &quot;&lt;customer_token&gt;&quot;);</code></p>
+
+<p>The request <code class="prettyprint">authenticateCustomer()</code> itself <em>won&rsquo;t</em> create a HTTP request. The client&rsquo;s Customer number as well as the API token gets stored in the isaac10 object and returned (if necessary) with every request.</p>
+
+<p>Once customer number and API token of the customer set, they can be displayed as properties of the isaac10 object:</p>
+
+<p><code class="prettyprint">console.log(isaac10.customerNumber);</code><br>
+<code class="prettyprint">// =&gt; &quot;&lt;customer_number&gt;&quot;</code></p>
+
+<p><code class="prettyprint">console.log(isaac10.customerApiToken);</code><br>
+<code class="prettyprint">// =&gt; &quot;&lt;customer_api_token&gt;&quot;</code></p>
+
+          <h2 id="merchant-authentication">Merchant Authentication</h2>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">authenticateMerchant</span><span class="p">(</span><span class="s1">'merchant_token'</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isaac10</span><span class="p">.</span><span class="nx">merchantToken</span><span class="p">);</span>  
+<span class="c1">// =&gt; "merchant_token"  </span>
+</code></pre>
+
+<p>In order to use the merchant&rsquo;s functions you have to authenticate with the system using your merchant API token. To find your merchant API token, see the merchant backend under the following section:</p>
+
+<p><strong>Konfiguration &gt; Allgemeine Einstellungen</strong></p>
+
+<h3 id="rest-api">REST API</h3>
+
+<p>If a request requires the authentication of the merchant, the merchant&rsquo;s API token has to be transferred within the <code class="prettyprint">Authorize</code> header.</p>
+
+<p><code class="prettyprint">Authorization: Token token=&quot;&lt;merchant_token&gt;&quot;</code></p>
+
+<h3 id="javascript-api">JavaScript API</h3>
+
+<p>When using the JavaScript API you have to authenticate yourself <em>before</em> your first request of a protected function by using your merchant API token. The authentication itself works by the method <code class="prettyprint">authenticateMerchant()</code> with an instance of the isaac10 object:</p>
+
+<p>As mentionned above the request <code class="prettyprint">authenticateMerchant()</code> <em>won&rsquo;t</em> create a HTTP request. The merchant&rsquo;s API token gets stored in the isaac10 object and returned (if necessary) with every request.</p>
+
+<p>He will be set as property as well and can be displayed with the isaac10 object:</p>
+
+<aside class="notice">
+Both methods of authentication can be operated independently one of another. Both, customer and merchant API token can be set at the same time.
+</aside>
+
+          <h2 id="authenticate-customer-login">authenticate - Customer Login</h2>
+<pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/v1/authenticate</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+
+{
+  "email": "you@example.com",
+  "password": "customer password"
+}
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">login</span><span class="p">(</span><span class="s1">'email'</span><span class="p">,</span> <span class="s1">'password'</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"customer_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100001"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"customer_token"</span><span class="p">:</span><span class="w">  </span><span class="s2">"abc123"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="params">Params</h3>
+
+<table>
+  <tr>
+    <th>Parameter</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><strong>email</strong></td>
+    <td>
+      Mail of the customer
+      <ul>
+        <li> required </li>
+      </ul>  
+    </td>
+   </tr>
+   <tr>
+     <td><strong>password</strong></td>
+     <td>
+       Password of the customer
+       <ul>
+         <li> required </li>
+       </ul>  
+     </td>
+    </tr>
+  </table>
+
+<p>If <code class="prettyprint">email</code> and <code class="prettyprint">password</code> are not matching, error 404 will be returned.</p>
+
+<p>If you wish to outsource the authentication entirely with isaac10, you can request customer number and API token, asked for the authorize header or JavaScript function <code class="prettyprint">.authenticateCustomer</code> by this API call.</p>
+
+<p>After the request, <code class="prettyprint">.authenticateCustomer</code> together with transferred customer number and customer token will be called automatically.</p>
+
+          <h1 id="public-functions">Public Functions</h1>
+
+          <h2 id="getproducts-retrieving-of-product-and-plan-data">getProducts - Retrieving of Product and Plan Data</h2>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1/products</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">getProducts</span><span class="p">();</span>
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"product_name 1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"plans"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"plan_name 1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"nid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NID Tarif 1"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                  </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monthly"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"cents"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                  </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"quarterly"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"cents"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                  </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yearly"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"cents"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="nt">"setup_fee"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"plan_name 2"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"nid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NID Tarif 2"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+              </span><span class="nt">"setup_fee"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"plan_name 3"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"nid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NID Tarif 3"</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                  </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monthly"</span><span class="p">,</span><span class="w">
+                  </span><span class="nt">"cents"</span><span class="p">:</span><span class="w"> </span><span class="mi">2000</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="nt">"setup_fee"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+              </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"product_name 2"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This function can be used to display project data on websites. If there&rsquo;s no products set on the subdomain, an empty array with status 200 will be returned.</p>
+
+          <h2 id="call-api-token-of-external-payment-service-providers">Call API Token of external Payment Service Providers</h2>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1/api_token</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isaac10</span><span class="p">.</span><span class="nx">apiToken</span><span class="p">);</span>
+<span class="c1">// =&gt; { "notLoaded": true }</span>
+
+<span class="nx">isaac10</span><span class="p">.</span><span class="nx">withApiToken</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isaac10</span><span class="p">.</span><span class="nx">apiToken</span><span class="p">);</span>
+  <span class="c1">// =&gt; {</span>
+  <span class="c1">//      "sandbox_mode":          true,</span>
+  <span class="c1">//      "betterpayment_api_key": "123abc",</span>
+  <span class="c1">//    }</span>
+<span class="p">});</span>
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"api_token"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="nt">"sandbox_mode"</span><span class="p">:</span><span class="w">          </span><span class="s2">"true"</span><span class="p">,</span><span class="w">
+     </span><span class="nt">"betterpayment_api_key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"123abc"</span><span class="w">
+   </span><span class="p">}</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>To be able to use external payment service providers (PSPs) within the system, you need to configure your merchant account by displaying their public API tokens. Those public API tokens can be called by this request.</p>
+
+<aside class="notice">
+This function is integrated in the JavaScript API. If an external API token for a function is required, he will automatically be called.   
+<br>
+<br>
+    <strong>Using the JavaScript library, you never need to retrieve explicitly this external API token.</strong>  
+  To retrieve it anyway, see JavaScript tab.
+</aside>
+
           <h1 id="customer-registration">Customer Registration</h1>
 
 <p>Customer registration is done in four steps:</p>
@@ -215,7 +431,7 @@ step is mandatory.</strong> As long as a subscription is not confirmed, it will 
 show up in your subscription overview and will not be accessible.</p></li>
 </ol>
 
-          <h2 id="request-plan-data">Request Plan Data</h2>
+          <h2 id="getplan-request-plan-data">getPlan - Request Plan Data</h2>
 <pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1/register/plan_nid</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 </code></pre>
 <pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">getPlan</span><span class="p">(</span><span class="s1">'plan_nid'</span><span class="p">);</span>
@@ -298,20 +514,18 @@ show up in your subscription overview and will not be accessible.</p></li>
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Request the data neccessary to display the registration form.</p>
+<p>Request the data necessary to display the registration form.</p>
 
 <h3 id="params">Params</h3>
 
 <table><thead>
 <tr>
 <th>Parameter</th>
-<th>Validations</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td><strong>plan_nid</strong> (in URL)</td>
-<td>no validations, but 404 error if plan not found or disabled</td>
 <td>The NID of the plan</td>
 </tr>
 </tbody></table>
@@ -334,7 +548,42 @@ A description for all parameters will follow.
 </tr>
 </tbody></table>
 
-          <h2 id="check-coupon-code">Check Coupon Code</h2>
+          <h2 id="checkcouponcode-verification-coupon-code">checkCouponCode - Verification Coupon Code</h2>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1/register/coupons/coupon_code?plan=plan_nid</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">checkCouponCode</span><span class="p">(</span><span class="nx">coupon_code</span><span class="p">,</span> <span class="p">{</span><span class="s2">"plan_nid"</span><span class="p">:</span> <span class="s2">"&lt;plan_nid&gt;"</span> <span class="p">});</span>
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+ </span><span class="nt">"coupon"</span><span class="p">:</span><span class="w">
+ </span><span class="p">{</span><span class="w">
+   </span><span class="nt">"coupon_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;coupon_code&gt;"</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"cents"</span><span class="p">:</span><span class="w"> </span><span class="mi">1200</span><span class="p">,</span><span class="w">
+   </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Erfolgsmeldung des Gutscheins"</span><span class="w">
+ </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="params">params</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>coupon_code</strong></td>
+<td>Code of the coupon</td>
+</tr>
+<tr>
+<td><strong>plan_nid</strong></td>
+<td>NID of the plan</td>
+</tr>
+</tbody></table>
 
           <h2 id="register">Register</h2>
 <pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/v1/register</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -390,7 +639,7 @@ A description for all parameters will follow.
       The NID of the plan.
       <ul>
         <li>required</li>
-        <li>plan must exist for this this merchant</li>
+        <li>plan must exist for this merchant</li>
         <li>plan must be enabled</li>
       </ul>
     </td>
@@ -406,7 +655,82 @@ A description for all parameters will follow.
     </td>
   </tr>
   <tr>
-    <td><strong>payment_method</strong></td>
+    <td><strong>additions</strong></td>
+    <td>
+      Additions for the plan.
+      <ul>
+        <li>all additions must be related to the booked plan itself</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>gender</strong></td>
+    <td>
+      Gender of the subscribing customer.
+      <ul>
+        <li>requested, when plan is with costs</li>
+        <li>allowed values: <em>male, female</em></li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>first_name</strong></td>
+    <td>
+      First name of the customer.
+      <ul>
+        <li>requested, when plan is with costs</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>last_name</strong></td>
+    <td>
+      Last name of the customer.
+      <ul>
+        <li>requested, when plan is with costs</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>street</strong></td>
+    <td>
+      Street name of the customer&rsquo;s address.
+      <ul>
+        <li>requested, when plan is with costs</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>zip</strong></td>
+    <td>
+      Zip code of the customer&rsquo;s address.
+      <ul>
+        <li>requested, when plan is with costs</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>city</strong></td>
+    <td>
+      City of the customer&rsquo;s address.
+      <ul>
+        <li>requested, when plan is with costs</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>country</strong></td>
+    <td>
+      Name of the country of the customer&rsquo;s address.
+      <ul>
+        <li>requested, when plan is with costs</li>
+        <li>must be a double-digit country code</li>
+        <li>must be included in the tax list</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+   <td><strong>payment_method</strong></td>
     <td>
       The payment method to use. The example shows <code>invoice</code>. For all
       payment methods and the instructions to integrate them, see
@@ -416,6 +740,37 @@ A description for all parameters will follow.
         <li>
           for allowed values see <a href="#payment_methods">Payment Methods</a>
         </li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>coupon_code</strong></td>
+    <td>
+      Code number of the coupon.
+      <ul>
+        <li>optional</li>
+        <li>if coupon code is transferred, must be valuable and activated</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>email</strong></td>
+    <td>
+      Mail adress of the customer.
+      <ul>
+        <li>required</li>
+        <li>has to contain the @ character</li>
+        <li>must not have already been assigned to this subdomain or this merchant</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>password</strong></td>
+    <td>
+      Customer&rsquo;s password for Login.
+      <ul>
+        <li>required</li>
+        <li>must contain at least 6 characters</li>
       </ul>
     </td>
   </tr>
@@ -454,6 +809,1430 @@ A description for all parameters will follow.
 </tr>
 </tbody></table>
 
+          <h2 id="thankyouafterregister-confirmation-after-registration">thankYouAfterRegister - Confirmation after Registration</h2>
+<pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/v1/customer/customer_nmber/thank_you/subscription_id/register</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">thankYouAfterRegister</span><span class="p">(</span><span class="nx">subscription_id</span><span class="p">,</span> <span class="nx">params</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>Request body/params</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="nt">"double_opt_in"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"plan"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"42"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"begins_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-19"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"term_ends_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-09-18"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"billing_interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monthly"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next_billing_interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monthly"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ongoing"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"additions"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<aside class="success">
+Before the function request, the customer must be authenticated.
+</aside>
+
+<h3 id="params">params</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>customer_number</strong></td>
+<td>Number identifying the customer.</td>
+</tr>
+<tr>
+<td><strong>subscription_id</strong></td>
+<td>ID identifying the booking.</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Using this function, the transmission of the email informing the merchant about a new customer/new subscription as well as of the subscription confirmation email for the customer gets initiated. Therefore by using the <code>double-opt-in</code> it must be decided, whether an email for the customer is sent out or not.
+</aside>
+
+<p>Every of the following functions <a href="#register">register - Customer registration</a>, <a href="#add_susbcription">addSubscription - Adding a new Subscription</a> and <a href="#upgrade_downgrade">upgradeDowngradeSubscription - Upgrading/Downgrading</a> create a new data record for a subscription, not yet been confirmed. The ID of this booking created will be used within the <code class="prettyprint">thank you</code> functions, in order to confirm the newly created record. Consequently those functions aren&rsquo;t optional.
+All kind of emails for new registrations, double-opt-in and Downgrade confirmations will also be initiated by the <code class="prettyprint">thank you</code> functions.</p>
+
+<h3 id="response">Response</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>plan</strong></td>
+<td>This data is the same as returned when calling <code class="prettyprint">.getPlan()</code></td>
+</tr>
+</tbody></table>
+
+          <h1 id="subscription-management">Subscription Management</h1>
+
+          <h2 id="getsubscriptions-call-customer-39-s-subscriptions">getSubscriptions - Call Customer&rsquo;s Subscriptions</h2>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1/customer/customer_number/subscriptions</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">getSubscriptions</span><span class="p">();</span>
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"subscriptions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w">               </span><span class="mi">42</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"product_name"</span><span class="p">:</span><span class="w">     </span><span class="s2">"Name of the products"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"plan_name"</span><span class="p">:</span><span class="w">        </span><span class="s2">"Name of the plan"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"begins_at"</span><span class="p">:</span><span class="w">        </span><span class="s2">"2014-09-25"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"term_ends_at"</span><span class="p">:</span><span class="w">     </span><span class="s2">"2014-10-24"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"billing_interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monthly"</span><span class="p">,</span><span class="w">   
+      </span><span class="nt">"price"</span><span class="p">:</span><span class="w">             </span><span class="mi">3000</span><span class="p">,</span><span class="w">       
+      </span><span class="nt">"status"</span><span class="p">:</span><span class="w">           </span><span class="s2">"ongoing"</span><span class="w">    
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<aside class="success">
+Before the function request, the customer must be authenticated.
+</aside>
+
+<h3 id="params">Params</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>customer_number</strong> (in URL)</td>
+<td>The ID of the customer.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>billing_interval</strong></td>
+<td><code class="prettyprint">monthly</code>, <code class="prettyprint">quarterly</code> or <code class="prettyprint">yearly</code></td>
+</tr>
+<tr>
+<td><strong>price</strong></td>
+<td>Indication in cents</td>
+</tr>
+<tr>
+<td><strong>status</strong></td>
+<td>see table</td>
+</tr>
+</tbody></table>
+
+<h3 id="status">Status</h3>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><em>ongoing</em></td>
+<td>Subscription is active and not in cancellation</td>
+</tr>
+<tr>
+<td><em>canceled</em></td>
+<td>Subscription is canceled, end of contract not reached yet</td>
+</tr>
+<tr>
+<td><em>expired</em></td>
+<td>Subscription is canceled, end of the contract is reached</td>
+</tr>
+<tr>
+<td><em>future</em></td>
+<td>Subscription contract starts in the future</td>
+</tr>
+</tbody></table>
+
+          <h2 id="getsubscribe-call-customer-and-plan-data">getSubscribe - Call Customer and Plan data</h2>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1/customer/customer_number/subscriptions/new?plan=plan_nid</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">getSubscribe</span><span class="p">(</span><span class="nx">plan_nid</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"plan"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<aside class="success">
+Before the function request, the customer must be authenticated.
+</aside>
+
+<h3 id="params">Params</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>customer_number</strong> (in URL)</td>
+<td>The ID of the customer.</td>
+</tr>
+<tr>
+<td><strong>plan_nid</strong></td>
+<td>The NID of the plan.</td>
+</tr>
+</tbody></table>
+
+<p>Account data of the customer and plan data can be called up in the same request.</p>
+
+<h3 id="response">Response</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>plan</strong></td>
+<td>This data is the same as provided when calling <code class="prettyprint">.getPlan()</code>.</td>
+</tr>
+<tr>
+<td><strong>account</strong></td>
+<td>This data is the same as provided when calling <code class="prettyprint">.getAccount()</code>.</td>
+</tr>
+</tbody></table>
+
+          <h2 id="editsubscription-call-of-a-subscription">editSubscription - Call of a Subscription</h2>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1/customer/customer_number/subscriptions/subscription_id/edit</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">editSubscription</span><span class="p">(</span><span class="nx">subscription_id</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"plan"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"billing_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"female"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dr."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Maxi"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mustermann"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"company"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"street"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Musterstraße 1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Musterstadt"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DE"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ustid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DE1234567890"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"payment_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"payment_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invoice"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"begins_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-09-24"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"term_ends_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"billing_interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yearly"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next_billing_interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yearly"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ongoing"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"additions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"nid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NID addition 1"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Name addition 1"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w"> </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monthly"</span><span class="p">,</span><span class="w"> </span><span class="nt">"cents"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w"> </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"quarterly"</span><span class="p">,</span><span class="w"> </span><span class="nt">"cents"</span><span class="p">:</span><span class="w"> </span><span class="s2">"400"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w"> </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yearly"</span><span class="p">,</span><span class="w"> </span><span class="nt">"cents"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1200"</span><span class="w"> </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"quantifiable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"false"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"next_quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"nid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NID addition 2"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Name addition 2"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w"> </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monthly"</span><span class="p">,</span><span class="w"> </span><span class="nt">"cents"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w"> </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"quarterly"</span><span class="p">,</span><span class="w"> </span><span class="nt">"cents"</span><span class="p">:</span><span class="w"> </span><span class="s2">"400"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w"> </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yearly"</span><span class="p">,</span><span class="w"> </span><span class="nt">"cents"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1200"</span><span class="w"> </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"quantifiable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"next_quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"allowed_transitions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"nid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NID of the current plan"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Name of the current plan"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"transition_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"self"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<aside class="success">
+Before the function request, the customer must be authenticated.
+</aside>
+
+<h3 id="params">Params</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>customer_number</strong> (in URL)</td>
+<td>The number identifying the customer.</td>
+</tr>
+<tr>
+<td><strong>subscription_id</strong></td>
+<td>The ID of the subscription.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>plan</strong></td>
+<td>This data is the same as provided when calling <code class="prettyprint">.getPlan()</code>.</td>
+</tr>
+<tr>
+<td><strong>billing_data</strong></td>
+<td>Data of the customer&rsquo;s billing address.</td>
+</tr>
+<tr>
+<td><strong>payment_data</strong></td>
+<td>Data of the given payment method.</td>
+</tr>
+<tr>
+<td><strong>subscription</strong></td>
+<td>Data of the created subscription.</td>
+</tr>
+<tr>
+<td><strong>allowed_transitions</strong></td>
+<td>Additional information for Upgrading/Downgrading.</td>
+</tr>
+</tbody></table>
+
+          <h2 id="getupgradedowngradesubscription-call-of-account-subscription-and-plan-data">getUpgradeDowngradeSubscription - Call of Account, Subscription and Plan Data</h2>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1/customer/customer_number/subscriptions/subscription_id/upgrade_downgrade/plan_nid</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">getUpgradeDowngradeSubscription</span><span class="p">(</span><span class="nx">subscription_id</span><span class="p">,</span> <span class="nx">plan_nid</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"plan"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"begins_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-09-21"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"term_ends_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-20"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"billing_interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monthly"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next_billing_interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monthly"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ongoing"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"additions"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<aside class="success">
+Before the function request, the customer must be authenticated.
+</aside>
+
+<h3 id="params">Params</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>customer_number</strong> (in URL)</td>
+<td>The number identifying the customer.</td>
+</tr>
+<tr>
+<td><strong>subscription_id</strong></td>
+<td>The ID of the subscription.</td>
+</tr>
+<tr>
+<td><strong>plan_nid</strong></td>
+<td>The NID of the plan.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>plan</strong></td>
+<td>This data is the same as provided when calling <code class="prettyprint">.getPlan()</code>.</td>
+</tr>
+<tr>
+<td><strong>account</strong></td>
+<td>This data is the same as provided when calling <code class="prettyprint">.getAccount()</code>.</td>
+</tr>
+<tr>
+<td><strong>subscription</strong></td>
+<td>Data of the created subscription.</td>
+</tr>
+</tbody></table>
+
+          <h2 id="updatesubscription-updating-a-subscription">updateSubscription - Updating a Subscription</h2>
+<pre class="highlight http"><code><span class="nf">PATCH</span> <span class="nn">/api/v1/customer/customer_number/subscriptions/subscription_id</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">updateSubscription</span><span class="p">(</span><span class="nx">subscription_id</span><span class="p">,</span> <span class="nx">params</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>Request body/params</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"billing_interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yearly"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"additions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="nt">"nid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NID Tarifergänzung 1"</span><span class="p">,</span><span class="w"> </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="nt">"nid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NID Tarifergänzung 2"</span><span class="p">,</span><span class="w"> </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="nt">"nid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NID Tarifergänzung 3"</span><span class="p">,</span><span class="w"> </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="w"> </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<aside class="success">
+Before the function request, the customer must be authenticated.
+</aside>
+
+<h3 id="params">Params</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>customer_number</strong> (in URL)</td>
+<td>The number identifying the customer.</td>
+</tr>
+<tr>
+<td><strong>subscription_id</strong></td>
+<td>The ID of the subscription.</td>
+</tr>
+</tbody></table>
+
+<h3 id="validation">Validation</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>next_billing_interval</strong></td>
+<td>The period of billing, offered by the merchant. <ul> <div style="text-align: left;"> <li>  required </li><li>  possible values: <code class="prettyprint">monthly</code>, <code class="prettyprint">quarterly</code>, <code class="prettyprint">yearly</code> </li>  <li> The billing interval must be enabled for the plan </li></ul></td>
+</tr>
+<tr>
+<td><strong>additions</strong></td>
+<td>The addition for a plan. <ul> <div style="text-align: left;"> <li> an addition with the given <strong>nid</strong> must exist for the plan to be changed </li><li>  <strong>quantify</strong> must be a natural number </li></ul></td>
+</tr>
+</tbody></table>
+
+          <h2 id="upgradedowngradesubscription-upgrading-downgrading-a-subscription">upgradeDowngradeSubscription - Upgrading/Downgrading a Subscription</h2>
+<pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/v1/customer/customer_number/subscriptions/subscription_id/upgrade_downgrade</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">upgradeDowngradeSubscription</span><span class="p">(</span><span class="nx">subscription_id</span><span class="p">,</span> <span class="nx">params</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>Request body/params</p>
+</blockquote>
+<pre class="highlight json"><code><span class="s2">"subscription"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nt">"plan_nid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NID of the plan"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"billing_interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monthly"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"additions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w"> </span><span class="nt">"nid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NID addition 1"</span><span class="p">,</span><span class="w"> </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w"> </span><span class="nt">"nid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NID addition 2"</span><span class="p">,</span><span class="w"> </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="p">},</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre class="highlight json"><code><span class="s2">"subscription"</span><span class="err">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="nt">"plan_nid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NID of the plan"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"billing_interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monthly"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"additions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w"> </span><span class="nt">"nid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NID addition 1"</span><span class="p">,</span><span class="w"> </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w"> </span><span class="nt">"nid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NID addition 2"</span><span class="p">,</span><span class="w"> </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="p">},</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"gender"</span><span class="p">:</span><span class="w">           </span><span class="s2">"female"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"title"</span><span class="p">:</span><span class="w">            </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w">       </span><span class="s2">"Maxi"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w">        </span><span class="s2">"Mustermann"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"company"</span><span class="p">:</span><span class="w">          </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"street"</span><span class="p">:</span><span class="w">           </span><span class="s2">"Musterstraße 1"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"zip"</span><span class="p">:</span><span class="w">              </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"city"</span><span class="p">:</span><span class="w">             </span><span class="s2">"Musterstadt"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"country"</span><span class="p">:</span><span class="w">          </span><span class="s2">"DE"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"ustid"</span><span class="p">:</span><span class="w">            </span><span class="s2">""</span><span class="p">,</span><span class="w">
+
+  </span><span class="nt">"payment_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invoice"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"subscription_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3793</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<aside class="success">
+Before the function request, the customer must be authenticated.
+</aside>
+
+<h3 id="params">Params</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>customer_number</strong> (in URL)</td>
+<td>The number identifying the customer.</td>
+</tr>
+<tr>
+<td><strong>subscription_id</strong></td>
+<td>The ID of the subscription.</td>
+</tr>
+</tbody></table>
+
+<h3 id="validations">Validations</h3>
+
+<p>The validations and conditions for an upgrade/downgrade are the same as mentioned in chapter <a href="#add_subscription">addSubscription() - Add a Subscription</a>.</p>
+
+<p>The conditions for billing address and billing method as mentioned below are the same for this call and, if necessary, must be transferred.</p>
+
+          <h2 id="thankyouafterupgradedowngrade-confirmation-after-upgrade-downgrade">thankYouAfterUpgradeDowngrade - Confirmation after Upgrade/Downgrade</h2>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1/customer/customer_number/thank_you/subscription_id/upgrade_downgrade</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">thankYouAfterUpgradeDowngrade</span><span class="p">(</span><span class="nx">subscription_id</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"plan"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<aside class="success">
+Before the function request, the customer must be authenticated.
+</aside>
+
+<h3 id="params">Params</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>customer_number</strong> (in URL)</td>
+<td>The number identifying the customer.</td>
+</tr>
+<tr>
+<td><strong>subscription_id</strong></td>
+<td>The ID of the subscription.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>plan</strong></td>
+<td>This data is the same as provided when calling <code class="prettyprint">.getPlan()</code>.</td>
+</tr>
+<tr>
+<td><strong>subscription</strong></td>
+<td>This Data is the same as provided when calling <code class="prettyprint">.thankYouAfterRegister()</code>.</td>
+</tr>
+</tbody></table>
+
+<p>As described in <a href="#confirmation_after_registration">thankYouAfterRegister - Confirmation after Registration</a> the function <a href="#upgrade_downgrade">upgradeDowngradeSubscription - Upgrading/Downgrading a Subscription</a> creates a new data record for a subscription, not yet been confirmed. The created ID of this subscription will be used here, in order to confirm the newly created record.</p>
+
+          <h2 id="addsubscription-adding-a-new-subscription">addSubscription - Adding a new Subscription</h2>
+<pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/v1/customer/customer_number/subscriptions</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">addSubscription</span><span class="p">(</span><span class="nx">params</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>Request body/params</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"plan_nid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NID of the plan"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"billing_interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monthly"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"additions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="nt">"nid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NID addition 1"</span><span class="p">,</span><span class="w"> </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="nt">"nid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NID addition 2"</span><span class="p">,</span><span class="w"> </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<blockquote>
+<p>billing address</p>
+</blockquote>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"plan_nid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NID of the plan"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"billing_interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monthly"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"additions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="nt">"nid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NID addition 1"</span><span class="p">,</span><span class="w"> </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="nt">"nid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NID addition 2"</span><span class="p">,</span><span class="w"> </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+
+    </span><span class="nt">"gender"</span><span class="p">:</span><span class="w">           </span><span class="s2">"female"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"title"</span><span class="p">:</span><span class="w">            </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w">       </span><span class="s2">"Maxi"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w">        </span><span class="s2">"Mustermann"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"company"</span><span class="p">:</span><span class="w">          </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"street"</span><span class="p">:</span><span class="w">           </span><span class="s2">"Musterstraße 1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"zip"</span><span class="p">:</span><span class="w">              </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"city"</span><span class="p">:</span><span class="w">             </span><span class="s2">"Musterstadt"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"country"</span><span class="p">:</span><span class="w">          </span><span class="s2">"DE"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ustid"</span><span class="p">:</span><span class="w">            </span><span class="s2">""</span><span class="p">,</span><span class="w">
+
+    </span><span class="nt">"payment_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invoice"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"plan"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<aside class="success">
+Before the function request, the customer must be authenticated.
+</aside>
+
+<h3 id="params">Params</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>customer_number</strong> (in URL)</td>
+<td>The number identifying the customer.</td>
+</tr>
+</tbody></table>
+
+<p><br>
+<br></p>
+
+<p>If the plan is with costs and neither billing address nor paymemt method have been given by the customer, the following data has to be transferred for the booking of the plan. (see right side)</p>
+
+<aside class="notice">
+If billing address and payment method already given by the customer, this information will be ignored.
+<br>
+<strong> Updating the billing address and payment method is not possible by this API call. </strong>
+</aside>
+
+<h3 id="validation">Validation</h3>
+
+<table>
+  <tr>
+    <th>Parameter</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><strong>plan_nid</strong></td>
+    <td>
+      The NID of the plan.
+      <ul>
+        <li>required</li>
+        <li>plan must exist for this merchant</li>
+        <li>plan must be enabled</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>billing_interval</strong></td>
+    <td>
+      The billing interval for the subscription.
+      <ul>
+        <li>required if plan is with costs</li>
+        <li>allowed values: <em>monthly, quarterly, yearly</em></li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>additions</strong></td>
+    <td>
+      Additions for the plan.
+      <ul>
+        <li>all additions must be related to the booked plan itself</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>gender</strong></td>
+    <td>
+      Gender of the subscribing customer.
+      <ul>
+        <li>requested, when plan is with costs</li>
+        <li>allowed values: <em>male, female</em></li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>first_name</strong></td>
+    <td>
+      First name of the customer.
+      <ul>
+        <li>requested, when plan is with costs</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>last_name</strong></td>
+    <td>
+      Last name of the customer.
+      <ul>
+        <li>requested, when plan is with costs</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>street</strong></td>
+    <td>
+      Street name of the customer&rsquo;s address.
+      <ul>
+        <li>requested, when plan is with costs</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>zip</strong></td>
+    <td>
+      Zip code of the customer&rsquo;s address.
+      <ul>
+        <li>requested, when plan is with costs</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>city</strong></td>
+    <td>
+      City of the customer&rsquo;s address.
+      <ul>
+        <li>requested, when plan is with costs</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>country</strong></td>
+    <td>
+      Name of the country of the customer&rsquo;s address.
+      <ul>
+        <li>requested, when plan is with costs</li>
+        <li>must be a double-digit country code</li>
+        <li>must be included in the tax list</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+   <td><strong>payment_method</strong></td>
+    <td>
+      The payment method to use. The example shows <code>invoice</code>. For all
+      payment methods and the instructions to integrate them, see
+      <a href="#payment_methods">Payment Methods</a>.
+      <ul>
+        <li>required if plan is with costs</li>
+        <li>
+          for allowed values see <a href="#payment_methods">Payment Methods</a>
+        </li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+          <h2 id="thankyouafteradd-confirmation-after-subscription">thankYouAfterAdd - Confirmation after Subscription</h2>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1/customer/customer_number/thank_you/subscription_id/add</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">thankYouAfterAdd</span><span class="p">(</span><span class="nx">subscription_id</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"plan"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<aside class="success">
+Before the function request, the customer must be authenticated.
+</aside>
+
+<h3 id="params">Params</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>customer_number</strong> (in URL)</td>
+<td>The number identifying the customer.</td>
+</tr>
+<tr>
+<td><strong>subscription_id</strong></td>
+<td>The ID of the subscription.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>plan</strong></td>
+<td>This data is the same as provided when calling <code class="prettyprint">.getPlan()</code>.</td>
+</tr>
+<tr>
+<td><strong>subscription</strong></td>
+<td>This Data is the same as provided when calling <code class="prettyprint">.thankYouAfterRegister()</code>.</td>
+</tr>
+</tbody></table>
+
+<p>As described in <a href="#confirmation_after_registration">thankYouAfterRegister - Confirmation after Registration</a> the function <a href="#add_subscription">addSubscription - Adding a new Subscription</a> creates a new data record for a subscription, not yet been confirmed. The created ID of this subscription will be used here, in order to confirm the newly created record.</p>
+
+          <h2 id="modify-subscription">Modify Subscription</h2>
+
+<p>The modification of a subscription is identical to <a href="#add_subscription">addSubscription - Adding a Subscription</a>. isaac10 verifies if a subscription for this product is already existing for the customer.</p>
+
+<p>When upgrading, the plan modification becomes effective immediately whereas when downgrading the plan modification just starts at the end of the respective contract period.</p>
+
+          <h2 id="cancelsubscription-cancel-a-subscription">cancelSubscription - Cancel a Subscription</h2>
+<pre class="highlight http"><code><span class="nf">DELETE</span> <span class="nn">/api/v1/customer/customer_number/subscriptions/subscription_id</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">cancelSubscription</span><span class="p">(</span><span class="nx">subscription_id</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<aside class="success">
+Before the function request, the customer must be authenticated.
+</aside>
+
+<h3 id="params">Params</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>customer_number</strong> (in URL)</td>
+<td>The number identifying the customer.</td>
+</tr>
+<tr>
+<td><strong>subscription_id</strong></td>
+<td>The ID of the subscription.</td>
+</tr>
+</tbody></table>
+
+          <h2 id="uncancelsubscription-uncancel-a-subscription">uncancelSubscription - Uncancel a Subscription</h2>
+<pre class="highlight http"><code><span class="nf">DELETE</span> <span class="nn">/api/v1/customer/customer_number/subscriptions/subscription_id/revert</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">uncancelSubscription</span><span class="p">(</span><span class="nx">subscription_id</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<aside class="success">
+Before the function request, the customer must be authenticated.
+</aside>
+
+<h3 id="params">Params</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>customer_number</strong> (in URL)</td>
+<td>The number identifying the customer.</td>
+</tr>
+<tr>
+<td><strong>subscription_id</strong></td>
+<td>The ID of the subscription.</td>
+</tr>
+</tbody></table>
+
+          <h1 id="account-functions">Account functions</h1>
+
+          <h2 id="getaccount-call-of-customer-data">getAccount - Call of Customer Data</h2>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1/customer/customer_number/account</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">getAccount</span><span class="p">();</span>
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"account_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"email"</span><span class="p">:</span><span class="w">           </span><span class="s2">"email@example.com"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+
+    </span><span class="nt">"billing_data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"none"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"billing_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"gender"</span><span class="p">:</span><span class="w">          </span><span class="s2">"female"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w">           </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w">      </span><span class="s2">"Maxi"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w">       </span><span class="s2">"Mustermann"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"company"</span><span class="p">:</span><span class="w">         </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"street"</span><span class="p">:</span><span class="w">          </span><span class="s2">"Musterstraße 1"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"zip"</span><span class="p">:</span><span class="w">             </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"city"</span><span class="p">:</span><span class="w">            </span><span class="s2">"Musterstadt"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"country"</span><span class="p">:</span><span class="w">         </span><span class="s2">"DE"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"ustid"</span><span class="p">:</span><span class="w">           </span><span class="s2">"DE1234567890"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+
+    </span><span class="nt">"payment_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"payment_method"</span><span class="p">:</span><span class="w">  </span><span class="s2">"invoice"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+
+    </span><span class="nt">"payment_data_logos"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"visa"</span><span class="p">,</span><span class="w"> </span><span class="s2">"mastercard"</span><span class="p">],</span><span class="w">
+    </span><span class="nt">"payment_data_types"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"invoice"</span><span class="p">,</span><span class="w"> </span><span class="s2">"cc_paymill"</span><span class="p">,</span><span class="w"> </span><span class="s2">"elv_paymill"</span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<aside class="success">
+Before the function request, the customer must be authenticated.
+</aside>
+
+<h3 id="params">Params</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>customer_number</strong> (in URL)</td>
+<td>The number identifying the customer.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>billing_data</strong></td>
+<td>If no billing address and/or payment method given, the return value is zero.</td>
+</tr>
+<tr>
+<td><strong>payment_data</strong></td>
+<td>Specific data requested according to the method chosen.</td>
+</tr>
+<tr>
+<td><strong>payment_data_logos</strong></td>
+<td>Logos of the different types of payment methods: <ul> <div style="text-align: left;"> <li>Visa</li> <li>Master Card</li> <li>American Express</li> <li> PayPal</li> </ul></td>
+</tr>
+<tr>
+<td><strong>payment_data_types</strong></td>
+<td>Different types of billing request different payment data.</td>
+</tr>
+</tbody></table>
+
+          <h2 id="updateaccountdata-updating-the-customer-39-s-account-data">updateAccountData - Updating the Customer&rsquo;s Account Data</h2>
+<pre class="highlight http"><code><span class="nf">PATCH</span> <span class="nn">/api/v1/customer/customer_number/account/account_data</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">updateAccountData</span><span class="p">(</span><span class="nx">params</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>Request body/ params</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"account_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new_email@example.com"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<aside class="success">
+Before the function request, the customer must be authenticated.
+</aside>
+
+<h3 id="params">Params</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>customer_number</strong> (in URL)</td>
+<td>The number identifying the customer.</td>
+</tr>
+</tbody></table>
+
+<h3 id="validation">Validation</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>email</strong></td>
+<td>The Email Address of the customer. <ul> <li>required</li> <li>has to contain the @ character</li> <li>must not have already been assigned to this subdomain or this merchant</li> </ul></td>
+</tr>
+</tbody></table>
+
+          <h2 id="updatepassword-updating-the-customer-39-s-password">updatePassword - Updating the Customer&rsquo;s Password</h2>
+<pre class="highlight http"><code><span class="nf">PATCH</span> <span class="nn">/api/v1/cstomer/customer_number/account/password</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">updatePassword</span><span class="p">(</span><span class="nx">params</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>Request body/ params</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"new_password"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<aside class="success">
+Before the function request, the customer must be authenticated.
+</aside>
+
+<h3 id="params">Params</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>customer_number</strong> (in URL)</td>
+<td>The number identifying the customer.</td>
+</tr>
+</tbody></table>
+
+<h3 id="validation">Validation</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>password</strong></td>
+<td>The new password of the customer. <ul> <div style="text-align: left;"> <li>required</li> <li>must contain at least 6 characters</li> </ul></td>
+</tr>
+</tbody></table>
+
+          <h2 id="updatebillingdata-updating-the-customer-39-s-billing-address">updateBillingData - Updating the Customer&rsquo;s Billing Address</h2>
+<pre class="highlight http"><code><span class="nf">PATCH</span> <span class="nn">/api/v1/cstomer/customer_number/account/billing_data</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">updateBillingData</span><span class="p">(</span><span class="nx">params</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>Request body/ params</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"billing_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"gender"</span><span class="p">:</span><span class="w">          </span><span class="s2">"female"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"title"</span><span class="p">:</span><span class="w">           </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w">      </span><span class="s2">"Vorname"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w">       </span><span class="s2">"Nachname"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"company"</span><span class="p">:</span><span class="w">         </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"street"</span><span class="p">:</span><span class="w">          </span><span class="s2">"Musterstraße 1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"zip"</span><span class="p">:</span><span class="w">             </span><span class="s2">"12345"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"city"</span><span class="p">:</span><span class="w">            </span><span class="s2">"Musterstadt"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"ustid"</span><span class="p">:</span><span class="w">           </span><span class="s2">"DE1234567890"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<aside class="success">
+Before the function request, the customer must be authenticated.
+</aside>
+
+<h3 id="params">Params</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>customer_number</strong> (in URL)</td>
+<td>The number identifying the customer.</td>
+</tr>
+</tbody></table>
+
+<h3 id="validation">Validation</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>gender</strong></td>
+<td>The gender of the customer. <ul> <div style="text-align: left;"> <li>required</li> <li>allowed values: <code class="prettyprint">male</code>, <code class="prettyprint">female</code></li> </ul></td>
+</tr>
+<tr>
+<td><strong>first_name</strong></td>
+<td>The first name of the customer. <ul> <div style="text-align: left;"> <li>required</li> </ul></td>
+</tr>
+<tr>
+<td><strong>last_name</strong></td>
+<td>The last name of the customer. <ul> <div style="text-align: left;"> <li>required</li> </ul></td>
+</tr>
+<tr>
+<td><strong>street</strong></td>
+<td>The street of the customer&rsquo;s billing address. <ul> <div style="text-align: left;"> <li>required</li> </ul></td>
+</tr>
+<tr>
+<td><strong>zip</strong></td>
+<td>The zip code of the customer&rsquo;s billing address. <ul> <div style="text-align: left;"> <li>required</li> </ul></td>
+</tr>
+<tr>
+<td><strong>city</strong></td>
+<td>The city of the customer&rsquo;s billing address. <ul> <div style="text-align: left;"> <li>required</li> </ul></td>
+</tr>
+</tbody></table>
+
+          <h2 id="updatepaymentdata-updating-the-customer-39-s-payment-method">updatePaymentData - Updating the Customer&rsquo;s Payment Method</h2>
+<pre class="highlight http"><code><span class="nf">PATCH</span> <span class="nn">/api/v1/cstomer/customer_number/account/billing_data</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">updatePaymentData</span><span class="p">(</span><span class="nx">params</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>Request body/ params</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"payment_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"payment_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"invoice"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<aside class="success">
+Before the function request, the customer must be authenticated.
+</aside>
+
+<h3 id="params">Params</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>customer_number</strong> (in URL)</td>
+<td>The number identifying the customer.</td>
+</tr>
+</tbody></table>
+
+<h3 id="validation">Validation</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>payment_method</strong></td>
+<td>The payment method chosen by the customer. <ul> <div style="text-align: left;"> <li>required</li> <li>allowed values: see <a href="#payment_methods">Payment Methods</a></li> </ul></td>
+</tr>
+</tbody></table>
+
+          <h1 id="billing">Billing</h1>
+
+          
+          <h2 id="getbills-calling-the-customer-39-s-bills">getBills - Calling the Customer&rsquo;s Bills</h2>
+<pre class="highlight http"><code><span class="nf">PATCH</span> <span class="nn">/api/v1/cstomer/customer_number/bills</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">getBills</span><span class="p">();</span>
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"bills"</span><span class="p">:</span><span class="w">
+    </span><span class="p">[</span><span class="w">
+      </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bill_cancelation"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"bill_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0001/2015/X"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"canceled_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-19"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"cents"</span><span class="p">:</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://url/to/bill"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bill"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"bill_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0001/2015"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"billed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-14"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"cents"</span><span class="p">:</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://url/to/bill"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first_dunning"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"bill_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0001/2015/1"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"billed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-19"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"cents"</span><span class="p">:</span><span class="w"> </span><span class="mi">2500</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://url/to/bill"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"type_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first_dunning_cancelation"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"bill_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0001/2015/1/X"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"canceled_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-19"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"cents"</span><span class="p">:</span><span class="w"> </span><span class="mi">2500</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://url/to/bill"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<aside class="success">
+Before the function request, the customer must be authenticated.
+</aside>
+
+<h3 id="params">Params</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>customer_number</strong> (in URL)</td>
+<td>The number identifying the customer.</td>
+</tr>
+</tbody></table>
+
+<h4 id="type_name">TYPE_NAME</h4>
+
+<p>The field <code class="prettyprint">type_name</code>is according to the dunning level and other states a bill/dunning can have. Possible types are:</p>
+
+<table><thead>
+<tr>
+<th>type_name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>bill</strong></td>
+<td>normal bill</td>
+</tr>
+<tr>
+<td><strong>first reminder</strong> <br> <strong>second reminder</strong></td>
+<td>payment reminder</td>
+</tr>
+</tbody></table>
+
+          <h1 id="further-merchant-functions">Further merchant functions</h1>
+
+          
+          <h1 id="payment-methods">Payment Methods</h1>
+
+          
+          
+          
+          
+          
+          <h1 id="isaac10-ui">isaac10 UI</h1>
+
+          
+          
+          
+          
+          
       </div>
       <div class="dark-box">
           <div class="lang-selector">

@@ -1,0 +1,54 @@
+<h2 id="authenticate-customer-login">authenticate - Customer Login</h2>
+<pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/v1/authenticate</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+
+{
+  "email": "you@example.com",
+  "password": "customer password"
+}
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">login</span><span class="p">(</span><span class="s1">'email'</span><span class="p">,</span> <span class="s1">'password'</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"customer_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100001"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"customer_token"</span><span class="p">:</span><span class="w">  </span><span class="s2">"abc123"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="params">Params</h3>
+
+<table>
+  <tr>
+    <th>Parameter</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><strong>email</strong></td>
+    <td>
+      Mail of the customer
+      <ul>
+        <li> required </li>
+      </ul>  
+    </td>
+   </tr>
+   <tr>
+     <td><strong>password</strong></td>
+     <td>
+       Password of the customer
+       <ul>
+         <li> required </li>
+       </ul>  
+     </td>
+    </tr>
+  </table>
+
+<p>If <code class="prettyprint">email</code> and <code class="prettyprint">password</code> are not matching, error 404 will be returned.</p>
+
+<p>If you wish to outsource the authentication entirely with isaac10, you can request customer number and API token, asked for the authorize header or JavaScript function <code class="prettyprint">.authenticateCustomer</code> by this API call.</p>
+
+<p>After the request, <code class="prettyprint">.authenticateCustomer</code> together with transferred customer number and customer token will be called automatically.</p>
