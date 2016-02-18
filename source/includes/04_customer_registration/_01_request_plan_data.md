@@ -1,4 +1,4 @@
-## Request Plan Data
+## getPlan - Request Plan Data
 
 ```http
 GET /api/v1/register/plan_nid HTTP/1.1
@@ -85,13 +85,13 @@ isaac10.getPlan('plan_nid');
 }
 ```
 
-Request the data neccessary to display the registration form.
+Request the data necessary to display the registration form.
 
 ### Params
 
-Parameter | Validations | Description
+Parameter | Description
 ----------|-------------|------------
-**plan_nid** (in URL) | no validations, but 404 error if plan not found or disabled | The NID of the plan
+**plan_nid** (in URL) | The NID of the plan
 
 ### Response
 

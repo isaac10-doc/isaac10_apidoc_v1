@@ -2,12 +2,12 @@
 
 ### REST API
 
-The REST API can be used with any HTTP client. All API request must use HTTPS
+The REST API can be used with any HTTP client. All API requests must use HTTPS
 and need to be send to:
 
 `https://your-subdomain.isaac10.com`
 
-Replace `your-subdomain` with... well... you subdomain.
+Replace `your-subdomain` with... well... your subdomain.
 
 <aside class="notice">
 All <code>PATCH</code> requests may also be called as <code>PUT</code>

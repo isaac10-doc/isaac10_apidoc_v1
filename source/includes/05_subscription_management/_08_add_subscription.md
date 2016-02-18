@@ -1,49 +1,93 @@
-## Register
+## addSubscription - Adding a new Subscription
 
 ```http
-POST /api/v1/register HTTP/1.1
+POST /api/v1/customer/customer_number/subscriptions HTTP/1.1
 ```
 
 ```javascript
-isaac10.register(params);
+isaac10.addSubscription(params);
 ```
 
-> Request Body / Params
+> Request body/params
+
 
 ```json
 {
-  "register": {
+  "id": null,
+  "subscription": {
     "plan_nid": "NID of the plan",
-    "billing_interval": "yearly",
-
-    "gender": "female",
-    "title": "Dr.",
-    "first_name": "Firstname",
-    "last_name": "Lastname",
-    "company": "Company",
-    "street": "Street 42",
-    "zip": "12345",
-    "city": "City",
-    "country": "DE",
-    "ustid": "",
-
-    "payment_method": "invoice",
-
+    "billing_interval": "monthly",
     "additions": [
       { "nid": "NID addition 1", "quantity": 1 },
-      { "nid": "NID addition 2", "quantity": 4 }
-    ],
-
-    "coupon_code": "",
-
-    "email": "email@example.com",
-    "password": "password",
-    "double_opt_in": false
+      { "nid": "NID addition 2", "quantity": 4 },
+    ]
   }
 }
 ```
 
-### Parameters
+>> billing address
+
+```json
+{
+  "id": null,
+  "subscription": {
+    "plan_nid": "NID of the plan",
+    "billing_interval": "monthly",
+    "additions": [
+      { "nid": "NID addition 1", "quantity": 1 },
+      { "nid": "NID addition 2", "quantity": 4 },
+    ],
+
+    "gender":           "female",
+    "title":            "",
+    "first_name":       "Maxi",
+    "last_name":        "Mustermann",
+    "company":          "",
+    "street":           "Musterstraße 1",
+    "zip":              "12345",
+    "city":             "Musterstadt",
+    "country":          "DE",
+    "ustid":            "",
+
+    "payment_method": "invoice"
+  }
+}
+```
+
+> Response
+
+```json
+{
+  "plan": {
+  },
+  "subscription": {
+}
+}
+```
+
+
+<aside class="success">
+Before the function request, the customer must be authenticated.
+</aside>
+
+### Params
+
+Parameter | Description
+----------|-------------
+**customer_number** (in URL) | The number identifying the customer.  
+
+<br>
+<br>
+
+If the plan is with costs and neither billing address nor paymemt method have been given by the customer, the following data has to be transferred for the booking of the plan. (see right side)
+
+<aside class="notice">
+If billing address and payment method already given by the customer, this information will be ignored.
+<br>
+<strong> Updating the billing address and payment method is not possible by this API call. </strong>
+</aside>
+
+### Validation
 
 <table>
   <tr>
@@ -160,54 +204,4 @@ isaac10.register(params);
       </ul>
     </td>
   </tr>
-  <tr>
-    <td><strong>coupon_code</strong></td>
-    <td>
-      Code number of the coupon.
-      <ul>
-        <li>optional</li>
-        <li>if coupon code is transferred, must be valuable and activated</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>email</strong></td>
-    <td>
-      Mail adress of the customer.
-      <ul>
-        <li>required</li>
-        <li>has to contain the @ character</li>
-        <li>must not have already been assigned to this subdomain or this merchant</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>password</strong></td>
-    <td>
-      Customer's password for Login.
-      <ul>
-        <li>required</li>
-        <li>must contain at least 6 characters</li>
-      </ul>
-    </td>
-  </tr>
 </table>
-
-### Response
-
-> Response
-
-```json
-{
-  "customer_number": "000001",
-  "customer_token": "abc123",
-  "plan_nid": "abc123",
-  "subscription_id": 42
-}
-```
-
-Parameter | Description
-----------|------------
-**customer_number, customer_token** | The customer number and customer token of the newly created account. Unless you want to [use the login function of _isaac10_ for authenticating your users](#customer-login), you need to save these in your database for [authenticating your customers](#customer-authentication).
-**plan_nid** | The NID of the subscribed plan.
-**subscription_id** | The ID of the newly created subscription. You need it as a parameter for [confirming the subscription](#confirming-the-subscription-after-register).
