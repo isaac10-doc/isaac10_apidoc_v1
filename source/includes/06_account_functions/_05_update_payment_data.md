@@ -1,7 +1,7 @@
 ## updatePaymentData - Updating the Customer's Payment Method
 
 ```http
-PATCH /api/v1/cstomer/customer_number/account/billing_data HTTP/1.1
+PATCH /api/v1/customer/customer_number/account/billing_data HTTP/1.1
 ```
 
 ```javascript
@@ -29,7 +29,7 @@ isaac10.updatePaymentData(params);
 
 
 <aside class="success">
-Before the function request, the customer must be authenticated.
+Before the function request, the <a href= "#customer_authentication"> customer must be authenticated</a>.
 </aside>
 
 ### Params

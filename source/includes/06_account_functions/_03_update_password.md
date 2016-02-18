@@ -1,7 +1,7 @@
 ## updatePassword - Updating the Customer's Password
 
 ```http
-PATCH /api/v1/cstomer/customer_number/account/password HTTP/1.1
+PATCH /api/v1/customer/customer_number/account/password HTTP/1.1
 ```
 
 ```javascript

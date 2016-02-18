@@ -17,7 +17,6 @@ includes:
   - 02_authentication/01_login
   - 02_authentication/02_customer_authentication
   - 02_authentication/03_merchant_authentication
-  - 02_authentication/04_authenticate_login_customer
   - 03_public_functions/00_headline
   - 03_public_functions/01_get_product
   - 03_public_functions/02_call_API_token

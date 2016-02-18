@@ -85,7 +85,7 @@ isaac10.register(params);
     <td>
       Gender of the subscribing customer.
       <ul>
-        <li>requested, when plan is with costs</li>
+        <li>required, when plan is with costs</li>
         <li>allowed values: <em>male, female</em></li>
       </ul>
     </td>
@@ -95,7 +95,7 @@ isaac10.register(params);
     <td>
       First name of the customer.
       <ul>
-        <li>requested, when plan is with costs</li>
+        <li>required, when plan is with costs</li>
       </ul>
     </td>
   </tr>
@@ -104,7 +104,7 @@ isaac10.register(params);
     <td>
       Last name of the customer.
       <ul>
-        <li>requested, when plan is with costs</li>
+        <li>required, when plan is with costs</li>
       </ul>
     </td>
   </tr>
@@ -113,7 +113,7 @@ isaac10.register(params);
     <td>
       Street name of the customer's address.
       <ul>
-        <li>requested, when plan is with costs</li>
+        <li>required, when plan is with costs</li>
       </ul>
     </td>
   </tr>
@@ -122,7 +122,7 @@ isaac10.register(params);
     <td>
       Zip code of the customer's address.
       <ul>
-        <li>requested, when plan is with costs</li>
+        <li>required, when plan is with costs</li>
       </ul>
     </td>
   </tr>
@@ -131,7 +131,7 @@ isaac10.register(params);
     <td>
       City of the customer's address.
       <ul>
-        <li>requested, when plan is with costs</li>
+        <li>required, when plan is with costs</li>
       </ul>
     </td>
   </tr>
@@ -140,7 +140,7 @@ isaac10.register(params);
     <td>
       Name of the country of the customer's address.
       <ul>
-        <li>requested, when plan is with costs</li>
+        <li>required, when plan is with costs</li>
         <li>must be a double-digit country code</li>
         <li>must be included in the tax list</li>
       </ul>

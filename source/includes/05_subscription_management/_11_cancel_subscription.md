@@ -19,7 +19,7 @@ isaac10.cancelSubscription(subscription_id);
 
 
 <aside class="success">
-Before the function request, the customer must be authenticated.
+Before the function request, the <a href= "#customer-authentication"> customer must be authenticated</a>.
 </aside>
 
 ### Params

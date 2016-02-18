@@ -1,4 +1,4 @@
-## upgradeDowngradeSubscription - Upgrading/Downgrading a Subscription
+## Upgrading/Downgrading a Subscription
 
 
 ```http
@@ -62,7 +62,7 @@ isaac10.upgradeDowngradeSubscription(subscription_id, params);
 ```
 
 <aside class="success">
-Before the function request, the customer must be authenticated.
+Before the function request, the <a href= "#customer-authentication"> customer must be authenticated</a>.
 </aside>
 
 
@@ -75,6 +75,6 @@ Parameter | Description
 
 
 ### Validations
-The validations and conditions for an upgrade/downgrade are the same as mentioned in chapter [addSubscription() - Add a Subscription](#add_subscription).
+The validations and conditions for an upgrade/downgrade are the same as mentioned in chapter [Adding a new Subscription](#adding-a-new-subscription).
 
 The conditions for billing address and billing method as mentioned below are the same for this call and, if necessary, must be transferred.

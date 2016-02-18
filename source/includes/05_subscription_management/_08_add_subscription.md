@@ -1,4 +1,4 @@
-## addSubscription - Adding a new Subscription
+## Adding a new Subscription
 
 ```http
 POST /api/v1/customer/customer_number/subscriptions HTTP/1.1
@@ -67,7 +67,7 @@ isaac10.addSubscription(params);
 
 
 <aside class="success">
-Before the function request, the customer must be authenticated.
+Before the function request, the <a href= "#customer-authentication"> customer must be authenticated</a>.
 </aside>
 
 ### Params
@@ -129,7 +129,7 @@ If billing address and payment method already given by the customer, this inform
     <td>
       Gender of the subscribing customer.
       <ul>
-        <li>requested, when plan is with costs</li>
+        <li>required, when plan is with costs</li>
         <li>allowed values: <em>male, female</em></li>
       </ul>
     </td>
@@ -139,7 +139,7 @@ If billing address and payment method already given by the customer, this inform
     <td>
       First name of the customer.
       <ul>
-        <li>requested, when plan is with costs</li>
+        <li>required, when plan is with costs</li>
       </ul>
     </td>
   </tr>
@@ -148,7 +148,7 @@ If billing address and payment method already given by the customer, this inform
     <td>
       Last name of the customer.
       <ul>
-        <li>requested, when plan is with costs</li>
+        <li>required, when plan is with costs</li>
       </ul>
     </td>
   </tr>
@@ -157,7 +157,7 @@ If billing address and payment method already given by the customer, this inform
     <td>
       Street name of the customer's address.
       <ul>
-        <li>requested, when plan is with costs</li>
+        <li>required, when plan is with costs</li>
       </ul>
     </td>
   </tr>
@@ -166,7 +166,7 @@ If billing address and payment method already given by the customer, this inform
     <td>
       Zip code of the customer's address.
       <ul>
-        <li>requested, when plan is with costs</li>
+        <li>required, when plan is with costs</li>
       </ul>
     </td>
   </tr>
@@ -175,7 +175,7 @@ If billing address and payment method already given by the customer, this inform
     <td>
       City of the customer's address.
       <ul>
-        <li>requested, when plan is with costs</li>
+        <li>required, when plan is with costs</li>
       </ul>
     </td>
   </tr>
@@ -184,7 +184,7 @@ If billing address and payment method already given by the customer, this inform
     <td>
       Name of the country of the customer's address.
       <ul>
-        <li>requested, when plan is with costs</li>
+        <li>required, when plan is with costs</li>
         <li>must be a double-digit country code</li>
         <li>must be included in the tax list</li>
       </ul>
