@@ -36,7 +36,7 @@ isaac10.createBillItem(params);
 
 
 <aside class="success">
-Before the function request, you must <a href= "#merchant-authentication"> authenticate yourself</a>.
+Before making the function call, you must <a href= "#merchant-authentication"> authenticate yourself</a>.
 </aside>
 
 ### Validation

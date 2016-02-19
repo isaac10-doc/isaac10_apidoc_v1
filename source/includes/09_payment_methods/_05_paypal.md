@@ -1,7 +1,7 @@
 ## PayPal
 
-
-> Request body / Params
+> Parameters for request body<br>
+> _(full request body depends on request)_
 
 ```json
 {
@@ -9,19 +9,26 @@
 }
 ```
 
-> Response
+> Response values for payment data<br>
+> _(full response depends on request)_
 
 ```json
 {
-  "payment_method": "paypal"
+  "payment_data": {
+    "payment_method": "paypal"
+  }
 }
 ```
 
 ### Params
 
-For the payment with PayPal no further information need to be given. The system expects that after the transmission PayPal will be called and the billing agreement ID is sent to _isaac10_ as described in [Confirmation after Registration](#confirmation-after-registration).
+For the payment with PayPal no further parameters (aside from `"payment_method": "paypal"`) need to be passed.
 
-### Setup
+However, when using the REST integration, you must pass special `successURL`s and `failureURL`s to the PayPal API to make PayPal send the billing agreement back to _issac10_ and not directly to your website. (Description TODO)
+
+When using the JavaScript library, the billing agreement of PayPal is sent to _isaac10_ automatically. This is described below.
+
+### Setup in Merchant Configuration
 
 The input mask for your PayPal ID (normally your email address with PayPal) and the display of given agreements on behalf of PayPal, as far as this payment method is activated for you, can be found in
 
@@ -29,8 +36,7 @@ The input mask for your PayPal ID (normally your email address with PayPal) and 
 
 <aside class="notice">
 To be able to use the checkout express, place billing agreements for recurring payment in order and charge your customers on your behalf, you need to grant us the appropriate permissions. By clicking on "Set Permission" you'll be forwarded to the PayPal Merchant Domain, where you can grant the appropriate permissions. Afterwards you'll be backwarded to your _isaac10_ merchant backend again.
- </aside>
-
+</aside>
 
 ### Integration with JavaScript library
 
@@ -38,17 +44,22 @@ With our _isaac10_ JavaScript library you can call up the [In-Context-Express-Ch
 This billing agreement will be maintained in the background by _isaac10_ in order to use it for further debiting.
 
 Please follow these steps:
-<ol>
-  <li> Call up the function which transfers the payment data (e.g. isaac10.register(…) or isaac10.updatePaymentData(…).   </li>
 
-  <li> In case of registration: Authenticate the customer by using the data received in step 1. If you changed the payment data of an existing customer the authentication is already realized.  </li>
+**1. Call a function which transfers the payment data**
 
-  <li> Call up the function isaac10.processPaypal('successURL', 'failureURL‘). After that you receive the express-chckeout-window by Paypal which redirects to Paypal.  </li>
+e.g. `.register()` or `.updatePaymentData()` and pass `"payment_method": "paypal"` in the params.
 
-    <ul>
-      <li> successURL: Paypal redirects to this URL (\*\) in case the customer confirms the payment via Paypal. </li>
-      <li> failureURL: Paypal redirects to this URL (\*\) in case the customer cancels the payment via Paypal. </li>
-    </ul>
-</ol>
+**2. In case of registration: Authenticate the customer**
 
-(\*\) In deed, PayPal will lead back to _isaac10_, where the PayPal returned data get processed and linked to the customer. The final redirect to your page (to the passed `successURL` or `failureURL`) is done by _isaac10_.
+by using the customer number and customer token received by step 1. This is unecessary if you changed the payment data of an existing customer. The authentication must have been already done in this case (otherwise you could not have called the function for changing the payment data in the first place).
+
+**3. Call the function to process PayPal**
+
+which is named `.processPaypal(successURL, failureURL)`.
+
+-   **successURL:** Paypal redirects to this URL (\*) in case the customer confirms the payment via Paypal.
+-   **failureURL:** Paypal redirects to this URL (\*) in case the customer cancels the payment via Paypal.
+
+After the call the express checkout window by Paypal will open which redirects the customer to Paypal.
+
+(\*) Indeed, we make PayPal to redirect back to _isaac10_, where the data returned by PayPal gets processed. The final redirect to your website (to the passed `successURL` or `failureURL`) is then done by _isaac10_ itself.

@@ -2,10 +2,10 @@
 
 isaac10 supports the following payment methods:
 
-* on [invoice](#invoice)
-* [direct debit (SEPA)](#direct-debit-sepa)
-* [credit card](#credit-card)
-* [PayPal](#paypal)
+-   on [invoice](#invoice)
+-   [direct debit (SEPA)](#direct-debit-sepa)
+-   [credit card](#credit-card)
+-   [PayPal](#paypal)
 
 The parameter `payment_method` specifies, which payment method gets stored. Each payment method requires different additional parameter.
 

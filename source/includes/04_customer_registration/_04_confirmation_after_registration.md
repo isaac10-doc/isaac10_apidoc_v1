@@ -34,7 +34,7 @@ isaac10.thankYouAfterRegister(subscription_id, params);
 ```
 
 <aside class="success">
-Before the function request, the <a href= "#customer-authentication"> customer must be authenticated</a>.
+Before making the function call, the <a href="#customer-authentication">customer must be authenticated</a>.
 </aside>
 
 ### Params

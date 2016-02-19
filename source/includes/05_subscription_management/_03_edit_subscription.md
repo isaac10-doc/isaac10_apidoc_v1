@@ -1,7 +1,9 @@
 ## Edit a Subscription
 
+Retrieve all necessary data to display an edit form for the subscription with the given `subscription_id` and a table with all possible up- and downgrade options.
+
 ```http
-GET /api/v1/customer/customer_number/subscriptions/subscription_id/edit HTTP/1.1
+GET /api/v1/customer/<customer_number>/subscriptions/<subscription_id>/edit HTTP/1.1
 ```
 
 ```javascript
@@ -45,7 +47,7 @@ isaac10.editSubscription(subscription_id);
 ```
 
 <aside class="success">
-Before the function request, the <a href= "#customer-authentication"> customer must be authenticated</a>.
+Before making the function call, the <a href="#customer-authentication">customer must be authenticated</a>.
 </aside>
 
 ### Params
@@ -53,7 +55,7 @@ Before the function request, the <a href= "#customer-authentication"> customer m
 Parameter | Description
 ----------|------------
 **customer_number** (in URL) | The number identifying the customer.
-**subscription_id** | The ID of the subscription.
+**subscription_id** (in URL) | The ID of the subscription.
 
 ### Response
 
@@ -62,16 +64,16 @@ Parameter | Description
 **plan** | Data of the plan. Same as [Get Plan Data](#get-plan-data)
 **billing_data** | Data of the customer's billing address. Same as [Get Account Data](#get-account-data)
 **payment_data** | Data of the given payment method. Same as [Get Account Data](#get-account-data)
-**subscription** | Data of the subscription to edit. Same as [List Customer Subscriptions](#list-customer-subscriptions)
+**subscription** | Data of the subscription to edit. Same as [List Customer Subscriptions](#list-customer-subscriptions) (but just one subscription, no array)
 **allowed_transitions[]** | Additional information for Upgrading/Downgrading.
 **allowed_transitions[].nid** | The NID of the plan to which can be up- or downgraded.
 **allowed_transitions[].name** | The name of the plan to which can be up- or downgraded.
 **allowed_transitions[].transition_type** | _See table below_
 
-### _transition_type_
+### _transition\_type_
 
 Value | Description
 ------|------------
 `upgrade` | Changing the subscription to this plan will be considered an _upgrade_ and therefor will be valid immediately.
 `downgrade` | Changing the subscriptio to this plan will be considered a _downgrade_ and therefor will be valid when the end of the current term is reached.
-`self` | The current plan. It is listed in the array for convenience reasons.
+`self` | The current plan. Listed in the array for convenience reasons.
