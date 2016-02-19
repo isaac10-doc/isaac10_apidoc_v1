@@ -6,7 +6,7 @@
 var customTranslations = {
   "de": {
     "defaults": {
-      "save": "Absenden"
+      "save": "send"
     }
   }
 };
@@ -24,8 +24,9 @@ Isaac10UI.setup({
 ```
 
 
-By initializing the _isaac10 UI_ you can overwrite or add translations employing the parameter `overrideTranslations`.
+By [initializing the _isaac10 UI_](#embedding-and-initialization) you can overwrite or add translations employing the parameter `overrideTranslations`.
 Therefore you need to generate a JavaScript object which has the same structure as the translation file (see JavaScript tab).
 
-You can use the currently used translation file in not minified form (as coffee script) as template to be downloaded here:
+You can use the currently used translation file in not minified form (as coffee script) as template to be downloaded here: <br>
+
 [https://app.isaac10.com/ui/translations.coffee](https://app.isaac10.com/ui/translations.coffee)

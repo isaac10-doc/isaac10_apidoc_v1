@@ -81,7 +81,7 @@ Parameter | Description
 <br>
 <br>
 
-If the plan is with costs and neither billing address nor paymemt method have been given by the customer, the following data has to be transmitted for the booking of the plan. (see right side)
+If the plan is with costs and neither billing address nor paymemt method have been given by the customer, the following data has to be transmitted for the subscription of the plan. (see right side)
 
 <aside class="notice">
 If billing address and payment method are already given by the customer, this information will be ignored.
@@ -197,11 +197,11 @@ If billing address and payment method are already given by the customer, this in
     <td>
       The payment method to use. The example shows <code>invoice</code>. For all
       payment methods and the instructions to integrate them, see
-      <a href="#payment_methods">Payment Methods</a>.
+      <a href="#payment-methods">Payment Methods</a>.
       <ul>
         <li>required if plan is with costs</li>
         <li>
-          for allowed values see <a href="#payment_methods">Payment Methods</a>
+          for allowed values see <a href="#payment-methods">Payment Methods</a>
         </li>
       </ul>
     </td>

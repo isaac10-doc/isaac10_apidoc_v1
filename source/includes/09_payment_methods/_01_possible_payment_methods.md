@@ -3,7 +3,7 @@
 isaac10 supports the following payment methods:
 
 * on [invoice](#invoice)
-* [direct debit (SEPA)](#direct-debit-(SEPA))
+* [direct debit (SEPA)](#direct-debit-sepa)
 * [credit card](#credit-card)
 * [PayPal](#paypal)
 
