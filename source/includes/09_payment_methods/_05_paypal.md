@@ -25,7 +25,7 @@ For the payment with PayPal no further information need to be given. The system 
 
 The input mask for your PayPal ID (normally your email address with PayPal) and the display of given agreements on behalf of PayPal, as far as this payment method is activated for you, can be found in
 
-**Configuration > Payment methods**
+**Settings > Payment methods**
 
 <aside class="notice">
 To be able to use the checkout express, place billing agreements for recurring payment in order and charge your customers on your behalf, you need to grant us the appropriate permissions. By clicking on "Set Permission" you'll be forwarded to the PayPal Merchant Domain, where you can grant the appropriate permissions. Afterwards you'll be backwarded to your _isaac10_ merchant backend again.
