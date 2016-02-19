@@ -58,6 +58,6 @@ isaac10.login('email', 'password');
 If `email` and `password` are not matching, error 404 will be returned.
 
 
-If you wish to outsource the authentication entirely with isaac10, you can request customer number and API token, asked for the authorize header or JavaScript function `.authenticateCustomer` by this API call.
+If you wish to outsource the authentication entirely with _isaac10_, you can request customer number and API token, asked for the authorize header or JavaScript function `.authenticateCustomer` by this API call.
 
 After the request, `.authenticateCustomer` together with transferred customer number and customer token will be called automatically.

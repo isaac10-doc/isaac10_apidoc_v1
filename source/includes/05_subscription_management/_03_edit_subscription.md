@@ -1,4 +1,4 @@
-## editSubscription - Call of a Subscription
+## Edit a Subscription
 
 ```http
 GET /api/v1/customer/customer_number/subscriptions/subscription_id/edit HTTP/1.1

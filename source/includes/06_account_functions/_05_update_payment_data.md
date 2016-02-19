@@ -8,7 +8,7 @@ PATCH /api/v1/customer/customer_number/account/billing_data HTTP/1.1
 isaac10.updatePaymentData(params);
 ```
 
-> Request body/ params
+> Request body / Params
 
 ```json
 {
@@ -41,4 +41,4 @@ Parameter | Description
 ### Validation
 Parameter | Description
 ----------|-------------
-**payment_method** | The payment method chosen by the customer. <ul> <div style="text-align: left;"> <li>required</li> <li>allowed values: see [Payment Methods](#payment_methods)</li> </ul>
+**payment_method** | The payment method chosen by the customer. <ul> <div style="text-align: left;"> <li>required</li> <li>allowed values: see [Payment Methods](#payment-methods)</li> </ul>

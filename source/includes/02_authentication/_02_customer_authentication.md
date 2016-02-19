@@ -2,7 +2,7 @@
 
 For using the functions regarding customer specific data, the customer has to be authenticated. The data required for authentication of the customer (API token, customer number) after a register request are returned as `customer_token` and `customer_number` and have to be stored in your system.
 
-If you wish to outsource the authentication process entirely to our isaac10 system, you need to embed the API call [authenticate - login of customer](#login), returning token and customer number.
+If you wish to outsource the authentication process entirely to our _isaac10_ system, you need to embed the API call [authenticate - login of customer](#login), returning token and customer number.
 
 ### REST API
 
@@ -16,9 +16,9 @@ When using the JavaScript API the customer has to be authenticated _before_ his 
 
 `isaac10.authenticateCustomer("<customer_number>", "<customer_token>");`
 
-The request `authenticateCustomer()` itself _won't_ create a HTTP request. The client's Customer number as well as the API token gets stored in the isaac10 object and returned (if necessary) with every request.
+The request `authenticateCustomer()` itself _won't_ create a HTTP request. The client's Customer number as well as the API token gets stored in the _isaac10_ object and returned (if necessary) with every request.
 
-Once customer number and API token of the customer set, they can be displayed as properties of the isaac10 object:
+Once customer number and API token of the customer set, they can be displayed as properties of the _isaac10_ object:
 
 `console.log(isaac10.customerNumber);`  
 `// => "<customer_number>"`

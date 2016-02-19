@@ -8,7 +8,7 @@ GET /api/v1/bill_items HTTP/1.1
 isaac10.createBillItem(params);
 ```
 
-> Request body/ params
+> Request body / Params
 
 ```json
 {
@@ -50,8 +50,9 @@ Parameter | Description
 **quantity** | <ul> <li>required </li> <li> must be in form of a whole number and be greater than zero</li> </ul>
 **vat** | <ul> <li>required </li> <li> must be in form of a decimal number, containing a point as decimal separator and be greater than zero</li> </ul>
 **bill_from** | <ul> <li>required </li> <li> must be in form of a date according to ISO-8601 (YYYY-MM-DD)</li> </ul>
-**bill_to** | <ul> <li> must be in form of a date according to ISO-8601 (YYYY-MM-DD)</li> <li>must lie after the `bill_from`date </li> </ul>
+**bill_to** | <ul> <li> must be in form of a date according to ISO-8601 (YYYY-MM-DD)</li> <li>must lie after the `bill_from` date </li> </ul>
 
 <aside class="notice">
-<strong> How to create a </a>.
+<strong> How to create a credit item?</strong><br>
+To create a credit item, just put a negative amount for <code>amount-cents </code>.
 </aside>

@@ -8,7 +8,7 @@ PATCH /api/v1/customer/customer_number/account/account_data HTTP/1.1
 isaac10.updateAccountData(params);
 ```
 
-> Request body/ params
+> Request body / Params
 
 ```json
 {

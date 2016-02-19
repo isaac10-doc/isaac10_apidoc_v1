@@ -1,4 +1,4 @@
-## getSubscriptions - Call Customer's Subscriptions
+## Call Customer's Subscriptions
 
 ```http
 GET /api/v1/customer/customer_number/subscriptions HTTP/1.1

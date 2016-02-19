@@ -22,7 +22,7 @@ isaac10.checkCouponCode(coupon_code, {"plan_nid": "<plan_nid>" });
 }
 ```
 
-### params
+### Params
 
 Parameter | Description
 ----------|------------

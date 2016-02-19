@@ -26,9 +26,9 @@ If a request requires the authentication of the merchant, the merchant's API tok
 When using the JavaScript API you have to authenticate yourself _before_ your first request of a protected function by using your merchant API token. The authentication itself works by the method `authenticateMerchant()` with an instance of the isaac10 object:
 
 
-As mentionned above the request `authenticateMerchant()` _won't_ create a HTTP request. The merchant's API token gets stored in the isaac10 object and returned (if necessary) with every request.
+As mentionned above the request `authenticateMerchant()` _won't_ create a HTTP request. The merchant's API token gets stored in the _isaac10_ object and returned (if necessary) with every request.
 
-He will be set as property as well and can be displayed with the isaac10 object:
+He will be set as property as well and can be displayed with the _isaac10_ object:
 
 
 

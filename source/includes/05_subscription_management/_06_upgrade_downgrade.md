@@ -11,7 +11,7 @@ isaac10.upgradeDowngradeSubscription(subscription_id, params);
 
 
 
-> Request body/params
+> Request body / Params
 
 ```json
 "subscription": {

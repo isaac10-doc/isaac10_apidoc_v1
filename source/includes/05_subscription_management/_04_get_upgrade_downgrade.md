@@ -1,4 +1,4 @@
-## getUpgradeDowngradeSubscription - Call of Account, Subscription and Plan Data
+## Call of Account, Subscription and Plan Data
 
 
 ```http

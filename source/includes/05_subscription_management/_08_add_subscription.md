@@ -8,7 +8,9 @@ POST /api/v1/customer/customer_number/subscriptions HTTP/1.1
 isaac10.addSubscription(params);
 ```
 
-> Request body/params
+> Request body / Params
+
+> - without costs
 
 
 ```json
@@ -25,7 +27,7 @@ isaac10.addSubscription(params);
 }
 ```
 
->> billing address
+> - with costs (requires billing address/payment method)
 
 ```json
 {
@@ -79,10 +81,10 @@ Parameter | Description
 <br>
 <br>
 
-If the plan is with costs and neither billing address nor paymemt method have been given by the customer, the following data has to be transferred for the booking of the plan. (see right side)
+If the plan is with costs and neither billing address nor paymemt method have been given by the customer, the following data has to be transmitted for the booking of the plan. (see right side)
 
 <aside class="notice">
-If billing address and payment method already given by the customer, this information will be ignored.
+If billing address and payment method are already given by the customer, this information will be ignored.
 <br>
 <strong> Updating the billing address and payment method is not possible by this API call. </strong>
 </aside>

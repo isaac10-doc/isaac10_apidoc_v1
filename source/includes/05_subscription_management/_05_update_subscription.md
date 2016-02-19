@@ -1,4 +1,4 @@
-## updateSubscription - Updating a Subscription
+## Updating a Subscription
 
 
 ```http
@@ -9,7 +9,7 @@ PATCH /api/v1/customer/customer_number/subscriptions/subscription_id HTTP/1.1
 isaac10.updateSubscription(subscription_id, params);
 ```
 
-> Request body/params
+> Request body / Params
 
 ```json
 {

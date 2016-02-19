@@ -1,4 +1,4 @@
-## thankYouAfterRegister - Confirmation after Registration
+## Confirmation after Registration
 
 ```http
 POST /api/v1/customer/customer_nmber/thank_you/subscription_id/register HTTP/1.1
@@ -8,7 +8,7 @@ POST /api/v1/customer/customer_nmber/thank_you/subscription_id/register HTTP/1.1
 isaac10.thankYouAfterRegister(subscription_id, params);
 ```
 
-> Request body/params
+> Request body / Params
 
 ```json
 {"double_opt_in": true}
@@ -34,10 +34,10 @@ isaac10.thankYouAfterRegister(subscription_id, params);
 ```
 
 <aside class="success">
-Before the function request, the customer must be authenticated.
+Before the function request, the <a href= "#customer-authentication"> customer must be authenticated</a>.
 </aside>
 
-### params
+### Params
 
 Parameter | Description
 ----------|------------
@@ -50,7 +50,7 @@ Using this function, the transmission of the email informing the merchant about 
 </aside>
 
 
-Every of the following functions [register - Customer registration](#register), [addSubscription - Adding a new Subscription](#add_susbcription) and [upgradeDowngradeSubscription - Upgrading/Downgrading](#upgrade_downgrade) create a new data record for a subscription, not yet been confirmed. The ID of this booking created will be used within the `thank you` functions, in order to confirm the newly created record. Consequently those functions aren't optional.
+Every of the following functions [register - Customer registration](#register), [Adding a new Subscription](#adding-a-new-subscription) and [Upgrading/Downgrading](#upgrading-downgrading-a-subscription) create a new data record for a subscription, not yet been confirmed. The ID of this booking created will be used within the `thank you` functions, in order to confirm the newly created record. Consequently those functions aren't optional.
 All kind of emails for new registrations, double-opt-in and Downgrade confirmations will also be initiated by the `thank you` functions.
 
 ### Response

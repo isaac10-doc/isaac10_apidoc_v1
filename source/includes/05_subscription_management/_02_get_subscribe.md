@@ -1,4 +1,4 @@
-## getSubscribe - Call Customer and Plan data
+## Call Customer and Plan data
 
 ```http
 GET /api/v1/customer/customer_number/subscriptions/new?plan=plan_nid HTTP/1.1
