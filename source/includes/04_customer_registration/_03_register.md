@@ -151,11 +151,11 @@ isaac10.register(params);
     <td>
       The payment method to use. The example shows <code>invoice</code>. For all
       payment methods and the instructions to integrate them, see
-      <a href="#payment_methods">Payment Methods</a>.
+      <a href="#payment-methods">Payment Methods</a>.
       <ul>
         <li>required if plan is with costs</li>
         <li>
-          for allowed values see <a href="#payment_methods">Payment Methods</a>
+          for allowed values see <a href="#payment-methods">Payment Methods</a>
         </li>
       </ul>
     </td>
@@ -208,6 +208,6 @@ isaac10.register(params);
 
 Parameter | Description
 ----------|------------
-**customer_number, customer_token** | The customer number and customer token of the newly created account. Unless you want to [use the login function of _isaac10_ for authenticating your users](#customer-login), you need to save these in your database for [authenticating your customers](#customer-authentication).
+**customer_number, customer_token** | The customer number and customer token of the newly created account. Unless you want to [use the login function of _isaac10_ for authenticating your users](#customer-authentication), you need to save these in your database for [authenticating your customers](#customer-authentication).
 **plan_nid** | The NID of the subscribed plan.
-**subscription_id** | The ID of the newly created subscription. You need it as a parameter for [confirming the subscription](#confirming-the-subscription-after-register).
+**subscription_id** | The ID of the newly created subscription. You need it as a parameter for [confirming the subscription](#confirmation-after-registration).

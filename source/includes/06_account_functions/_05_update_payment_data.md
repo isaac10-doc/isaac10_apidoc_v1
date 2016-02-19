@@ -29,7 +29,7 @@ isaac10.updatePaymentData(params);
 
 
 <aside class="success">
-Before the function request, the <a href= "#customer_authentication"> customer must be authenticated</a>.
+Before the function request, the <a href= "#customer-authentication"> customer must be authenticated</a>.
 </aside>
 
 ### Params
