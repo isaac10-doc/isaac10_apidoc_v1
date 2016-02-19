@@ -14,8 +14,10 @@ isaac10.getSubscribe(plan_nid);
 ```json
 {
   "plan": {
+
   },
   "account": {
+
   }
 }
 ```
@@ -28,7 +30,7 @@ Before the function request, the <a href= "#customer-authentication"> customer m
 
 Parameter | Description
 ----------|-------------
-**customer_number** (in URL) | The ID of the customer.  
+**customer_number** (in URL) | The ID of the customer.
 **plan_nid** | The NID of the plan.
 
 

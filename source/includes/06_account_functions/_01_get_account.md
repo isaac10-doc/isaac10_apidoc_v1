@@ -1,4 +1,4 @@
-## getAccount - Call of Customer Data
+## Get Customer Data
 
 ```http
 GET /api/v1/customer/customer_number/account HTTP/1.1

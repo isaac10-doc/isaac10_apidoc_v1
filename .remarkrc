@@ -1,7 +1,11 @@
 {
   "plugins": {
     "lint": {
-      "first-heading-level": false
+      "first-heading-level": false,
+      "maximum-line-length": false,
+      "no-html": false,
+      "table-pipes": false,
+      "table-pipe-alignment": false
     }
   }
 }
