@@ -2519,7 +2519,7 @@ To create a credit item, just put a negative amount for <code>amount-cents </cod
 
 <h3 id="integration-with-javascript-library">Integration with JavaScript library</h3>
 
-<p>As payment upon invoice doesn&rsquo;t require further specifications, transferring the value <code class="prettyprint">invoice</code> is sufficient.</p>
+<p>As payment on invoice doesn&rsquo;t require further specifications, transferring the value <code class="prettyprint">invoice</code> is sufficient.</p>
 
           <h2 id="direct-debit-sepa">Direct Debit (SEPA)</h2>
 
@@ -2532,7 +2532,7 @@ To create a credit item, just put a negative amount for <code>amount-cents </cod
 
 <blockquote>
 <p>Parameters for request body / params when Micropayment is used<br>
-<em>(full request body / params depends on request)</em></p>
+<em>(full request body / params depend on request)</em></p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"payment_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"elv_micropayment"</span><span class="p">,</span><span class="w">
@@ -2556,7 +2556,7 @@ To create a credit item, just put a negative amount for <code>amount-cents </cod
 
 <blockquote>
 <p>Parameters for request body / params when garage clearing is used<br>
-<em>(full request body / params depends on request)</em></p>
+<em>(full request body / params depend on request)</em></p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"payment_method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"elv_dtaus"</span><span class="p">,</span><span class="w">
@@ -2602,7 +2602,7 @@ To create a credit item, just put a negative amount for <code>amount-cents </cod
 
           <h2 id="credit-card">Credit Card</h2>
 
-<p>For the payment upon credit card <em>isaac10</em> offers two different methods:</p>
+<p>For the payment by credit card <em>isaac10</em> offers two different methods:</p>
 
 <ul>
 <li>  <em>isaac10</em>&rsquo;s own integration: <code class="prettyprint">&quot;payment_method&quot;: &quot;cc_betterpayment&quot;</code>. This is a white label solution provided by <a href="http://betterpayment.de/">Better Payment</a></li>
@@ -2610,7 +2610,7 @@ To create a credit item, just put a negative amount for <code>amount-cents </cod
 </ul>
 
 <aside class="warning">
-<strong> Payment upon Credit Card with Micropayment is not yet implemented</strong><br>
+<strong> Payment by credit card with Micropayment is not yet implemented</strong><br>
 This documentation is ahead of its time. The payment method <code>cc_micropayment</code> is scheduled for delivery in the next release.
 </aside>
 
@@ -2764,7 +2764,7 @@ This documentation is ahead of its time. The payment method <code>cc_micropaymen
 <span class="nt">&lt;/html&gt;</span>
 </code></pre>
 
-<p>The JavaScript library (in comparison to an own implementation) offers an easy integration into your frontend. The procedure is the same for both, <code class="prettyprint">elv_betterpayment</code> and <code class="prettyprint">elv_micropayment</code>. Implementation procedure is as follows:</p>
+<p>The JavaScript library (in comparison to an own implementation) offers an easy integration into your front end. The procedure is the same for both, <code class="prettyprint">elv_betterpayment</code> and <code class="prettyprint">elv_micropayment</code>. Implementation procedure is as follows:</p>
 
 <p><strong>1. Place a <code class="prettyprint">&lt;div&gt;</code> in the HTML code</strong></p>
 
@@ -2772,7 +2772,7 @@ This documentation is ahead of its time. The payment method <code>cc_micropaymen
 
 <p><strong>2. Display the credit card iframe</strong></p>
 
-<p>by calling the function <code class="prettyprint">isaac10.displayCreditCardiframe(selector, width, height)</code>. The call and therefore the display can be linked to a JavaScript event, e.g. chosing a radio button.</p>
+<p>by calling the function <code class="prettyprint">isaac10.displayCreditCardiframe(selector, width, height)</code>. The call and therefore the display can be linked to a JavaScript event, e.g. choosing a radio button.</p>
 
 <ul>
 <li>  <strong>selector</strong> is the jQuery selector for the <code class="prettyprint">&lt;div&gt;</code>, where the iframe shall be rendered</li>
@@ -2824,12 +2824,12 @@ This documentation is ahead of its time. The payment method <code>cc_micropaymen
 <p><strong>Settings &gt; Payment methods</strong></p>
 
 <aside class="notice">
-To be able to use the checkout express, place billing agreements for recurring payment in order and charge your customers on your behalf, you need to grant us the appropriate permissions. By clicking on &ldquo;Set Permission&rdquo; you&rsquo;ll be forwarded to the PayPal Merchant Domain, where you can grant the appropriate permissions. Afterwards you&rsquo;ll be backwarded to your _isaac10_ merchant backend again.
+To be able to use the checkout express, place billing agreements for recurring payment in order and charge your customers on your behalf. You need to grant us the appropriate permissions. By clicking on &ldquo;Set Permission&rdquo; you&rsquo;ll be forwarded to the PayPal Merchant Domain, where you can grant the appropriate permissions. Afterwards you&rsquo;ll be backwarded to your _isaac10_ merchant backend again.
 </aside>
 
 <h3 id="integration-with-javascript-library">Integration with JavaScript library</h3>
 
-<p>With our <em>isaac10</em> JavaScript library you can call up the <a href="https://developer.paypal.com/docs/classic/express-checkout/in-context/">In-Context-Express-Checkout</a> by what Paypal customers conclude a billing agreement with the merchant.
+<p>With our <em>isaac10</em> JavaScript library you can call up the <a href="https://developer.paypal.com/docs/classic/express-checkout/in-context/">In-Context-Express-Checkout</a> by what PayPal customers conclude a billing agreement with the merchant.
 This billing agreement will be maintained in the background by <em>isaac10</em> in order to use it for further debiting.</p>
 
 <p>Please follow these steps:</p>
@@ -2840,18 +2840,18 @@ This billing agreement will be maintained in the background by <em>isaac10</em> 
 
 <p><strong>2. In case of registration: Authenticate the customer</strong></p>
 
-<p>by using the customer number and customer token received by step 1. This is unecessary if you changed the payment data of an existing customer. The authentication must have been already done in this case (otherwise you could not have called the function for changing the payment data in the first place).</p>
+<p>by using the customer number and customer token received by step 1. This is unnecessary if you changed the payment data of an existing customer. The authentication must have been already done in this case (otherwise you could not have called the function for changing the payment data in the first place).</p>
 
 <p><strong>3. Call the function to process PayPal</strong></p>
 
 <p>which is named <code class="prettyprint">.processPaypal(successURL, failureURL)</code>.</p>
 
 <ul>
-<li>  <strong>successURL:</strong> Paypal redirects to this URL (*) in case the customer confirms the payment via Paypal.</li>
-<li>  <strong>failureURL:</strong> Paypal redirects to this URL (*) in case the customer cancels the payment via Paypal.</li>
+<li>  <strong>successURL:</strong> PayPal redirects to this URL (*) in case the customer confirms the payment via PayPal.</li>
+<li>  <strong>failureURL:</strong> PayPal redirects to this URL (*) in case the customer cancels the payment via PayPal.</li>
 </ul>
 
-<p>After the call the express checkout window by Paypal will open which redirects the customer to Paypal.</p>
+<p>After the call the express checkout window by PayPal will open which redirects the customer to PayPal.</p>
 
 <p>(*) Indeed, we make PayPal to redirect back to <em>isaac10</em>, where the data returned by PayPal gets processed. The final redirect to your website (to the passed <code class="prettyprint">successURL</code> or <code class="prettyprint">failureURL</code>) is then done by <em>isaac10</em> itself.</p>
 
