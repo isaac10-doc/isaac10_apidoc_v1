@@ -1242,8 +1242,8 @@ Before making the function call, the <a href="#customer-authentication">customer
 <td>Same as <a href="#get-subscriptions">Get Subscriptions</a></td>
 </tr>
 <tr>
-<td><strong>subscription.monthly_price</strong><br><strong>subscription.quarterly_price</strong><br><strong>subscription.monthly_price</strong></td>
-<td>The prices for the possible billing intervals. When a billing interval is not allowed, <code class="prettyprint">null</code> will be set as the price. Beware: This is different from a price <code class="prettyprint">0</code>, which means that the billing interval is allowed, but without costs.</td>
+<td><strong>subscription.price</strong></td>
+<td>The prices for the possible billing intervals.</td>
 </tr>
 <tr>
 <td><strong>subscription.additions[]</strong></td>
@@ -1266,7 +1266,7 @@ Before making the function call, the <a href="#customer-authentication">customer
 <td>The quantity of the addition for the next term. When <code class="prettyprint">0</code> the addition is either unsubscribed or will be canceled when the end of the term is reached.</td>
 </tr>
 <tr>
-<td><strong>subscription.additions[].monthly_price</strong><br><strong>subscription.additions[].quarterly_price</strong><br><strong>subscription.additions[].monthly_price</strong></td>
+<td><strong>subscription.additions[].price</strong></td>
 <td>The prices for the possible billing intervals of the addition. The allowed billing intervals will match those of the subscription itself (see above).</td>
 </tr>
 <tr>
