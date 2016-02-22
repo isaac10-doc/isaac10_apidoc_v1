@@ -1,4 +1,4 @@
-## updatePassword - Updating the Customer's Password
+## Updating the Customer's Password
 
 ```http
 PATCH /api/v1/customer/customer_number/account/password HTTP/1.1

@@ -61,9 +61,9 @@ Parameter | Description
 
 Parameter | Description
 ----------|------------
-**plan** | Data of the plan. Same as [Get Plan Data](#get-plan-data)
-**billing_data** | Data of the customer's billing address. Same as [Get Account Data](#get-account-data)
-**payment_data** | Data of the given payment method. Same as [Get Account Data](#get-account-data)
+**plan** | Data of the plan. Same as [Request Plan Data](#request-plan-data)
+**billing_data** | Data of the customer's billing address. Same as [Get Account Data](#get-customer-account-data)
+**payment_data** | Data of the given payment method. Same as [Get Account Data](#get-customer-account-data)
 **subscription** | Data of the subscription to edit. Same as [List Customer Subscriptions](#list-customer-subscriptions) (but just one subscription, no array)
 **allowed_transitions[]** | Additional information for Upgrading/Downgrading.
 **allowed_transitions[].nid** | The NID of the plan to which can be up- or downgraded.

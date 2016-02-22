@@ -40,4 +40,4 @@ Parameter | Description
 **plan** | This data is the same as provided when calling `.getPlan()`.
 **subscription** | This Data is the same as provided when calling `.thankYouAfterRegister()`.
 
-As described in [thankYouAfterRegister - Confirmation after Registration](#confirmation-after-registration) the function [upgradeDowngradeSubscription - Upgrading/Downgrading a Subscription](#upgrading-downgrading-a-subscription) creates a new data record for a subscription, not yet been confirmed. The created ID of this subscription will be used here, in order to confirm the newly created record.
+As described in [Confirmation after Registration](#confirmation-after-registration) the function [Upgrading/Downgrading a Subscription](#upgrading-downgrading-a-subscription) creates a new data record for a subscription, not yet been confirmed. The created ID of this subscription will be used here, in order to confirm the newly created record.

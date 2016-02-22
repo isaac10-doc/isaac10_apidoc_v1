@@ -35,7 +35,7 @@ The input mask for your PayPal ID (normally your email address with PayPal) and 
 **Settings > Payment methods**
 
 <aside class="notice">
-To be able to use the checkout express, place billing agreements for recurring payment in order and charge your customers on your behalf. You need to grant us the appropriate permissions. By clicking on "Set Permission" you'll be forwarded to the PayPal Merchant Domain, where you can grant the appropriate permissions. Afterwards you'll be backwarded to your _isaac10_ merchant backend again.
+To be able to use the checkout express, place billing agreements for recurring payment in order and charge your customers on your behalf. You need to grant us the appropriate permissions. By clicking on "Set Permission" you'll be forwarded to the PayPal Merchant Domain, where you can grant the appropriate permissions. Afterwards you'll be backwarded to your <em>isaac10</em> merchant backend again.
 </aside>
 
 ### Integration with JavaScript library

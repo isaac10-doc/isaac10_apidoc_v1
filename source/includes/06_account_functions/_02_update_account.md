@@ -1,4 +1,4 @@
-## updateAccountData - Updating the Customer's Account Data
+## Updating the Customer's Account Data
 
 ```http
 PATCH /api/v1/customer/customer_number/account/account_data HTTP/1.1

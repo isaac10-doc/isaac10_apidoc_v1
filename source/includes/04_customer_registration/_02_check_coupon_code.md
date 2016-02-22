@@ -1,4 +1,4 @@
-## checkCouponCode - Verification Coupon Code
+## Verification of Coupon Code
 
 
 ```http

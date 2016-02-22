@@ -83,10 +83,10 @@ type_name | Description
 
 <aside class="notice">
 <strong>Why so complicated?</strong> <br>
-To protect privacy, PDF files can't be downloaded directly. Before each download, a temporary URL has to be created. For system performance reasons we refrain from creating temporary URLs for each and every bill at each API call. The API call <a href "#download_bills"> Download of a PDF bill </a>  will be creating a temporary URL.
+To protect privacy, PDF files can't be downloaded directly. Before each download, a temporary URL has to be created. For system performance reasons we refrain from creating temporary URLs for each and every bill at each API call. The API call <a href="#download-of-a-pdf-bill"> Download of a PDF bill </a>  will be creating a temporary URL.
 </aside>
+<br>
 
-<aside class="warning"> <strong> Please note:</strong> <br>
+<aside class="warning"> <strong> Please note</strong> <br>
+If the PDF file is not rendered yet, the returned hash <em>won't</em> contain an <code>url</code>-key. This happens just in case, the customer opens this webpage briefly after the bill was released.
 </aside>
-
-If the PDF file is not rendered yet, the returned hash _won't_ contain an `url`-key. This happens just in case, the customer opens this webpage briefly after the bill was released.

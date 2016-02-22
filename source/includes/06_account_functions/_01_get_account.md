@@ -1,4 +1,4 @@
-## Get Customer Data
+## Get Customer Account Data
 
 ```http
 GET /api/v1/customer/<customer_number>/account HTTP/1.1

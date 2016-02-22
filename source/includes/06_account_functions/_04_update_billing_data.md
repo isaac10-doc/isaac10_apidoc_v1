@@ -1,4 +1,4 @@
-## updateBillingData - Updating the Customer's Billing Address
+## Updating the Customer's Billing Address
 
 ```http
 PATCH /api/v1/customer/customer_number/account/billing_data HTTP/1.1

@@ -1,4 +1,4 @@
-## Get Plan Data
+## Request Plan Data
 
 ```http
 GET /api/v1/register/plan_nid HTTP/1.1
