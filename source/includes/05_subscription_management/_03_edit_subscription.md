@@ -35,9 +35,10 @@ isaac10.editSubscription(subscription_id);
     "currency":              "EUR",
     "pricing":               "brutto",
 
-    "monthly_price":           3000,
-    "quarterly_price":         null,
-    "yearly_price":           48000,
+    "price": [
+      { "interval": "monthly", "cents":  3000 },
+      { "interval": "yearly",  "cents": 36000 }
+    ],
 
     "additions": [
       {
@@ -48,9 +49,10 @@ isaac10.editSubscription(subscription_id);
         "quantity":           2,
         "next_quantity":      1,
 
-        "monthly_price":       100,
-        "quarterly_price":    null,
-        "yearly_price":       1200
+        "price": [
+          { "interval": "monthly", "cents":  1000 },
+          { "interval": "yearly",  "cents": 12000 }
+        ]
       }, {
         ...
       }
@@ -117,5 +119,5 @@ Value | Description
 `self` | The current plan. Listed in the array for convenience reasons.
 
 <aside class="notice">
-The response contains prices from the plan (in the <code>plan</code> hash) and the subscription (in the <code>subscription</code> and <code>subscription.additions[]</code> hashes). These prices may differ since you can override the prices set in the plan for any specific subscription and addition of a customer.
+The response contains prices from the plan (in <code>plan.price</code> and <code>plan.additions[].price</code>) and the subscription (in <code>subscription.price</code> and <code>subscription.additions[].price</code>). These prices may differ since you as merchant can override the prices set in the plan for any specific subscription and addition of a customer.
 </aside>
