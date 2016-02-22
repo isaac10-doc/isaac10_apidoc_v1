@@ -420,16 +420,16 @@ This function is integrated in the JavaScript API. If an external API token for 
 <li><p><a href="#request-plan-data">Request the plan data</a> to receive all data that is
 needed to display the registration form.</p></li>
 <li><p>(optional) When the customer entered a coupon code, you may
-<a href="#check-coupon-code">check if the entered coupon code is valid</a>.</p></li>
-<li><p><a href="#register">Register the customer</a> the customer by submitting the entered
+<a href="#verification-of-coupon-code">check if the entered coupon code is valid</a>.</p></li>
+<li><p><a href="#register">Register the customer</a> by submitting the entered
 data for the customer account, subscription, billing address and payment
 information.</p></li>
-<li><p><a href="#confirm-subscription">Confirm the subscription</a> of the customer. <strong>This
+<li><p><a href="#confirmation-after-registration">Confirm the subscription</a> of the customer. <strong>This
 step is mandatory.</strong> As long as a subscription is not confirmed, it will not
 show up in your subscription overview and will not be accessible.</p></li>
 </ol>
 
-          <h2 id="get-plan-data">Get Plan Data</h2>
+          <h2 id="request-plan-data">Request Plan Data</h2>
 <pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1/register/plan_nid</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 </code></pre>
 <pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">getPlan</span><span class="p">(</span><span class="s1">'plan_nid'</span><span class="p">);</span>
@@ -546,7 +546,7 @@ A description for all parameters will follow.
 </tr>
 </tbody></table>
 
-          <h2 id="checkcouponcode-verification-coupon-code">checkCouponCode - Verification Coupon Code</h2>
+          <h2 id="verification-of-coupon-code">Verification of Coupon Code</h2>
 <pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1/register/coupons/coupon_code?plan=plan_nid</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 </code></pre>
 <pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">checkCouponCode</span><span class="p">(</span><span class="nx">coupon_code</span><span class="p">,</span> <span class="p">{</span><span class="s2">"plan_nid"</span><span class="p">:</span> <span class="s2">"&lt;plan_nid&gt;"</span> <span class="p">});</span>
@@ -1193,15 +1193,15 @@ Before making the function call, the <a href="#customer-authentication">customer
 </thead><tbody>
 <tr>
 <td><strong>plan</strong></td>
-<td>Data of the plan. Same as <a href="#get-plan-data">Get Plan Data</a></td>
+<td>Data of the plan. Same as <a href="#request-plan-data">Request Plan Data</a></td>
 </tr>
 <tr>
 <td><strong>billing_data</strong></td>
-<td>Data of the customer&rsquo;s billing address. Same as <a href="#get-account-data">Get Account Data</a></td>
+<td>Data of the customer&rsquo;s billing address. Same as <a href="#get-customer-account-data">Get Account Data</a></td>
 </tr>
 <tr>
 <td><strong>payment_data</strong></td>
-<td>Data of the given payment method. Same as <a href="#get-account-data">Get Account Data</a></td>
+<td>Data of the given payment method. Same as <a href="#get-customer-account-data">Get Account Data</a></td>
 </tr>
 <tr>
 <td><strong>subscription</strong></td>
@@ -1525,7 +1525,7 @@ Before making the function call, the <a href="#customer-authentication">customer
 </tr>
 </tbody></table>
 
-<p>As described in <a href="#confirmation-after-registration">thankYouAfterRegister - Confirmation after Registration</a> the function <a href="#upgrading-downgrading-a-subscription">upgradeDowngradeSubscription - Upgrading/Downgrading a Subscription</a> creates a new data record for a subscription, not yet been confirmed. The created ID of this subscription will be used here, in order to confirm the newly created record.</p>
+<p>As described in <a href="#confirmation-after-registration">Confirmation after Registration</a> the function <a href="#upgrading-downgrading-a-subscription">Upgrading/Downgrading a Subscription</a> creates a new data record for a subscription, not yet been confirmed. The created ID of this subscription will be used here, in order to confirm the newly created record.</p>
 
           <h2 id="adding-a-new-subscription">Adding a new Subscription</h2>
 <pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/v1/customer/customer_number/subscriptions</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -1804,7 +1804,7 @@ Before making the function call, the <a href="#customer-authentication">customer
 
           <h2 id="modify-subscription">Modify Subscription</h2>
 
-<p>The modification of a subscription is identical to <a href="#adding-a-new-subscription">Adding a Subscription</a>. <em>isaac10</em> verifies if a subscription for this product is already existing for the customer.</p>
+<p>The modification of a subscription is identical to <a href="#adding-a-new-subscription">Adding a new Subscription</a>. <em>isaac10</em> verifies if a subscription for this product is already existing for the customer.</p>
 
 <p>When upgrading, the plan modification becomes effective immediately whereas when downgrading the plan modification just starts at the end of the respective contract period.</p>
 
@@ -1882,7 +1882,7 @@ Before making the function call, the <a href="#customer-authentication">customer
 
           <h1 id="account-functions">Account functions</h1>
 
-          <h2 id="get-customer-data">Get Customer Data</h2>
+          <h2 id="get-customer-account-data">Get Customer Account Data</h2>
 <pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1/customer/&lt;customer_number&gt;/account</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 </code></pre>
 <pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">getAccount</span><span class="p">();</span>
@@ -1964,7 +1964,7 @@ Before making the function call, the <a href="#customer-authentication">customer
 </tr>
 </tbody></table>
 
-          <h2 id="updateaccountdata-updating-the-customer-39-s-account-data">updateAccountData - Updating the Customer&rsquo;s Account Data</h2>
+          <h2 id="updating-the-customer-39-s-account-data">Updating the Customer&rsquo;s Account Data</h2>
 <pre class="highlight http"><code><span class="nf">PATCH</span> <span class="nn">/api/v1/customer/customer_number/account/account_data</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 </code></pre>
 <pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">updateAccountData</span><span class="p">(</span><span class="nx">params</span><span class="p">);</span>
@@ -2020,7 +2020,7 @@ Before making the function call, the <a href="#customer-authentication">customer
 </tr>
 </tbody></table>
 
-          <h2 id="updatepassword-updating-the-customer-39-s-password">updatePassword - Updating the Customer&rsquo;s Password</h2>
+          <h2 id="updating-the-customer-39-s-password">Updating the Customer&rsquo;s Password</h2>
 <pre class="highlight http"><code><span class="nf">PATCH</span> <span class="nn">/api/v1/customer/customer_number/account/password</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 </code></pre>
 <pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">updatePassword</span><span class="p">(</span><span class="nx">params</span><span class="p">);</span>
@@ -2076,7 +2076,7 @@ Before making the function call, the <a href="#customer-authentication">customer
 </tr>
 </tbody></table>
 
-          <h2 id="updatebillingdata-updating-the-customer-39-s-billing-address">updateBillingData - Updating the Customer&rsquo;s Billing Address</h2>
+          <h2 id="updating-the-customer-39-s-billing-address">Updating the Customer&rsquo;s Billing Address</h2>
 <pre class="highlight http"><code><span class="nf">PATCH</span> <span class="nn">/api/v1/customer/customer_number/account/billing_data</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 </code></pre>
 <pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">updateBillingData</span><span class="p">(</span><span class="nx">params</span><span class="p">);</span>
@@ -2160,7 +2160,7 @@ Before making the function call, the <a href="#customer-authentication">customer
 </tr>
 </tbody></table>
 
-          <h2 id="updatepaymentdata-updating-the-customer-39-s-payment-method">updatePaymentData - Updating the Customer&rsquo;s Payment Method</h2>
+          <h2 id="updating-the-customer-39-s-payment-method">Updating the Customer&rsquo;s Payment Method</h2>
 <pre class="highlight http"><code><span class="nf">PATCH</span> <span class="nn">/api/v1/customer/customer_number/account/billing_data</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 </code></pre>
 <pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">updatePaymentData</span><span class="p">(</span><span class="nx">params</span><span class="p">);</span>
@@ -2336,13 +2336,14 @@ Before making the function call, the <a href="#customer-authentication">customer
 
 <aside class="notice">
 <strong>Why so complicated?</strong> <br>
-To protect privacy, PDF files can&rsquo;t be downloaded directly. Before each download, a temporary URL has to be created. For system performance reasons we refrain from creating temporary URLs for each and every bill at each API call. The API call <a href "#download_bills"> Download of a PDF bill </a>  will be creating a temporary URL.
+To protect privacy, PDF files can&rsquo;t be downloaded directly. Before each download, a temporary URL has to be created. For system performance reasons we refrain from creating temporary URLs for each and every bill at each API call. The API call <a href="#download-of-a-pdf-bill"> Download of a PDF bill </a>  will be creating a temporary URL.
 </aside>
 
-<aside class="warning"> <strong> Please note:</strong> <br>
-</aside>
+<p><br></p>
 
-<p>If the PDF file is not rendered yet, the returned hash <em>won&rsquo;t</em> contain an <code class="prettyprint">url</code>-key. This happens just in case, the customer opens this webpage briefly after the bill was released.</p>
+<aside class="warning"> <strong> Please note</strong> <br>
+If the PDF file is not rendered yet, the returned hash <em>won&rsquo;t</em> contain an <code>url</code>-key. This happens just in case, the customer opens this webpage briefly after the bill was released.
+</aside>
 
           <h2 id="download-of-a-pdf-bill">Download of a PDF Bill</h2>
 <pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1/customer/customer_number/bills/bill_slug/type_name</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
@@ -2824,7 +2825,7 @@ This documentation is ahead of its time. The payment method <code>cc_micropaymen
 <p><strong>Settings &gt; Payment methods</strong></p>
 
 <aside class="notice">
-To be able to use the checkout express, place billing agreements for recurring payment in order and charge your customers on your behalf. You need to grant us the appropriate permissions. By clicking on &ldquo;Set Permission&rdquo; you&rsquo;ll be forwarded to the PayPal Merchant Domain, where you can grant the appropriate permissions. Afterwards you&rsquo;ll be backwarded to your _isaac10_ merchant backend again.
+To be able to use the checkout express, place billing agreements for recurring payment in order and charge your customers on your behalf. You need to grant us the appropriate permissions. By clicking on &ldquo;Set Permission&rdquo; you&rsquo;ll be forwarded to the PayPal Merchant Domain, where you can grant the appropriate permissions. Afterwards you&rsquo;ll be backwarded to your <em>isaac10</em> merchant backend again.
 </aside>
 
 <h3 id="integration-with-javascript-library">Integration with JavaScript library</h3>
