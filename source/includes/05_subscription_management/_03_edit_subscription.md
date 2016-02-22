@@ -96,13 +96,13 @@ Parameter | Description
 **payment_data** | Data of the given payment method. Same as [Get Account Data](#get-customer-account-data)
 **subscription** | Data of the subscription to edit.
 **subscription.begins_at**<br>**subscription.term_ends_at**<br>**subscription.billing_interval**<br>**subscription.next_billing_interval**<br>**subscription.status**<br>**subscription.pricing** | Same as [Get Subscriptions](#get-subscriptions)
-**subscription.monthly_price**<br>**subscription.quarterly_price**<br>**subscription.monthly_price** | The prices for the possible billing intervals. When a billing interval is not allowed, `null` will be set as the price. Beware: This is different from a price `0`, which means that the billing interval is allowed, but without costs.
+**subscription.price** | The prices for the possible billing intervals.
 **subscription.additions[]** | An array of _all_ additions, both subscribed and unsubscribed.
 **subscription.additions[].begins_at** | The date when the addition was booked. Is `null` when the addition is not booked.
 **subscription.additions[].quantifiable** | Is the addition quantifiable? `true` or `false`.
 **subscription.additions[].quantity** | The subscribed quantity of the addition for the current term. Is `0` when the addition is not subscribed. Is `1` when the addition is subscribed and not quantifiable.
 **subscription.additions[].next_quantity** | The quantity of the addition for the next term. When `0` the addition is either unsubscribed or will be canceled when the end of the term is reached.
-**subscription.additions[].monthly_price**<br>**subscription.additions[].quarterly_price**<br>**subscription.additions[].monthly_price** | The prices for the possible billing intervals of the addition. The allowed billing intervals will match those of the subscription itself (see above).
+**subscription.additions[].price** | The prices for the possible billing intervals of the addition. The allowed billing intervals will match those of the subscription itself (see above).
 **allowed_transitions[]** | Additional information for Upgrading/Downgrading. The table includes _all_ possible plans for up- and downgrading the subscription.
 **allowed_transitions[].nid** | The NID of the plan to which can be up- or downgraded.
 **allowed_transitions[].name** | The name of the plan to which can be up- or downgraded.
