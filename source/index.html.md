@@ -6,7 +6,7 @@ language_tabs:
   - javascript: JavaScript
 
 toc_footers:
-  - <a href='https://isaac10.com'>isaac10.com</a>
+  - <a href='http://isaac10.com'>isaac10.com</a>
   - <a href='http://isaac10ui-demo.herokuapp.com'>isaac10 UI Demo</a>
 
 includes:
