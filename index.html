@@ -1139,7 +1139,37 @@ Before making the function call, the <a href="#customer-authentication">customer
     </span><span class="err">...</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="err">...</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w">                     </span><span class="mi">42</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"product_name"</span><span class="p">:</span><span class="w">          </span><span class="s2">"name of the product"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"plan_name"</span><span class="p">:</span><span class="w">             </span><span class="s2">"name of the plan"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"begins_at"</span><span class="p">:</span><span class="w">             </span><span class="s2">"2014-09-25"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"term_ends_at"</span><span class="p">:</span><span class="w">          </span><span class="s2">"2014-10-24"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"billing_interval"</span><span class="p">:</span><span class="w">      </span><span class="s2">"monthly"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"next_billing_interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monthly"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w">                </span><span class="s2">"ongoing"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"currency"</span><span class="p">:</span><span class="w">              </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"pricing"</span><span class="p">:</span><span class="w">               </span><span class="s2">"brutto"</span><span class="p">,</span><span class="w">
+
+    </span><span class="nt">"monthly_price"</span><span class="p">:</span><span class="w">           </span><span class="mi">3000</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"quarterly_price"</span><span class="p">:</span><span class="w">         </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"yearly_price"</span><span class="p">:</span><span class="w">           </span><span class="mi">48000</span><span class="p">,</span><span class="w">
+
+    </span><span class="nt">"additions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"nid"</span><span class="p">:</span><span class="w">               </span><span class="s2">"NID of the addition"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w">              </span><span class="s2">"name of the addition"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"begins_at"</span><span class="p">:</span><span class="w">         </span><span class="s2">"2014-09-25"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"quantifiable"</span><span class="p">:</span><span class="w">       </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w">           </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"next_quantity"</span><span class="p">:</span><span class="w">      </span><span class="mi">1</span><span class="p">,</span><span class="w">
+
+        </span><span class="nt">"monthly_price"</span><span class="p">:</span><span class="w">       </span><span class="mi">100</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"quarterly_price"</span><span class="p">:</span><span class="w">    </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"yearly_price"</span><span class="p">:</span><span class="w">       </span><span class="mi">1200</span><span class="w">
+      </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"allowed_transitions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -1205,11 +1235,43 @@ Before making the function call, the <a href="#customer-authentication">customer
 </tr>
 <tr>
 <td><strong>subscription</strong></td>
-<td>Data of the subscription to edit. Same as <a href="#list-customer-subscriptions">List Customer Subscriptions</a> (but just one subscription, no array)</td>
+<td>Data of the subscription to edit.</td>
+</tr>
+<tr>
+<td><strong>subscription.begins_at</strong><br><strong>subscription.term_ends_at</strong><br><strong>subscription.billing_interval</strong><br><strong>subscription.next_billing_interval</strong><br><strong>subscription.status</strong><br><strong>subscription.pricing</strong></td>
+<td>Same as <a href="#get-subscriptions">Get Subscriptions</a></td>
+</tr>
+<tr>
+<td><strong>subscription.monthly_price</strong><br><strong>subscription.quarterly_price</strong><br><strong>subscription.monthly_price</strong></td>
+<td>The prices for the possible billing intervals. When a billing interval is not allowed, <code class="prettyprint">null</code> will be set as the price. Beware: This is different from a price <code class="prettyprint">0</code>, which means that the billing interval is allowed, but without costs.</td>
+</tr>
+<tr>
+<td><strong>subscription.additions[]</strong></td>
+<td>An array of <em>all</em> additions, both subscribed and unsubscribed.</td>
+</tr>
+<tr>
+<td><strong>subscription.additions[].begins_at</strong></td>
+<td>The date when the addition was booked. Is <code class="prettyprint">null</code> when the addition is not booked.</td>
+</tr>
+<tr>
+<td><strong>subscription.additions[].quantifiable</strong></td>
+<td>Is the addition quantifiable? <code class="prettyprint">true</code> or <code class="prettyprint">false</code>.</td>
+</tr>
+<tr>
+<td><strong>subscription.additions[].quantity</strong></td>
+<td>The subscribed quantity of the addition for the current term. Is <code class="prettyprint">0</code> when the addition is not subscribed. Is <code class="prettyprint">1</code> when the addition is subscribed and not quantifiable.</td>
+</tr>
+<tr>
+<td><strong>subscription.additions[].next_quantity</strong></td>
+<td>The quantity of the addition for the next term. When <code class="prettyprint">0</code> the addition is either unsubscribed or will be canceled when the end of the term is reached.</td>
+</tr>
+<tr>
+<td><strong>subscription.additions[].monthly_price</strong><br><strong>subscription.additions[].quarterly_price</strong><br><strong>subscription.additions[].monthly_price</strong></td>
+<td>The prices for the possible billing intervals of the addition. The allowed billing intervals will match those of the subscription itself (see above).</td>
 </tr>
 <tr>
 <td><strong>allowed_transitions[]</strong></td>
-<td>Additional information for Upgrading/Downgrading.</td>
+<td>Additional information for Upgrading/Downgrading. The table includes <em>all</em> possible plans for up- and downgrading the subscription.</td>
 </tr>
 <tr>
 <td><strong>allowed_transitions[].nid</strong></td>
@@ -1235,17 +1297,21 @@ Before making the function call, the <a href="#customer-authentication">customer
 </thead><tbody>
 <tr>
 <td><code class="prettyprint">upgrade</code></td>
-<td>Changing the subscription to this plan will be considered an <em>upgrade</em> and therefor will be valid immediately.</td>
+<td>Changing the subscription to this plan will be considered an <em>upgrade</em> and therefore will be valid immediately.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">downgrade</code></td>
-<td>Changing the subscriptio to this plan will be considered a <em>downgrade</em> and therefor will be valid when the end of the current term is reached.</td>
+<td>Changing the subscriptio to this plan will be considered a <em>downgrade</em> and therefore will be valid when the end of the current term is reached.</td>
 </tr>
 <tr>
 <td><code class="prettyprint">self</code></td>
 <td>The current plan. Listed in the array for convenience reasons.</td>
 </tr>
 </tbody></table>
+
+<aside class="notice">
+The response contains prices from the plan (in the <code>plan</code> hash) and the subscription (in the <code>subscription</code> and <code>subscription.additions[]</code> hashes). These prices may differ since you can override the prices set in the plan for any specific subscription and addition of a customer.
+</aside>
 
           <h2 id="call-of-account-subscription-and-plan-data">Call of Account, Subscription and Plan Data</h2>
 <pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1/customer/customer_number/subscriptions/subscription_id/upgrade_downgrade/plan_nid</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
