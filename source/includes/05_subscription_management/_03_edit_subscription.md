@@ -119,5 +119,11 @@ Value | Description
 `self` | The current plan. Listed in the array for convenience reasons.
 
 <aside class="notice">
-The response contains prices from the plan (in <code>plan.price</code> and <code>plan.additions[].price</code>) and the subscription (in <code>subscription.price</code> and <code>subscription.additions[].price</code>). These prices may differ since you as merchant can override the prices set in the plan for any specific subscription and addition of a customer.
+<strong>Why there are duplicate <code>price</code> arrays?</strong>
+<br>
+<br>
+The response contains prices from the plan (in <code>plan.price</code> and <code>plan.additions[].price</code>) and the subscription (in <code>subscription.price</code> and <code>subscription.additions[].price</code>). These prices may differ since you as merchant can override the prices set in the plan in any specific subscription and addition of a customer.
+<br>
+<br>
+If an addition is not subscribed, it will always show the prices defined in the plan.
 </aside>
