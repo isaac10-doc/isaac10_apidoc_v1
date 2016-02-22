@@ -6,7 +6,7 @@ For the payment upon direct debit (SEPA) _isaac10_ offers two different methods:
 -   creation of SEPA-XML files, which you can deposit yourself at the bank: `"payment_method": "elv_dtaus"`. This method is traditionally known as "garage clearing".
 
 > Parameters for request body / params when Micropayment is used<br>
-> _(full request body / params depends on request)_
+> _(full request body / params depend on request)_
 
 ```json
 {
@@ -30,7 +30,7 @@ For the payment upon direct debit (SEPA) _isaac10_ offers two different methods:
 ```
 
 > Parameters for request body / params when garage clearing is used<br>
-> _(full request body / params depends on request)_
+> _(full request body / params depend on request)_
 
 ```json
 {

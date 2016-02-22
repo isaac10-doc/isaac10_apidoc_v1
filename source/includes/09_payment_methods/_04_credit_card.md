@@ -1,12 +1,12 @@
 ## Credit Card
 
-For the payment upon credit card _isaac10_ offers two different methods:
+For the payment by credit card _isaac10_ offers two different methods:
 
 -   _isaac10_'s own integration: `"payment_method": "cc_betterpayment"`. This is a white label solution provided by [Better Payment](http://betterpayment.de/)
 -   Micropayment integration: `"payment_method": "cc_micropayment"`.
 
 <aside class="warning">
-<strong> Payment upon Credit Card with Micropayment is not yet implemented</strong><br>
+<strong> Payment by credit card with Micropayment is not yet implemented</strong><br>
 This documentation is ahead of its time. The payment method <code>cc_micropayment</code> is scheduled for delivery in the next release.
 </aside>
 
@@ -149,7 +149,7 @@ TODO
 </html>
 ```
 
-The JavaScript library (in comparison to an own implementation) offers an easy integration into your frontend. The procedure is the same for both, `elv_betterpayment` and `elv_micropayment`. Implementation procedure is as follows:
+The JavaScript library (in comparison to an own implementation) offers an easy integration into your front end. The procedure is the same for both, `elv_betterpayment` and `elv_micropayment`. Implementation procedure is as follows:
 
 **1. Place a `<div>` in the HTML code**
 
@@ -157,7 +157,7 @@ where the iframe for the credit card form should be placed into.
 
 **2. Display the credit card iframe**
 
-by calling the function `isaac10.displayCreditCardiframe(selector, width, height)`. The call and therefore the display can be linked to a JavaScript event, e.g. chosing a radio button.
+by calling the function `isaac10.displayCreditCardiframe(selector, width, height)`. The call and therefore the display can be linked to a JavaScript event, e.g. choosing a radio button.
 
 -   **selector** is the jQuery selector for the `<div>`, where the iframe shall be rendered
 -   **width** and **height** are the dimensions of the iframe

@@ -24,4 +24,4 @@ For payment upon invoicing no further specifications are necessary.
 
 ### Integration with JavaScript library
 
-As payment upon invoice doesn't require further specifications, transferring the value `invoice` is sufficient.
+As payment on invoice doesn't require further specifications, transferring the value `invoice` is sufficient.
