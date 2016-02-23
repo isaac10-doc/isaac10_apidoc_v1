@@ -2939,16 +2939,18 @@ This billing agreement will be maintained in the background by <em>isaac10</em> 
 </blockquote>
 <pre class="highlight html"><code><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"https://app.isaac10.com/api/v1/isaac10_api.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"https://app.isaac10.com/ui/isaac10_ui.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-</code></pre>
-<pre class="highlight javascript"><code><span class="c1">// Initialization of JavaScript API</span>
-<span class="kd">var</span> <span class="nx">isaac10</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Isaac10</span><span class="p">(</span><span class="s2">"your-subdomain"</span><span class="p">);</span>
 
-<span class="c1">// Initialization of isaac10 UI</span>
-<span class="nx">isaac10UI</span><span class="p">.</span><span class="nx">setup</span><span class="p">({</span>
-  <span class="s2">"isaac10Instance"</span><span class="p">:</span> <span class="nx">isaac10</span><span class="p">,</span>
-  <span class="s2">"fetchTemplate"</span><span class="p">:</span> <span class="s2">"bootstrap3"</span><span class="p">,</span>
-  <span class="s2">"locale"</span><span class="p">:</span> <span class="s2">"de"</span>
-<span class="p">}).</span><span class="nx">render</span><span class="p">(</span><span class="s2">"#isaac10-ui"</span><span class="p">);</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+  <span class="c1">// Initialization of JavaScript API</span>
+  <span class="kd">var</span> <span class="nx">isaac10</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Isaac10</span><span class="p">(</span><span class="s2">"your-subdomain"</span><span class="p">);</span>
+
+  <span class="c1">// Initialization of isaac10 UI</span>
+  <span class="nx">isaac10UI</span><span class="p">.</span><span class="nx">setup</span><span class="p">({</span>
+    <span class="s2">"isaac10Instance"</span><span class="p">:</span> <span class="nx">isaac10</span><span class="p">,</span>
+    <span class="s2">"fetchTemplate"</span><span class="p">:</span>  <span class="s2">"bootstrap3"</span><span class="p">,</span>
+    <span class="s2">"locale"</span><span class="p">:</span>         <span class="s2">"de"</span>
+  <span class="p">}).</span><span class="nx">render</span><span class="p">(</span><span class="s2">"#isaac10-ui"</span><span class="p">);</span>
+<span class="nt">&lt;/script&gt;</span>
 </code></pre>
 
 <blockquote>
@@ -2957,12 +2959,8 @@ This billing agreement will be maintained in the background by <em>isaac10</em> 
 <pre class="highlight html"><code><span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"isaac10-ui"</span><span class="nt">&gt;&lt;/div&gt;</span>
 </code></pre>
 
-<h3 id="embedding-and-initialization">Embedding and Initialization</h3>
-
 <p>To be able to use the <em>isaac10 UI</em>, the JavaScript library of <em>isaac10</em> must be loaded as well.
-Embedding in an HTML file: see right side.</p>
-
-<p>Initialization of the <em>isaac10 UI</em> objects and rendering of the website: see JavaScript tab.</p>
+See right side, for how to initialize the <em>isaac10 UI</em> and render it on your website.</p>
 
 <h3 id="configuration">Configuration</h3>
 
@@ -2976,40 +2974,43 @@ Embedding in an HTML file: see right side.</p>
 <tr>
 <td><strong>isaac10Instance</strong></td>
 <td></td>
-<td>An instance of <code class="prettyprint">isaac10</code>.</td>
+<td>An instance of the <code class="prettyprint">Isaac10</code> object.</td>
 </tr>
 <tr>
 <td><strong>fetchTemplate</strong></td>
-<td>those HTML templates (or handlebar templates) to be rendered</td>
-<td><ul> <li>false (no templates will be loaded)</li> <li>&ldquo;bootstrap3&rdquo;</li> </ul></td>
+<td>the HTML templates (or handlebar templates) to be loaded</td>
+<td><ul><li><code class="prettyprint">false</code> (no templates will be loaded, you have to provide the templates yourself)</li><li><code class="prettyprint">&quot;bootstrap3&quot;</code></li></ul></td>
 </tr>
 <tr>
 <td><strong>overrideTranslations</strong></td>
-<td><a href="#overwriting-and-adding-translations">Overwriting and Adding Translations</a></td>
+<td>See <a href="#overwriting-and-adding-translations">Overwriting and Adding Translations</a></td>
 <td>A JavaScript object, structured like a translation file.</td>
 </tr>
 <tr>
 <td><strong>locale</strong></td>
-<td>Language, displayed in the <em>isaac10 UI</em></td>
-<td><ul> <li> &ldquo;de&rdquo; (german) </li> <li>&ldquo;en&rdquo; (english)</li> </ul> More languages can be added through <strong>overrideTranslations</strong>.</td>
+<td>The language that should be used in the <em>isaac10 UI</em></td>
+<td><ul><li> <code class="prettyprint">&quot;de&quot;</code> (german)</li><li><code class="prettyprint">&quot;en&quot;</code> (english)</li></ul> More languages can be added through the <strong>overrideTranslations</strong> parameter.</td>
 </tr>
 </tbody></table>
 
-<h3 id="display-of-a-page">Display of a Page</h3>
+<h3 id="display-the-isaac10-ui">Display the isaac10-UI</h3>
 
-<p>The call of <code class="prettyprint">render()</code> includes the <em>isaac10 UI</em> within the HTML element, referenced through a JQuery selector (as shown in the given example: the element with ID &ldquo;isaac10-ui&rdquo;). The element should be a <code class="prettyprint">div()</code> tag.</p>
+<p>The call of <code class="prettyprint">.render()</code> rendered the <em>isaac10 UI</em> in the HTML element, referenced by the passed jQuery selector (as shown in the given example: the element with ID <code class="prettyprint">#isaac10-ui</code>). The element should be a <code class="prettyprint">&lt;div&gt;</code> tag but can be anything else.</p>
 
-<h3 id="rendering-an-isaac10-ui-page">Rendering an isaac10 UI page</h3>
+<h3 id="navigating-through-the-isaac10-ui">Navigating through the isaac10-UI</h3>
 
-<p>Which page to be rendered is controlled through an URL anchor. If the <em>isaac10 UI</em> is rendered in the URL without an anchor, only a test page will be created, displaying &ldquo;<em>isaac10-UI</em> works!&rdquo;  </p>
+<p>The page to be displayed is controlled by an URL anchor. If the <em>isaac10 UI</em> is rendered on a page with an URL without anchor, only a test page will be displayed, stating: <strong>isaac10-UI works!</strong></p>
 
-<p>The following pages are displayable through <em>isaac10 UI</em>:<br>
+<p>The following pages are available:</p>
+
 <ul>
-<li> the <a href="#registration-page-for-new-customers">Registration Page for new Customers</a></li>
-<li> Overview and forms for account data  </li>
-<li>  bills overview  </li>
-<li>  subscriptions overview and forms to have the subscriptions managed  </li>
-</ul></p>
+<li>  the <a href="#registration-page-for-new-customers">Registration Page for new Customers</a></li>
+<li>  Overview and forms for account data</li>
+<li>  bills overview</li>
+<li>  subscriptions overview and forms to have the subscriptions managed</li>
+</ul>
+
+<p>More pages can be reached by clicking on the links on these pages.</p>
 
           <h2 id="customer-specific-pages">Customer specific Pages</h2>
 <pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">authenticateCustomer</span><span class="p">(</span><span class="s2">"&lt;customer_number&gt;"</span><span class="p">,</span> <span class="s2">"&lt;customer_token&gt;"</span><span class="p">);</span>
