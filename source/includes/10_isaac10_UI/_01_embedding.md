@@ -5,18 +5,18 @@
 ```html
 <script type="text/javascript" src="https://app.isaac10.com/api/v1/isaac10_api.js"></script>
 <script type="text/javascript" src="https://app.isaac10.com/ui/isaac10_ui.js"></script>
-```
 
-```javascript
-// Initialization of JavaScript API
-var isaac10 = new Isaac10("your-subdomain");
+<script type="text/javascript">
+  // Initialization of JavaScript API
+  var isaac10 = new Isaac10("your-subdomain");
 
-// Initialization of isaac10 UI
-isaac10UI.setup({
-  "isaac10Instance": isaac10,
-  "fetchTemplate": "bootstrap3",
-  "locale": "de"
-}).render("#isaac10-ui");
+  // Initialization of isaac10 UI
+  isaac10UI.setup({
+    "isaac10Instance": isaac10,
+    "fetchTemplate":  "bootstrap3",
+    "locale":         "de"
+  }).render("#isaac10-ui");
+</script>
 ```
 
 > Rendering
@@ -25,37 +25,31 @@ isaac10UI.setup({
 <div id="isaac10-ui"></div>
 ```
 
-
-### Embedding and Initialization
-
 To be able to use the _isaac10 UI_, the JavaScript library of _isaac10_ must be loaded as well.
-Embedding in an HTML file: see right side.
-
-Initialization of the _isaac10 UI_ objects and rendering of the website: see JavaScript tab.
+See right side, for how to initialize the _isaac10 UI_ and render it on your website.
 
 ### Configuration
 
 Parameter | Description | Possible Values
 ----------|-------------|----------------
-**isaac10Instance** | | An instance of `isaac10`.
-**fetchTemplate** | those HTML templates (or handlebar templates) to be rendered | <ul> <li>false (no templates will be loaded)</li> <li>"bootstrap3"</li> </ul>
-**overrideTranslations** | [Overwriting and Adding Translations](#overwriting-and-adding-translations) |  A JavaScript object, structured like a translation file.
-**locale** | Language, displayed in the _isaac10 UI_ | <ul> <li> "de" (german) </li> <li>"en" (english)</li> </ul> More languages can be added through **overrideTranslations**.
+**isaac10Instance** | | An instance of the `Isaac10` object.
+**fetchTemplate** | the HTML templates (or handlebar templates) to be loaded | <ul><li>`false` (no templates will be loaded, you have to provide the templates yourself)</li><li>`"bootstrap3"`</li></ul>
+**overrideTranslations** | See [Overwriting and Adding Translations](#overwriting-and-adding-translations) | A JavaScript object, structured like a translation file.
+**locale** | The language that should be used in the _isaac10 UI_ | <ul><li> `"de"` (german)</li><li>`"en"` (english)</li></ul> More languages can be added through the **overrideTranslations** parameter.
 
+### Display the isaac10-UI
 
-### Display of a Page
+The call of `.render()` rendered the _isaac10 UI_ in the HTML element, referenced by the passed jQuery selector (as shown in the given example: the element with ID `#isaac10-ui`). The element should be a `<div>` tag but can be anything else.
 
-The call of `render()` includes the _isaac10 UI_ within the HTML element, referenced through a JQuery selector (as shown in the given example: the element with ID "isaac10-ui"). The element should be a `div()` tag.
+### Navigating through the isaac10-UI
 
+The page to be displayed is controlled by an URL anchor. If the _isaac10 UI_ is rendered on a page with an URL without anchor, only a test page will be displayed, stating: **isaac10-UI works!**
 
-### Rendering an isaac10 UI page
+The following pages are available:
 
-Which page to be rendered is controlled through an URL anchor. If the _isaac10 UI_ is rendered in the URL without an anchor, only a test page will be created, displaying "_isaac10-UI_ works!"  
+-   the [Registration Page for new Customers](#registration-page-for-new-customers)
+-   Overview and forms for account data
+-   bills overview
+-   subscriptions overview and forms to have the subscriptions managed
 
-The following pages are displayable through _isaac10 UI_:    
-<ul>
-<li> the [Registration Page for new Customers](#registration-page-for-new-customers)</li>
-<li> Overview and forms for account data  </li>
-<li>  bills overview  </li>
-<li>  subscriptions overview and forms to have the subscriptions managed  </li>
-</ul>
+More pages can be reached by clicking on the links on these pages.
