@@ -808,32 +808,36 @@ A description for all parameters will follow.
 </tbody></table>
 
           <h2 id="confirmation-after-registration">Confirmation after Registration</h2>
-<pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/v1/customer/customer_nmber/thank_you/subscription_id/register</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1/customer/&lt;customer_nmber&gt;/thank_you/&lt;subscription_id&gt;/register?double_opt_in=true</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 </code></pre>
-<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">thankYouAfterRegister</span><span class="p">(</span><span class="nx">subscription_id</span><span class="p">,</span> <span class="nx">params</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">thankYouAfterRegister</span><span class="p">(</span><span class="nx">subscription_id</span><span class="p">,</span> <span class="p">{</span> <span class="na">double_opt_in</span><span class="p">:</span> <span class="kc">true</span> <span class="p">});</span>
 </code></pre>
-
-<blockquote>
-<p>Request body / Params</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="nt">"double_opt_in"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">}</span><span class="w">
-</span></code></pre>
 
 <blockquote>
 <p>Response</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"plan"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-
+    </span><span class="err">...</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nt">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"42"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"product_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name of the product"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"plan_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name of the plan"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"begins_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-19"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"term_ends_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-09-18"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"billing_interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monthly"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"next_billing_interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monthly"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ongoing"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"additions"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+    </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"monthly"</span><span class="p">,</span><span class="w"> </span><span class="nt">"cents"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"quarterly"</span><span class="p">,</span><span class="w"> </span><span class="nt">"cents"</span><span class="p">:</span><span class="w"> </span><span class="mi">3000</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w"> </span><span class="nt">"interval"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yearly"</span><span class="p">,</span><span class="w"> </span><span class="nt">"cents"</span><span class="p">:</span><span class="w"> </span><span class="mi">12000</span><span class="w"> </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"additions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+    </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -851,21 +855,26 @@ Before making the function call, the <a href="#customer-authentication">customer
 </tr>
 </thead><tbody>
 <tr>
-<td><strong>customer_number</strong></td>
+<td><strong>customer_number</strong> (REST only)</td>
 <td>Number identifying the customer.</td>
 </tr>
 <tr>
 <td><strong>subscription_id</strong></td>
-<td>ID identifying the subscription.</td>
+<td>ID of the subscription.</td>
+</tr>
+<tr>
+<td><strong>double_opt_in</strong></td>
+<td>(optional) Should a mail with a confirmation link be sent to the customer? <code class="prettyprint">true</code> or <code class="prettyprint">false</code> (default: <code class="prettyprint">true</code>)</td>
 </tr>
 </tbody></table>
 
 <aside class="notice">
-Using this function, the transmission of the email informing the merchant about a new customer/new subscription as well as of the subscription confirmation email for the customer gets initiated. Therefore by using the <code>double-opt-in</code> it must be decided, whether an email for the customer is sent out or not.
+Using this function, the transmission of the email informing the merchant about a new customer/new subscription as well as of the subscription confirmation email for the customer gets initiated. Therefore by using the <code>double_opt_in</code> it must be decided, whether an email for the customer is sent out or not.
 </aside>
 
-<p>Every of the following functions <a href="#register">register - Customer registration</a>, <a href="#adding-a-new-subscription">Adding a new Subscription</a> and <a href="#upgrading-downgrading-a-subscription">Upgrading/Downgrading</a> create a new data record for a subscription, not yet been confirmed. The ID of this subscription created will be used within the <code class="prettyprint">thank you</code> functions, in order to confirm the newly created record. Consequently those functions aren&rsquo;t optional.
-All kind of emails for new registrations, double-opt-in and Downgrade confirmations will also be initiated by the <code class="prettyprint">thank you</code> functions.</p>
+<p>Every of the following functions <a href="#register">register - Customer registration</a>, <a href="#adding-a-new-subscription">Adding a new Subscription</a> and <a href="#upgrading-downgrading-a-subscription">Upgrading/Downgrading</a> create a new data record for a subscription, not yet been confirmed. The ID of this subscription created will be used within the &ldquo;thank you&rdquo; functions, in order to confirm the newly created record. Consequently calling the &ldquo;thank you&rdquo; functions isn&rsquo;t optional.</p>
+
+<p>All kind of emails for new registrations, double-opt-in and downgrade confirmations will also be initiated by the &ldquo;thank you&rdquo; functions.</p>
 
 <h3 id="response">Response</h3>
 
@@ -877,7 +886,51 @@ All kind of emails for new registrations, double-opt-in and Downgrade confirmati
 </thead><tbody>
 <tr>
 <td><strong>plan</strong></td>
-<td>This data is the same as returned when calling <code class="prettyprint">.getPlan()</code></td>
+<td>This data is the same as returned by <a href="#request-plan-data">Request Plan Data</a></td>
+</tr>
+<tr>
+<td><strong>subscription</strong></td>
+<td>The confirmed subscription.</td>
+</tr>
+<tr>
+<td><strong>subscription.product_name</strong></td>
+<td>The name of the product.</td>
+</tr>
+<tr>
+<td><strong>subscription.plan_name</strong></td>
+<td>The name of the plan.</td>
+</tr>
+<tr>
+<td><strong>subscription.begins_at</strong></td>
+<td>The date when the subscription started. Since this is the response for a new registration, it will be today.</td>
+</tr>
+<tr>
+<td><strong>subscription.term_ends_at</strong></td>
+<td>The date when this term (= the first term) ends.</td>
+</tr>
+<tr>
+<td><strong>subscription.billing_interval</strong></td>
+<td>The chosen billing interval.</td>
+</tr>
+<tr>
+<td><strong>subscription.next_billing_interval</strong></td>
+<td>The billing interval after this term ends. Since this is the response for a new registration, it will be the same as the billing interval.</td>
+</tr>
+<tr>
+<td><strong>subscription.status</strong></td>
+<td>See <a href="#list-customer-subscriptions">List Customer Subscriptions</a>. Since this is the response for a new registration, it will be <code class="prettyprint">ongoing</code>.</td>
+</tr>
+<tr>
+<td><strong>subscription.currency</strong></td>
+<td>The currency.</td>
+</tr>
+<tr>
+<td><strong>subscription.price</strong></td>
+<td>The prices for the possible billing intervals.</td>
+</tr>
+<tr>
+<td><strong>additions</strong></td>
+<td>The subscribed additions.</td>
 </tr>
 </tbody></table>
 
