@@ -864,7 +864,7 @@ Before making the function call, the <a href="#customer-authentication">customer
 </tr>
 <tr>
 <td><strong>double_opt_in</strong></td>
-<td>(optional) Should a mail with a confirmation link be sent to the customer? <code class="prettyprint">true</code> or <code class="prettyprint">false</code> (default: <code class="prettyprint">true</code>)</td>
+<td>Should a mail with a confirmation link be sent to the customer? <code class="prettyprint">true</code> or <code class="prettyprint">false</code> (optional, default: <code class="prettyprint">true</code>)</td>
 </tr>
 </tbody></table>
 
@@ -2975,13 +2975,11 @@ This billing agreement will be maintained in the background by <em>isaac10</em> 
 <p>which is named <code class="prettyprint">.processPaypal(successURL, failureURL)</code>.</p>
 
 <ul>
-<li>  <strong>successURL:</strong> PayPal redirects to this URL (*) in case the customer confirms the payment via PayPal.</li>
-<li>  <strong>failureURL:</strong> PayPal redirects to this URL (*) in case the customer cancels the payment via PayPal.</li>
+<li>  <strong>successURL:</strong> PayPal redirects to this URL in case the customer confirms the payment via PayPal.</li>
+<li>  <strong>failureURL:</strong> PayPal redirects to this URL in case the customer cancels the payment via PayPal.</li>
 </ul>
 
-<p>After the call the express checkout window by PayPal will open which redirects the customer to PayPal.</p>
-
-<p>(*) Indeed, we make PayPal to redirect back to <em>isaac10</em>, where the data returned by PayPal gets processed. The final redirect to your website (to the passed <code class="prettyprint">successURL</code> or <code class="prettyprint">failureURL</code>) is then done by <em>isaac10</em> itself.</p>
+<p>After the call the express checkout window by PayPal will open which redirects the customer to PayPal. Please keep in mind that you have to call the subscription confirmation (<a href="#confirmation-after-registration">Confirmation after Registration</a>, <a href="#confirmation-after-upgrade-downgrade">Confirmation after Upgrade/Downgrade</a> or <a href="#confirmation-after-subscription">Confirmation after Subscription</a>) when the <code class="prettyprint">successURL</code> is opened.</p>
 
           <h1 id="isaac10-ui">isaac10 UI</h1>
 
