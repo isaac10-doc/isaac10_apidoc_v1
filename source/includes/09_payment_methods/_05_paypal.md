@@ -57,9 +57,7 @@ by using the customer number and customer token received by step 1. This is unne
 
 which is named `.processPaypal(successURL, failureURL)`.
 
--   **successURL:** PayPal redirects to this URL (\*) in case the customer confirms the payment via PayPal.
--   **failureURL:** PayPal redirects to this URL (\*) in case the customer cancels the payment via PayPal.
+-   **successURL:** PayPal redirects to this URL in case the customer confirms the payment via PayPal.
+-   **failureURL:** PayPal redirects to this URL in case the customer cancels the payment via PayPal.
 
-After the call the express checkout window by PayPal will open which redirects the customer to PayPal.
-
-(\*) Indeed, we make PayPal to redirect back to _isaac10_, where the data returned by PayPal gets processed. The final redirect to your website (to the passed `successURL` or `failureURL`) is then done by _isaac10_ itself.
+After the call the express checkout window by PayPal will open which redirects the customer to PayPal. Please keep in mind that you have to call the subscription confirmation ([Confirmation after Registration](#confirmation-after-registration), [Confirmation after Upgrade/Downgrade](#confirmation-after-upgrade-downgrade) or [Confirmation after Subscription](#confirmation-after-subscription)) when the `successURL` is opened.

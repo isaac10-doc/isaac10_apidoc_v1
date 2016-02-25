@@ -47,7 +47,7 @@ Parameter | Description
 ----------|------------
 **customer_number** (REST only) | Number identifying the customer.
 **subscription_id** | ID of the subscription.
-**double_opt_in** | (optional) Should a mail with a confirmation link be sent to the customer? `true` or `false` (default: `true`)
+**double_opt_in** | Should a mail with a confirmation link be sent to the customer? `true` or `false` (optional, default: `true`)
 
 <aside class="notice">
 Using this function, the transmission of the email informing the merchant about a new customer/new subscription as well as of the subscription confirmation email for the customer gets initiated. Therefore by using the <code>double_opt_in</code> it must be decided, whether an email for the customer is sent out or not.
