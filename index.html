@@ -619,160 +619,81 @@ A description for all parameters will follow.
 
     </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email@example.com"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"double_opt_in"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+
+    </span><span class="nt">"locale"</span><span class="p">:</span><span class="w"> </span><span class="s2">"de"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
 <h3 id="parameters">Parameters</h3>
 
-<table>
-  <tr>
-    <th>Parameter</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td><strong>plan_nid</strong></td>
-    <td>
-      The NID of the plan.
-      <ul>
-        <li>required</li>
-        <li>plan must exist for this merchant</li>
-        <li>plan must be enabled</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>billing_interval</strong></td>
-    <td>
-      The billing interval for the subscription.
-      <ul>
-        <li>required if plan is with costs</li>
-        <li>allowed values: <em>monthly, quarterly, yearly</em></li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>additions</strong></td>
-    <td>
-      Additions for the plan.
-      <ul>
-        <li>all additions must be related to the booked plan itself</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>gender</strong></td>
-    <td>
-      Gender of the subscribing customer.
-      <ul>
-        <li>required, when plan is with costs</li>
-        <li>allowed values: <em>male, female</em></li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>first_name</strong></td>
-    <td>
-      First name of the customer.
-      <ul>
-        <li>required, when plan is with costs</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>last_name</strong></td>
-    <td>
-      Last name of the customer.
-      <ul>
-        <li>required, when plan is with costs</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>street</strong></td>
-    <td>
-      Street name of the customer&rsquo;s address.
-      <ul>
-        <li>required, when plan is with costs</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>zip</strong></td>
-    <td>
-      Zip code of the customer&rsquo;s address.
-      <ul>
-        <li>required, when plan is with costs</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>city</strong></td>
-    <td>
-      City of the customer&rsquo;s address.
-      <ul>
-        <li>required, when plan is with costs</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>country</strong></td>
-    <td>
-      Name of the country of the customer&rsquo;s address.
-      <ul>
-        <li>required, when plan is with costs</li>
-        <li>must be a double-digit country code</li>
-        <li>must be included in the tax list</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-   <td><strong>payment_method</strong></td>
-    <td>
-      The payment method to use. The example shows <code>invoice</code>. For all
-      payment methods and the instructions to integrate them, see
-      <a href="#payment-methods">Payment Methods</a>.
-      <ul>
-        <li>required if plan is with costs</li>
-        <li>
-          for allowed values see <a href="#payment-methods">Payment Methods</a>
-        </li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>coupon_code</strong></td>
-    <td>
-      Code number of the coupon.
-      <ul>
-        <li>optional</li>
-        <li>if coupon code is transferred, must be valuable and activated</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>email</strong></td>
-    <td>
-      Mail adress of the customer.
-      <ul>
-        <li>required</li>
-        <li>has to contain the @ character</li>
-        <li>must not have already been assigned to this subdomain or this merchant</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>password</strong></td>
-    <td>
-      Customer&rsquo;s password for Login.
-      <ul>
-        <li>required</li>
-        <li>must contain at least 6 characters</li>
-      </ul>
-    </td>
-  </tr>
-</table>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>plan_nid</strong></td>
+<td>The NID of the plan. <ul> <li>required</li> <li>plan must exist for this merchant</li> <li>plan must be enabled</li> </ul></td>
+</tr>
+<tr>
+<td><strong>billing_interval</strong></td>
+<td>The billing interval for the subscription. <ul> <li>required if plan is with costs</li> <li>allowed values: <code>&quot;monthly&quot;, &quot;quarterly&quot;, &quot;yearly&quot;</code></li> </ul></td>
+</tr>
+<tr>
+<td><strong>additions</strong></td>
+<td>Additions for the plan. <ul> <li>all additions must be related to the booked plan itself</li> </ul></td>
+</tr>
+<tr>
+<td><strong>gender</strong></td>
+<td>Gender of the subscribing customer. <ul> <li>required, when plan is with costs</li> <li>allowed values: <em>male, female</em></li> </ul></td>
+</tr>
+<tr>
+<td><strong>first_name</strong></td>
+<td>First name of the customer. <ul> <li>required, when plan is with costs</li> </ul></td>
+</tr>
+<tr>
+<td><strong>last_name</strong></td>
+<td>Last name of the customer. <ul> <li>required, when plan is with costs</li> </ul></td>
+</tr>
+<tr>
+<td><strong>street</strong></td>
+<td>Street name of the customer&rsquo;s address. <ul> <li>required, when plan is with costs</li> </ul></td>
+</tr>
+<tr>
+<td><strong>zip</strong></td>
+<td>Zip code of the customer&rsquo;s address. <ul> <li>required, when plan is with costs</li> </ul></td>
+</tr>
+<tr>
+<td><strong>city</strong></td>
+<td>City of the customer&rsquo;s address. <ul> <li>required, when plan is with costs</li> </ul></td>
+</tr>
+<tr>
+<td><strong>country</strong></td>
+<td>Name of the country of the customer&rsquo;s address. <ul> <li>required, when plan is with costs</li> <li>must be a double-digit country code</li> <li>must be included in the tax list</li> </ul></td>
+</tr>
+<tr>
+<td><strong>payment_method</strong></td>
+<td>The payment method to use. The example shows <code class="prettyprint">invoice</code>. For all payment methods and the instructions to integrate them, see <a href="#payment-methods">Payment Methods</a> <ul> <li>required if plan is with costs</li> <li>for allowed values see <a href="#payment-methods">Payment Methods</a> </li> </ul></td>
+</tr>
+<tr>
+<td><strong>coupon_code</strong></td>
+<td>Code number of the coupon. <ul> <li>optional</li> <li>if coupon code is transferred, must be valuable and activated</li> </ul></td>
+</tr>
+<tr>
+<td><strong>email</strong></td>
+<td>Mail adress of the customer. <ul> <li>required</li> <li>has to contain the <code class="prettyprint">@</code> character</li> <li>must not have already been assigned to this subdomain or this merchant</li> </ul></td>
+</tr>
+<tr>
+<td><strong>password</strong></td>
+<td>Customer&rsquo;s password for Login. <ul> <li>required</li> <li>must contain at least 6 characters</li> </ul></td>
+</tr>
+<tr>
+<td><strong>locale</strong></td>
+<td>The language of the customer. <ul><li>optional (default: <code>&quot;de&quot;</code>)</li><li>allowed values: <code>&quot;de&quot;, &quot;en&quot;, &quot;fr&quot;, &quot;it&quot;, &quot;es&quot;</code></li></ul> When used in the JavaScript library and <strong>locale</strong> is not passed, the transmitted locale of the browser is used.</td>
+</tr>
+</tbody></table>
 
 <h3 id="response">Response</h3>
 
