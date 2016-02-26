@@ -38,160 +38,31 @@ isaac10.register(params);
 
     "email": "email@example.com",
     "password": "password",
-    "double_opt_in": false
+
+    "locale": "de"
   }
 }
 ```
 
 ### Parameters
 
-<table>
-  <tr>
-    <th>Parameter</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td><strong>plan_nid</strong></td>
-    <td>
-      The NID of the plan.
-      <ul>
-        <li>required</li>
-        <li>plan must exist for this merchant</li>
-        <li>plan must be enabled</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>billing_interval</strong></td>
-    <td>
-      The billing interval for the subscription.
-      <ul>
-        <li>required if plan is with costs</li>
-        <li>allowed values: <em>monthly, quarterly, yearly</em></li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>additions</strong></td>
-    <td>
-      Additions for the plan.
-      <ul>
-        <li>all additions must be related to the booked plan itself</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>gender</strong></td>
-    <td>
-      Gender of the subscribing customer.
-      <ul>
-        <li>required, when plan is with costs</li>
-        <li>allowed values: <em>male, female</em></li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>first_name</strong></td>
-    <td>
-      First name of the customer.
-      <ul>
-        <li>required, when plan is with costs</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>last_name</strong></td>
-    <td>
-      Last name of the customer.
-      <ul>
-        <li>required, when plan is with costs</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>street</strong></td>
-    <td>
-      Street name of the customer's address.
-      <ul>
-        <li>required, when plan is with costs</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>zip</strong></td>
-    <td>
-      Zip code of the customer's address.
-      <ul>
-        <li>required, when plan is with costs</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>city</strong></td>
-    <td>
-      City of the customer's address.
-      <ul>
-        <li>required, when plan is with costs</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>country</strong></td>
-    <td>
-      Name of the country of the customer's address.
-      <ul>
-        <li>required, when plan is with costs</li>
-        <li>must be a double-digit country code</li>
-        <li>must be included in the tax list</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-   <td><strong>payment_method</strong></td>
-    <td>
-      The payment method to use. The example shows <code>invoice</code>. For all
-      payment methods and the instructions to integrate them, see
-      <a href="#payment-methods">Payment Methods</a>.
-      <ul>
-        <li>required if plan is with costs</li>
-        <li>
-          for allowed values see <a href="#payment-methods">Payment Methods</a>
-        </li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>coupon_code</strong></td>
-    <td>
-      Code number of the coupon.
-      <ul>
-        <li>optional</li>
-        <li>if coupon code is transferred, must be valuable and activated</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>email</strong></td>
-    <td>
-      Mail adress of the customer.
-      <ul>
-        <li>required</li>
-        <li>has to contain the @ character</li>
-        <li>must not have already been assigned to this subdomain or this merchant</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><strong>password</strong></td>
-    <td>
-      Customer's password for Login.
-      <ul>
-        <li>required</li>
-        <li>must contain at least 6 characters</li>
-      </ul>
-    </td>
-  </tr>
-</table>
+Parameter | Description
+----------|------------
+**plan_nid** | The NID of the plan. <ul> <li>required</li> <li>plan must exist for this merchant</li> <li>plan must be enabled</li> </ul>
+**billing_interval** | The billing interval for the subscription. <ul> <li>required if plan is with costs</li> <li>allowed values: <code>"monthly", "quarterly", "yearly"</code></li> </ul>
+**additions** | Additions for the plan. <ul> <li>all additions must be related to the booked plan itself</li> </ul>
+**gender** | Gender of the subscribing customer. <ul> <li>required, when plan is with costs</li> <li>allowed values: <em>male, female</em></li> </ul>
+**first_name** | First name of the customer. <ul> <li>required, when plan is with costs</li> </ul>
+**last_name** | Last name of the customer. <ul> <li>required, when plan is with costs</li> </ul>
+**street** | Street name of the customer's address. <ul> <li>required, when plan is with costs</li> </ul>
+**zip** | Zip code of the customer's address. <ul> <li>required, when plan is with costs</li> </ul>
+**city** | City of the customer's address. <ul> <li>required, when plan is with costs</li> </ul>
+**country** | Name of the country of the customer's address. <ul> <li>required, when plan is with costs</li> <li>must be a double-digit country code</li> <li>must be included in the tax list</li> </ul>
+**payment_method** | The payment method to use. The example shows `invoice`. For all payment methods and the instructions to integrate them, see [Payment Methods](#payment-methods) <ul> <li>required if plan is with costs</li> <li>for allowed values see <a href="#payment-methods">Payment Methods</a> </li> </ul>
+**coupon_code** | Code number of the coupon. <ul> <li>optional</li> <li>if coupon code is transferred, must be valuable and activated</li> </ul>
+**email** | Mail adress of the customer. <ul> <li>required</li> <li>has to contain the `@` character</li> <li>must not have already been assigned to this subdomain or this merchant</li> </ul>
+**password** | Customer's password for Login. <ul> <li>required</li> <li>must contain at least 6 characters</li> </ul>
+**locale** | The language of the customer. <ul><li>optional (default: <code>"de"</code>)</li><li>allowed values: <code>"de", "en", "fr", "it", "es"</code></li></ul> When used in the JavaScript library and **locale** is not passed, the transmitted locale of the browser is used.
 
 ### Response
 
