@@ -872,6 +872,7 @@ Using this function, the transmission of the email informing the merchant about 
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w">                     </span><span class="mi">42</span><span class="p">,</span><span class="w">
       </span><span class="nt">"product_name"</span><span class="p">:</span><span class="w">          </span><span class="s2">"name of the product"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"plan_name"</span><span class="p">:</span><span class="w">             </span><span class="s2">"name of the plan"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"plan_nid"</span><span class="p">:</span><span class="w">              </span><span class="s2">"abc123"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"begins_at"</span><span class="p">:</span><span class="w">             </span><span class="s2">"2014-09-25"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"term_ends_at"</span><span class="p">:</span><span class="w">          </span><span class="s2">"2014-10-24"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"billing_interval"</span><span class="p">:</span><span class="w">      </span><span class="s2">"monthly"</span><span class="p">,</span><span class="w">
@@ -2156,6 +2157,8 @@ Before making the function call, the <a href="#customer-authentication">customer
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
+<p>Update the billing address of the passed customer. When the customer has no billing address, it will be created. However, the returned status code is <code class="prettyprint">200</code> in both cases.</p>
+
 <aside class="success">
 Before making the function call, the <a href="#customer-authentication">customer must be authenticated</a>.
 </aside>
@@ -2444,7 +2447,7 @@ Before making the function call, the <a href="#customer-authentication">customer
           <h1 id="further-merchant-functions">Further merchant functions</h1>
 
           <h2 id="creating-an-extra-bill-item">Creating an extra bill item</h2>
-<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1/bill_items</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/v1/bill_items</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 </code></pre>
 <pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">createBillItem</span><span class="p">(</span><span class="nx">params</span><span class="p">);</span>
 </code></pre>
@@ -2454,14 +2457,14 @@ Before making the function call, the <a href="#customer-authentication">customer
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"bill_item"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"customer_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100001"</span><span class="p">,</span><span class="w">                                
-    </span><span class="nt">"product_name"</span><span class="p">:</span><span class="w">    </span><span class="s2">"product_name"</span><span class="p">,</span><span class="w">                           
-    </span><span class="nt">"invoice_text"</span><span class="p">:</span><span class="w">    </span><span class="s2">"Text, being displayed on the bill"</span><span class="p">,</span><span class="w">  
-    </span><span class="nt">"amount_cents"</span><span class="p">:</span><span class="w">    </span><span class="s2">"2000"</span><span class="p">,</span><span class="w"> </span><span class="err">//</span><span class="w"> </span><span class="err">2000</span><span class="w"> </span><span class="err">=</span><span class="w"> </span><span class="err">20,00</span><span class="w"> </span><span class="err">€</span><span class="w">                  
-    </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w">        </span><span class="s2">"1"</span><span class="p">,</span><span class="w">                                    
-    </span><span class="nt">"vat"</span><span class="p">:</span><span class="w">             </span><span class="s2">"19.0"</span><span class="p">,</span><span class="w">                                  
-    </span><span class="nt">"bill_from"</span><span class="p">:</span><span class="w">       </span><span class="s2">"2015-03-12"</span><span class="p">,</span><span class="w">                            
-    </span><span class="nt">"bill_to"</span><span class="p">:</span><span class="w">         </span><span class="s2">"2015-04-11"</span><span class="w">                            
+    </span><span class="nt">"customer_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100001"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"product_name"</span><span class="p">:</span><span class="w">    </span><span class="s2">"product_name"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"invoice_text"</span><span class="p">:</span><span class="w">    </span><span class="s2">"Text, being displayed on the bill"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"amount_cents"</span><span class="p">:</span><span class="w">    </span><span class="s2">"2000"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w">        </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"vat"</span><span class="p">:</span><span class="w">             </span><span class="s2">"19.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"billed_from"</span><span class="p">:</span><span class="w">     </span><span class="s2">"2015-03-12"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"billed_to"</span><span class="p">:</span><span class="w">       </span><span class="s2">"2015-04-11"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -2475,7 +2478,7 @@ Before making the function call, the <a href="#customer-authentication">customer
 </span></code></pre>
 
 <aside class="success">
-Before making the function call, you must <a href= "#merchant-authentication"> authenticate yourself</a>.
+Before making the function call, you must <a href="#merchant-authentication">authenticate yourself</a>.
 </aside>
 
 <h3 id="validation">Validation</h3>
@@ -2488,11 +2491,11 @@ Before making the function call, you must <a href= "#merchant-authentication"> a
 </thead><tbody>
 <tr>
 <td><strong>customer_number</strong></td>
-<td><ul> <li>required </li> <li>must exist and be linked to one of your customers </li>  </ul></td>
+<td><ul> <li>required </li> <li>must exist and be one of your customers </li>  </ul></td>
 </tr>
 <tr>
 <td><strong>product_name</strong></td>
-<td><ul> <li>required </li> <li>must exist and be linked to one of your products </li>  </ul></td>
+<td><ul> <li>required </li> <li>must exist and be one of your products </li>  </ul></td>
 </tr>
 <tr>
 <td><strong>invoice_text</strong></td>
@@ -2504,25 +2507,25 @@ Before making the function call, you must <a href= "#merchant-authentication"> a
 </tr>
 <tr>
 <td><strong>quantity</strong></td>
-<td><ul> <li>required </li> <li> must be in form of a whole number and be greater than zero</li> </ul></td>
+<td><ul><li>required</li><li>must be in form of a whole number</li><li>must be greater than zero</li></ul></td>
 </tr>
 <tr>
 <td><strong>vat</strong></td>
-<td><ul> <li>required </li> <li> must be in form of a decimal number, containing a point as decimal separator and be greater than zero</li> </ul></td>
+<td><ul> <li>required </li> <li> must be in form of a decimal number, containing a point as decimal separator</li><li>must be greater than zero</li> </ul></td>
 </tr>
 <tr>
-<td><strong>bill_from</strong></td>
-<td><ul> <li>required </li> <li> must be in form of a date according to ISO-8601 (YYYY-MM-DD)</li> </ul></td>
+<td><strong>billed_from</strong></td>
+<td>The start date of the bill item.<ul><li>required</li><li>must be in form of a date according to ISO-8601 (YYYY-MM-DD)</li></ul></td>
 </tr>
 <tr>
-<td><strong>bill_to</strong></td>
-<td><ul> <li> must be in form of a date according to ISO-8601 (YYYY-MM-DD)</li> <li>must lie after the <code class="prettyprint">bill_from</code> date </li> </ul></td>
+<td><strong>billed_to</strong></td>
+<td>(optional) The end date of the bill item. When no end date is given, only the start date will be displayed on the bill. <ul><li>must be in form of a date according to ISO-8601 (YYYY-MM-DD)</li><li>must lie after the <code class="prettyprint">bill_from</code> date</li></ul></td>
 </tr>
 </tbody></table>
 
 <aside class="notice">
-<strong> How to create a credit item?</strong><br>
-To create a credit item, just put a negative amount for <code>amount-cents </code>.
+<strong>How to create a credit item?</strong><br><br>
+To create a credit item, just put a negative amount for <code>amount_cents</code>.
 </aside>
 
           <h1 id="payment-methods">Payment Methods</h1>
