@@ -15,6 +15,7 @@ isaac10.getPlan('plan_nid');
   "plan": {
     "nid": "<plan_nid>",
     "product_name": "name of the product",
+    "internal_product_name": "internal name of the product",
     "plan_name": "name of the plan",
     "public": true,
     "logo_url": "http://path/to/merchant/logo.png",

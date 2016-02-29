@@ -13,14 +13,14 @@ isaac10.createBillItem(params);
 ```json
 {
   "bill_item": {
-    "customer_number": "100001",
-    "product_name":    "product_name",
-    "invoice_text":    "Text, being displayed on the bill",
-    "amount_cents":    "2000",
-    "quantity":        "1",
-    "vat":             "19.0",
-    "billed_from":     "2015-03-12",
-    "billed_to":       "2015-04-11"
+    "customer_number":       "100001",
+    "internal_product_name": "internal product_name",
+    "invoice_text":          "Text, being displayed on the bill",
+    "amount_cents":          "2000",
+    "quantity":              "1",
+    "vat":                   "19.0",
+    "billed_from":           "2015-03-12",
+    "billed_to":             "2015-04-11"
   }
 }
 ```
@@ -42,7 +42,7 @@ Before making the function call, you must <a href="#merchant-authentication">aut
 Parameter | Description
 ----------|-------------
 **customer_number** | <ul> <li>required </li> <li>must exist and be one of your customers </li>  </ul>
-**product_name** | <ul> <li>required </li> <li>must exist and be one of your products </li>  </ul>
+**internal_product_name** | <ul> <li>required </li> <li>must exist and be one of your products </li>  </ul>
 **invoice_text** | <ul> <li>required </li> </ul>
 **amount_cents** | <ul> <li>required </li> <li> must be in form of a whole number </li> </ul>
 **quantity** | <ul><li>required</li><li>must be in form of a whole number</li><li>must be greater than zero</li></ul>

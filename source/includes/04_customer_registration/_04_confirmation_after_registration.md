@@ -18,6 +18,7 @@ isaac10.thankYouAfterRegister(subscription_id, { double_opt_in: true });
   "subscription": {
     "id": "42",
     "product_name": "name of the product",
+    "internal_product_name": "internal name of the product",
     "plan_name": "name of the plan",
     "begins_at": "2015-08-19",
     "term_ends_at": "2015-09-18",
@@ -64,6 +65,7 @@ Parameter | Description
 **plan** | This data is the same as returned by [Request Plan Data](#request-plan-data)
 **subscription** | The confirmed subscription.
 **subscription.product_name** | The name of the product.
+**subscription.internal_product_name** | The internal name of the product.
 **subscription.plan_name** | The name of the plan.
 **subscription.begins_at** | The date when the subscription started. Since this is the response for a new registration, it will be today.
 **subscription.term_ends_at** | The date when this term (= the first term) ends.

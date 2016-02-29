@@ -15,6 +15,7 @@ isaac10.getProducts();
   "products": [
     {
       "product_name 1": {
+        "internal_product_name": "internal_product_name",
         "plans": [
           {
             "plan_name 1": {
@@ -63,11 +64,11 @@ isaac10.getProducts();
     },
     {
       "product_name 2": {
+        ...
       }
     }
   ]
 }
 ```
-
 
 This function can be used to display project data on websites. If there's no products set on the subdomain, an empty array with status 200 will be returned.

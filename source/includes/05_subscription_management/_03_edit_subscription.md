@@ -26,6 +26,7 @@ isaac10.editSubscription(subscription_id);
   "subscription": {
     "id":                     42,
     "product_name":          "name of the product",
+    "internal_product_name": "internal name of the product",
     "plan_name":             "name of the plan",
     "begins_at":             "2014-09-25",
     "term_ends_at":          "2014-10-24",
