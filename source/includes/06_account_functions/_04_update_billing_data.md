@@ -26,7 +26,6 @@ isaac10.updateBillingData(params);
 }
 ```
 
-
 > Response
 
 ```json
@@ -35,11 +34,11 @@ isaac10.updateBillingData(params);
 }
 ```
 
+Update the billing address of the passed customer. When the customer has no billing address, it will be created. However, the returned status code is `200` in both cases.
 
 <aside class="success">
 Before making the function call, the <a href="#customer-authentication">customer must be authenticated</a>.
 </aside>
-
 
 ### Params
 
@@ -48,6 +47,7 @@ Parameter | Description
 **customer_number** (in URL) | The number identifying the customer.
 
 ### Validation
+
 Parameter | Description
 ----------|-------------
 **gender** | The gender of the customer. <ul> <div style="text-align: left;"> <li>required</li> <li>allowed values: `male`, `female`</li> </ul>

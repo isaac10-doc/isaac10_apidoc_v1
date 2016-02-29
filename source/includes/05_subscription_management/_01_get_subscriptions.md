@@ -17,6 +17,7 @@ isaac10.getSubscriptions();
       "id":                     42,
       "product_name":          "name of the product",
       "plan_name":             "name of the plan",
+      "plan_nid":              "abc123",
       "begins_at":             "2014-09-25",
       "term_ends_at":          "2014-10-24",
       "billing_interval":      "monthly",
