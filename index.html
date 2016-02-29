@@ -320,6 +320,7 @@ Both methods of authentication can be operated independently one of another. Bot
   </span><span class="nt">"products"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"product_name 1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"internal_product_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"internal_product_name"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"plans"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
             </span><span class="nt">"plan_name 1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -368,6 +369,7 @@ Both methods of authentication can be operated independently one of another. Bot
     </span><span class="p">},</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"product_name 2"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="err">...</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -442,6 +444,7 @@ show up in your subscription overview and will not be accessible.</p></li>
   </span><span class="nt">"plan"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"nid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;plan_nid&gt;"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"product_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name of the product"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"internal_product_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"internal name of the product"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"plan_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name of the plan"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"public"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
     </span><span class="nt">"logo_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://path/to/merchant/logo.png"</span><span class="p">,</span><span class="w">
@@ -744,6 +747,7 @@ A description for all parameters will follow.
   </span><span class="nt">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"42"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"product_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name of the product"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"internal_product_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"internal name of the product"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"plan_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name of the plan"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"begins_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-08-19"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"term_ends_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-09-18"</span><span class="p">,</span><span class="w">
@@ -818,6 +822,10 @@ Using this function, the transmission of the email informing the merchant about 
 <td>The name of the product.</td>
 </tr>
 <tr>
+<td><strong>subscription.internal_product_name</strong></td>
+<td>The internal name of the product.</td>
+</tr>
+<tr>
 <td><strong>subscription.plan_name</strong></td>
 <td>The name of the plan.</td>
 </tr>
@@ -871,6 +879,7 @@ Using this function, the transmission of the email informing the merchant about 
     </span><span class="p">{</span><span class="w">
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w">                     </span><span class="mi">42</span><span class="p">,</span><span class="w">
       </span><span class="nt">"product_name"</span><span class="p">:</span><span class="w">          </span><span class="s2">"name of the product"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"internal_product_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"internal name of the product"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"plan_name"</span><span class="p">:</span><span class="w">             </span><span class="s2">"name of the plan"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"plan_nid"</span><span class="p">:</span><span class="w">              </span><span class="s2">"abc123"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"begins_at"</span><span class="p">:</span><span class="w">             </span><span class="s2">"2014-09-25"</span><span class="p">,</span><span class="w">
@@ -1116,6 +1125,7 @@ Before making the function call, the <a href="#customer-authentication">customer
   </span><span class="nt">"subscription"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w">                     </span><span class="mi">42</span><span class="p">,</span><span class="w">
     </span><span class="nt">"product_name"</span><span class="p">:</span><span class="w">          </span><span class="s2">"name of the product"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"internal_product_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"internal name of the product"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"plan_name"</span><span class="p">:</span><span class="w">             </span><span class="s2">"name of the plan"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"begins_at"</span><span class="p">:</span><span class="w">             </span><span class="s2">"2014-09-25"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"term_ends_at"</span><span class="p">:</span><span class="w">          </span><span class="s2">"2014-10-24"</span><span class="p">,</span><span class="w">
@@ -2457,14 +2467,14 @@ Before making the function call, the <a href="#customer-authentication">customer
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"bill_item"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"customer_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100001"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"product_name"</span><span class="p">:</span><span class="w">    </span><span class="s2">"product_name"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"invoice_text"</span><span class="p">:</span><span class="w">    </span><span class="s2">"Text, being displayed on the bill"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"amount_cents"</span><span class="p">:</span><span class="w">    </span><span class="s2">"2000"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w">        </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"vat"</span><span class="p">:</span><span class="w">             </span><span class="s2">"19.0"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"billed_from"</span><span class="p">:</span><span class="w">     </span><span class="s2">"2015-03-12"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"billed_to"</span><span class="p">:</span><span class="w">       </span><span class="s2">"2015-04-11"</span><span class="w">
+    </span><span class="nt">"customer_number"</span><span class="p">:</span><span class="w">       </span><span class="s2">"100001"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"internal_product_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"internal product_name"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"invoice_text"</span><span class="p">:</span><span class="w">          </span><span class="s2">"Text, being displayed on the bill"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"amount_cents"</span><span class="p">:</span><span class="w">          </span><span class="s2">"2000"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w">              </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"vat"</span><span class="p">:</span><span class="w">                   </span><span class="s2">"19.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"billed_from"</span><span class="p">:</span><span class="w">           </span><span class="s2">"2015-03-12"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"billed_to"</span><span class="p">:</span><span class="w">             </span><span class="s2">"2015-04-11"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -2494,7 +2504,7 @@ Before making the function call, you must <a href="#merchant-authentication">aut
 <td><ul> <li>required </li> <li>must exist and be one of your customers </li>  </ul></td>
 </tr>
 <tr>
-<td><strong>product_name</strong></td>
+<td><strong>internal_product_name</strong></td>
 <td><ul> <li>required </li> <li>must exist and be one of your products </li>  </ul></td>
 </tr>
 <tr>
