@@ -24,7 +24,7 @@ panel.
 Load the JavaScript library into the page and initialize the `isaac10`
 JavaScript object as shown on the right side.
 
-`<script type="text/javascript" src="https://app.issac10.com/api/v1/isaac10_api.js"></script>`
+`<script type="text/javascript" src="https://app.isaac10.com/api/v1/isaac10_api.js"></script>`
 
 ```javascript
 var isaac10 = new Isaac10("your-subdomain");
