@@ -17,9 +17,9 @@ isaac10.getCustomers();
       "account": {
         ...
       },
-      "subscriptions": {
+      "subscriptions": [
         ...
-      }
+      ]
     }
   ]
 }
