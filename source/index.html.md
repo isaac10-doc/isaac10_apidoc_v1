@@ -49,7 +49,9 @@ includes:
   - 07_billing/02_download_bills
   - 08_merchant_functions/00_headline
   - 08_merchant_functions/01_get_customers
-  - 08_merchant_functions/02_create_billitem
+  - 08_merchant_functions/02_set_customer_custom_data
+  - 08_merchant_functions/03_get_customer_custom_data
+  - 08_merchant_functions/04_create_billitem
   - 09_payment_methods/00_headline
   - 09_payment_methods/01_possible_payment_methods
   - 09_payment_methods/02_invoice
