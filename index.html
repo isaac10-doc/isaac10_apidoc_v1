@@ -2506,6 +2506,50 @@ Before making the function call, you must <a href="#merchant-authentication">aut
 </tr>
 </tbody></table>
 
+          <h2 id="set-customer-custom-data">Set customer custom data</h2>
+<pre class="highlight http"><code><span class="nf">PATCH</span> <span class="nn">/api/v1/customers/&lt;customer_number&gt;/custom_data</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">setCustomerCustomData</span><span class="p">(</span><span class="nx">customer_number</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>Request body / Data</p>
+</blockquote>
+<pre class="highlight plaintext"><code>Whatever you want. Please use responsibly, this is not a challenge.
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>You may set custom data for any of your customers. The data can be anything, there are no validations. It will be stored as-is in the database. To read the data see <a href="#get-customer-custom-data">Get customer custom data</a>.</p>
+
+<aside class="success">
+Before making the function call, you must <a href="#merchant-authentication">authenticate yourself</a>.
+</aside>
+
+          <h2 id="get-customer-custom-data">Get customer custom data</h2>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1/customers/&lt;customer_number&gt;/custom_data</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">getCustomerCustomData</span><span class="p">(</span><span class="nx">customer_number</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight plaintext"><code>Whatever you set at the customer. The content type "text/plain" is used.
+</code></pre>
+
+<p>Retrieve the data you set with <a href="#set-customer-custom-data">Set customer custom data</a>.</p>
+
+<aside class="success">
+Before making the function call, you must <a href="#merchant-authentication">authenticate yourself</a>.
+</aside>
+
           <h2 id="creating-an-extra-bill-item">Creating an extra bill item</h2>
 <pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/v1/bill_items</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 </code></pre>
