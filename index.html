@@ -2469,6 +2469,9 @@ Before making the function call, the <a href="#customer-authentication">customer
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"customers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"customer_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10001"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"customer_token"</span><span class="p">:</span><span class="w">  </span><span class="s2">"abc123"</span><span class="p">,</span><span class="w">
+
       </span><span class="nt">"account"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="err">...</span><span class="w">
       </span><span class="p">},</span><span class="w">
@@ -2495,6 +2498,10 @@ Before making the function call, you must <a href="#merchant-authentication">aut
 <tr>
 <td><strong>customers</strong></td>
 <td>An array of all customers of the merchant.</td>
+</tr>
+<tr>
+<td><strong>customer_number</strong><br><strong>customer_token</strong></td>
+<td>Customer number and customer token to be used for <a href="#customer-authentication">Customer Authentication</a>.</td>
 </tr>
 <tr>
 <td><strong>account</strong></td>
