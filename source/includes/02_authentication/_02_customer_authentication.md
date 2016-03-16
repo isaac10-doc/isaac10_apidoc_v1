@@ -6,22 +6,29 @@ If you wish to outsource the authentication process entirely to our _isaac10_ sy
 
 ### REST API
 
-If a request requires the authentication of the customer, the customer's API token has to be sent within the `Authorize` Header. The customer number, as part of the URL, has to be transferred as well.
+```http
+GET /api/v1/... HTTP/1.1
+Authorization: Token token="<customer_token>"
+```
 
- `Authorization: Token token="<customer_token>"`
+If a request requires the authentication of the customer, the customer's API token has to be sent within the `Authorization` Header. The customer number, as part of the URL, has to be transferred as well.
 
 ### JavaScript API
 
-When using the JavaScript API the customer has to be authenticated _before_ his first request of a protected function by using his customer number and his API token. The authentication itself works by the method `authenticateCustomer()` with an instance of the isaac10 object:
+```javascript
+isaac10.authenticateCustomer("<customer_number>", "<customer_token>");
+```
 
-`isaac10.authenticateCustomer("<customer_number>", "<customer_token>");`
+When using the JavaScript API the customer has to be authenticated _before_ his first request of a protected function by using his customer number and his API token. The authentication itself works by the method `.authenticateCustomer()` with an instance of the isaac10 object. (shown right)
 
-The request `authenticateCustomer()` itself _won't_ create a HTTP request. The client's Customer number as well as the API token gets stored in the _isaac10_ object and returned (if necessary) with every request.
+The request `authenticateCustomer()` itself _won't_ create a HTTP request. The client's customer number as well as the customer token gets stored in the _isaac10_ object and returned (if necessary) with every request.
 
-Once customer number and API token of the customer set, they can be displayed as properties of the _isaac10_ object:
+```javascript
+console.log(isaac10.customerNumber);
+// => "<customer_number>"`
 
-`console.log(isaac10.customerNumber);`  
-`// => "<customer_number>"`
+console.log(isaac10.customerApiToken);
+// => "<customer_api_token>"`
+```
 
-`console.log(isaac10.customerApiToken);`  
-`// => "<customer_api_token>"`
+Once customer number and API token of the customer set, they can be displayed as properties of the _isaac10_ object. (shown right)
