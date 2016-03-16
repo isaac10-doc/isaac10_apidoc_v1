@@ -190,10 +190,6 @@ the JSON response of the API call to <code class="prettyprint">success</code> an
           <h1 id="authentication">Authentication</h1>
 
           <h2 id="login">Login</h2>
-
-<aside class="notice">
-There is no equivalent function for authenticating you as merchant.
-</aside>
 <pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/v1/authenticate</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 
 {
@@ -210,43 +206,69 @@ There is no equivalent function for authenticating you as merchant.
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"customer_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100001"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"customer_token"</span><span class="p">:</span><span class="w">  </span><span class="s2">"abc123"</span><span class="w">
+    </span><span class="nt">"customer_token"</span><span class="p">:</span><span class="w">  </span><span class="s2">"abc123"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"confirmed"</span><span class="p">:</span><span class="w">        </span><span class="kc">true</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+    </span><span class="nt">"confirmed"</span><span class="p">:</span><span class="w">                 </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"request_confirmation_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://subdomain.isaac10.com/confirm/789"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
+<p>If you wish to outsource the customer authentication entirely to <em>isaac10</em>, you can request customer number and customer token, which are needed for the AUTHORIZE header or the JavaScript function <code class="prettyprint">.authenticateCustomer()</code> (explained in <a href="#customer-authentication">Customer Authentication</a>), with this API call.</p>
+
+<p>If you are using the JavaScript library, <code class="prettyprint">.authenticateCustomer()</code> will be called automatically with the returned customer number and customer token after the request returns successfully.</p>
+
+<aside class="notice">
+There is no equivalent function for authenticating you as merchant.
+</aside>
+
 <h3 id="params">Params</h3>
 
-<table>
-  <tr>
-    <th>Parameter</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td><strong>email</strong></td>
-    <td>
-      Mail of the customer
-      <ul>
-        <li> required </li>
-      </ul>  
-    </td>
-   </tr>
-   <tr>
-     <td><strong>password</strong></td>
-     <td>
-       Password of the customer
-       <ul>
-         <li> required </li>
-       </ul>  
-     </td>
-    </tr>
-  </table>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>email</strong></td>
+<td>Email address of the customer. <ul><li>required</li></ul></td>
+</tr>
+<tr>
+<td><strong>password</strong></td>
+<td>Password of the customer. <ul><li>required</li></ul></td>
+</tr>
+</tbody></table>
 
 <p>If <code class="prettyprint">email</code> and <code class="prettyprint">password</code> are not matching, error 404 will be returned.</p>
 
-<p>If you wish to outsource the authentication entirely with <em>isaac10</em>, you can request customer number and API token, asked for the authorize header or JavaScript function <code class="prettyprint">.authenticateCustomer</code> by this API call.</p>
+<h3 id="response">Response</h3>
 
-<p>After the request, <code class="prettyprint">.authenticateCustomer</code> together with transferred customer number and customer token will be called automatically.</p>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>customer_number</strong><br><strong>customer_token</strong></td>
+<td>Customer number and customer token to be used for <a href="#customer-authentication">Customer Authentication</a>.</td>
+</tr>
+<tr>
+<td><strong>confirmed</strong></td>
+<td>Is the customer confirmed (i.e. clicked on the confirmation link send to her/him after the registration)? <code class="prettyprint">true</code> or <code class="prettyprint">false</code>.</td>
+</tr>
+<tr>
+<td><strong>request_confirmation_url</strong></td>
+<td>Only present when the customer is not confirmed. A GET request to this URL will trigger sending an email with the confirmation link to the customer.</td>
+</tr>
+</tbody></table>
 
           <h2 id="customer-authentication">Customer Authentication</h2>
 
@@ -255,54 +277,54 @@ There is no equivalent function for authenticating you as merchant.
 <p>If you wish to outsource the authentication process entirely to our <em>isaac10</em> system, you need to embed the API call <a href="#login">authenticate - login of customer</a>, returning token and customer number.</p>
 
 <h3 id="rest-api">REST API</h3>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1/...</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Token token="&lt;customer_token&gt;"</span>
+</code></pre>
 
-<p>If a request requires the authentication of the customer, the customer&rsquo;s API token has to be sent within the <code class="prettyprint">Authorize</code> Header. The customer number, as part of the URL, has to be transferred as well.</p>
-
-<p><code class="prettyprint">Authorization: Token token=&quot;&lt;customer_token&gt;&quot;</code></p>
+<p>If a request requires the authentication of the customer, the customer&rsquo;s API token has to be sent within the <code class="prettyprint">Authorization</code> Header. The customer number, as part of the URL, has to be transferred as well.</p>
 
 <h3 id="javascript-api">JavaScript API</h3>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">authenticateCustomer</span><span class="p">(</span><span class="s2">"&lt;customer_number&gt;"</span><span class="p">,</span> <span class="s2">"&lt;customer_token&gt;"</span><span class="p">);</span>
+</code></pre>
 
-<p>When using the JavaScript API the customer has to be authenticated <em>before</em> his first request of a protected function by using his customer number and his API token. The authentication itself works by the method <code class="prettyprint">authenticateCustomer()</code> with an instance of the isaac10 object:</p>
+<p>When using the JavaScript API the customer has to be authenticated <em>before</em> his first request of a protected function by using his customer number and his API token. The authentication itself works by the method <code class="prettyprint">.authenticateCustomer()</code> with an instance of the isaac10 object. (shown right)</p>
 
-<p><code class="prettyprint">isaac10.authenticateCustomer(&quot;&lt;customer_number&gt;&quot;, &quot;&lt;customer_token&gt;&quot;);</code></p>
+<p>The request <code class="prettyprint">authenticateCustomer()</code> itself <em>won&rsquo;t</em> create a HTTP request. The client&rsquo;s customer number as well as the customer token gets stored in the <em>isaac10</em> object and returned (if necessary) with every request.</p>
+<pre class="highlight javascript"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isaac10</span><span class="p">.</span><span class="nx">customerNumber</span><span class="p">);</span>
+<span class="c1">// =&gt; "&lt;customer_number&gt;"`</span>
 
-<p>The request <code class="prettyprint">authenticateCustomer()</code> itself <em>won&rsquo;t</em> create a HTTP request. The client&rsquo;s Customer number as well as the API token gets stored in the <em>isaac10</em> object and returned (if necessary) with every request.</p>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isaac10</span><span class="p">.</span><span class="nx">customerApiToken</span><span class="p">);</span>
+<span class="c1">// =&gt; "&lt;customer_api_token&gt;"`</span>
+</code></pre>
 
-<p>Once customer number and API token of the customer set, they can be displayed as properties of the <em>isaac10</em> object:</p>
-
-<p><code class="prettyprint">console.log(isaac10.customerNumber);</code><br>
-<code class="prettyprint">// =&gt; &quot;&lt;customer_number&gt;&quot;</code></p>
-
-<p><code class="prettyprint">console.log(isaac10.customerApiToken);</code><br>
-<code class="prettyprint">// =&gt; &quot;&lt;customer_api_token&gt;&quot;</code></p>
+<p>Once customer number and API token of the customer set, they can be displayed as properties of the <em>isaac10</em> object. (shown right)</p>
 
           <h2 id="merchant-authentication">Merchant Authentication</h2>
-<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">authenticateMerchant</span><span class="p">(</span><span class="s1">'merchant_token'</span><span class="p">);</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isaac10</span><span class="p">.</span><span class="nx">merchantToken</span><span class="p">);</span>  
-<span class="c1">// =&gt; "merchant_token"  </span>
-</code></pre>
 
 <p>In order to use the merchant&rsquo;s functions you have to authenticate with the system using your merchant API token. To find your merchant API token, see the merchant backend under the following section:</p>
 
 <p><strong>Konfiguration &gt; Allgemeine Einstellungen</strong></p>
 
 <h3 id="rest-api">REST API</h3>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1/...</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Token token="&lt;merchant_token&gt;"</span>
+</code></pre>
 
-<p>If a request requires the authentication of the merchant, the merchant&rsquo;s API token has to be transferred within the <code class="prettyprint">Authorize</code> header.</p>
-
-<p><code class="prettyprint">Authorization: Token token=&quot;&lt;merchant_token&gt;&quot;</code></p>
+<p>If a request requires the authentication of the merchant, the merchant&rsquo;s API token has to be transferred within the <code class="prettyprint">Authorization</code> header.</p>
 
 <h3 id="javascript-api">JavaScript API</h3>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">authenticateMerchant</span><span class="p">(</span><span class="s1">'merchant_token'</span><span class="p">);</span>
 
-<p>When using the JavaScript API you have to authenticate yourself <em>before</em> your first request of a protected function by using your merchant API token. The authentication itself works by the method <code class="prettyprint">authenticateMerchant()</code> with an instance of the isaac10 object:</p>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isaac10</span><span class="p">.</span><span class="nx">merchantToken</span><span class="p">);</span>
+<span class="c1">// =&gt; "merchant_token"</span>
+</code></pre>
 
-<p>As mentionned above the request <code class="prettyprint">authenticateMerchant()</code> <em>won&rsquo;t</em> create a HTTP request. The merchant&rsquo;s API token gets stored in the <em>isaac10</em> object and returned (if necessary) with every request.</p>
+<p>When using the JavaScript API you have to authenticate yourself <em>before</em> your first request of a protected function by using your merchant API token. The authentication itself works by the method <code class="prettyprint">authenticateMerchant()</code> with an instance of the isaac10 object. (shown right)</p>
 
-<p>He will be set as property as well and can be displayed with the <em>isaac10</em> object:</p>
+<p>Like the equivalent function for the customer, the request <code class="prettyprint">authenticateMerchant()</code> <em>won&rsquo;t</em> create a HTTP request. The merchant&rsquo;s API token gets stored in the <em>isaac10</em> object and returned (if necessary) with every request.</p>
 
 <aside class="notice">
-Both methods of authentication can be operated independently one of another. Both, customer and merchant API token can be set at the same time.
+Both methods of authentication can be operated independently one of another. Both customer and merchant API token can be set at the same time. But keep in mind that the merchant token will grant access to the data of _every_ customer of the merchant. You should _never_ set the merchant token when a customer is logged in.
 </aside>
 
           <h1 id="public-functions">Public Functions</h1>
