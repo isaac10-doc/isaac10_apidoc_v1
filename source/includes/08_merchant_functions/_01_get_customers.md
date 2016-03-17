@@ -1,5 +1,7 @@
 ## List all customers
 
+List all customers of the merchant. Customers without an ongoing subscription are included, but deleted customers (shown as "deleted" in the customer listing in the merchant backend) are not.
+
 ```http
 GET /api/v1/customers HTTP/1.1
 ```
