@@ -2480,6 +2480,8 @@ Before making the function call, the <a href="#customer-authentication">customer
           <h1 id="merchant-functions">Merchant functions</h1>
 
           <h2 id="list-all-customers">List all customers</h2>
+
+<p>List all customers of the merchant. Customers without an ongoing subscription are included, but deleted customers (shown as &ldquo;deleted&rdquo; in the customer listing in the merchant backend) are not.</p>
 <pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1/customers</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 </code></pre>
 <pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">getCustomers</span><span class="p">();</span>
