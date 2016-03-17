@@ -51,7 +51,9 @@ includes:
   - 08_merchant_functions/01_get_customers
   - 08_merchant_functions/02_set_customer_custom_data
   - 08_merchant_functions/03_get_customer_custom_data
-  - 08_merchant_functions/04_create_billitem
+  - 08_merchant_functions/04_get_clearance
+  - 08_merchant_functions/05_clear_bill
+  - 08_merchant_functions/06_create_bill_item
   - 09_payment_methods/00_headline
   - 09_payment_methods/01_possible_payment_methods
   - 09_payment_methods/02_invoice
@@ -64,9 +66,6 @@ includes:
   - 10_isaac10_UI/03_registration_new_customer
   - 10_isaac10_UI/04_override_translation
   - 10_isaac10_UI/05_custom_template
-
-
-
 
 search: true
 ---
