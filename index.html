@@ -2480,8 +2480,6 @@ Before making the function call, the <a href="#customer-authentication">customer
           <h1 id="merchant-functions">Merchant functions</h1>
 
           <h2 id="list-all-customers">List all customers</h2>
-
-<p>List all customers of the merchant. Customers without an ongoing subscription are included, but deleted customers (shown as &ldquo;deleted&rdquo; in the customer listing in the merchant backend) are not.</p>
 <pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1/customers</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 </code></pre>
 <pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">getCustomers</span><span class="p">();</span>
@@ -2506,6 +2504,8 @@ Before making the function call, the <a href="#customer-authentication">customer
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+
+<p>List all customers of the merchant. Customers without an ongoing subscription are included, but deleted customers (shown as &ldquo;deleted&rdquo; in the customer listing in the merchant backend) are not.</p>
 
 <aside class="success">
 Before making the function call, you must <a href="#merchant-authentication">authenticate yourself</a>.
@@ -2580,6 +2580,87 @@ Before making the function call, you must <a href="#merchant-authentication">aut
 <aside class="success">
 Before making the function call, you must <a href="#merchant-authentication">authenticate yourself</a>.
 </aside>
+
+          <h2 id="list-bill-clearance">List bill clearance</h2>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1/bills</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">getClearance</span><span class="p">();</span>
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"bills"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w">                      </span><span class="mi">123</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"product_name"</span><span class="p">:</span><span class="w">           </span><span class="s2">"name of the product"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"customer_number"</span><span class="p">:</span><span class="w">        </span><span class="s2">"100001"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"currency"</span><span class="p">:</span><span class="w">               </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"brutto_amount"</span><span class="p">:</span><span class="w">           </span><span class="mi">11900</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"netto_amount"</span><span class="p">:</span><span class="w">            </span><span class="mi">10000</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"vat_amount"</span><span class="p">:</span><span class="w">               </span><span class="mi">1190</span><span class="p">,</span><span class="w">
+
+      </span><span class="nt">"bill_items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"invoice_text"</span><span class="p">:</span><span class="w">       </span><span class="s2">"the text appearing on the PDF invoice document"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"brutto_base_amount"</span><span class="p">:</span><span class="w">  </span><span class="mi">4760</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"netto_base_amount"</span><span class="p">:</span><span class="w">   </span><span class="mi">4000</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"vat_base_amount"</span><span class="p">:</span><span class="w">      </span><span class="mi">760</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"brutto_amount"</span><span class="p">:</span><span class="w">       </span><span class="mi">9520</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"netto_amount"</span><span class="p">:</span><span class="w">        </span><span class="mi">8000</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"vat_amount"</span><span class="p">:</span><span class="w">          </span><span class="mi">1520</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w">               </span><span class="mi">2</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"billed_from"</span><span class="p">:</span><span class="w">        </span><span class="s2">"2016-03-17"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"billed_to"</span><span class="p">:</span><span class="w">          </span><span class="s2">"2016-04-16"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>List all bills in the system that are not cleared. These appear in <strong>Bills &gt; Clearance</strong> (german: <strong>Rechnungen &gt; Rechnungsfreigabe</strong>) in the merchant backend. Please note that these bills do not have a bill number. The bill number is generated when a bill get&rsquo;s cleared.</p>
+
+<aside class="success">
+Before making the function call, you must <a href="#merchant-authentication">authenticate yourself</a>.
+</aside>
+
+          <h2 id="clear-bill">Clear bill</h2>
+<pre class="highlight http"><code><span class="err">PATCH /api/v1/clearance/&lt;bill_id&gt;
+</span></code></pre>
+<pre class="highlight javascript"><code><span class="nx">isaac10</span><span class="p">.</span><span class="nx">clearBill</span><span class="p">(</span><span class="s2">"bill_id"</span><span class="p">);</span>
+</code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Clears the bill with the given ID.</p>
+
+<aside class="success">
+Before making the function call, you must <a href="#merchant-authentication">authenticate yourself</a>.
+</aside>
+
+<h3 id="params">Params</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>bill_id</strong></td>
+<td>The ID of the bill to clear. Retrieve it by calling <a href="#list-bill-clearance">List Bill Clearance</a>.</td>
+</tr>
+</tbody></table>
 
           <h2 id="creating-an-extra-bill-item">Creating an extra bill item</h2>
 <pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/v1/bill_items</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
