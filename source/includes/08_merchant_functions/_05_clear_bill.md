@@ -1,7 +1,7 @@
 ## Clear bill
 
 ```http
-PATCH /api/v1/clearance/<bill_id>
+PATCH /api/v1/clearance/<bill_id> HTTP/1.1
 ```
 
 ```javascript
