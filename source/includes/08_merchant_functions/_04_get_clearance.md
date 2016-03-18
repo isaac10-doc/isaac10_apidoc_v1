@@ -1,7 +1,5 @@
 ## List bill clearance
 
-List all bills in the system that are not cleared. These appear in **Bills > Clearance** (german: **Rechnungen > Rechnungsfreigabe**) in the merchant backend. Please note that these bills do not have a bill number. The bill number is generated when a bill get's cleared.
-
 ```http
 GET /api/v1/bills HTTP/1.1
 ```
@@ -44,6 +42,8 @@ isaac10.getClearance();
   ]
 }
 ```
+
+List all bills in the system that are not cleared. These appear in **Bills > Clearance** (german: **Rechnungen > Rechnungsfreigabe**) in the merchant backend. Please note that these bills do not have a bill number. The bill number is generated when a bill get's cleared.
 
 <aside class="success">
 Before making the function call, you must <a href="#merchant-authentication">authenticate yourself</a>.

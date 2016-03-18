@@ -1,7 +1,5 @@
 ## List all customers
 
-List all customers of the merchant. Customers without an ongoing subscription are included, but deleted customers (shown as "deleted" in the customer listing in the merchant backend) are not.
-
 ```http
 GET /api/v1/customers HTTP/1.1
 ```
@@ -29,6 +27,8 @@ isaac10.getCustomers();
   ]
 }
 ```
+
+List all customers of the merchant. Customers without an ongoing subscription are included, but deleted customers (shown as "deleted" in the customer listing in the merchant backend) are not.
 
 <aside class="success">
 Before making the function call, you must <a href="#merchant-authentication">authenticate yourself</a>.
