@@ -60,12 +60,14 @@ includes:
   - 09_payment_methods/03_SEPA
   - 09_payment_methods/04_credit_card
   - 09_payment_methods/05_paypal
-  - 10_isaac10_UI/00_headline
-  - 10_isaac10_UI/01_embedding
-  - 10_isaac10_UI/02_customer_data
-  - 10_isaac10_UI/03_registration_new_customer
-  - 10_isaac10_UI/04_override_translation
-  - 10_isaac10_UI/05_custom_template
+  - 20_isaac10_UI/00_headline
+  - 20_isaac10_UI/01_embedding
+  - 20_isaac10_UI/02_customer_data
+  - 20_isaac10_UI/03_registration_new_customer
+  - 20_isaac10_UI/04_override_translation
+  - 20_isaac10_UI/05_custom_template
+  - 90_additional_information/00_headline
+  - 90_additional_information/01_enabled_billing_intervals
 
 search: true
 ---
