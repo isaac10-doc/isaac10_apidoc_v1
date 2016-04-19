@@ -54,5 +54,5 @@ Parameter | Description
 ----------|-------------
 **customer_number** (in URL) | The number identifying the customer.
 **subscription_id** (in URL) | The ID of the subscription.
-**next_billing_interval** | The period of billing, offered by the merchant. <ul><li>required</li><li>possible values: `monthly`, `quarterly`, `yearly`</li><li>The billing interval must be enabled for the subscription (See also: [Enabled billing intervals](#enabled-billing-intervals))</li></ul>
-**additions** | The addition for a plan. <ul> <div style="text-align: left;"> <li> an addition with the given **nid** must exist for the plan to be changed </li><li> **quantify** must be a natural number </li></ul>
+**billing_interval** | The period of billing, offered by the merchant. <ul><li>required</li><li>possible values: `monthly`, `quarterly`, `yearly`</li><li>The billing interval must be enabled for the subscription (See also: [Enabled billing intervals](#enabled-billing-intervals))</li></ul>
+**additions** | The addition for a plan. <ul><li>an addition with the given **nid** must exist for the plan to be changed</li><li>**quantify** must be a natural number</li></ul>
