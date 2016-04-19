@@ -1,0 +1,16 @@
+<h2 id="enabled-billing-intervals">Enabled billing intervals</h2>
+
+<p><em>isaac10</em> offers three billing intervals:</p>
+
+<ul>
+<li>  monthly</li>
+<li>  quarterly</li>
+<li>  yearly</li>
+</ul>
+
+<p>Not all billing intervals are available at all times. A billing interval is <em>enabled</em> when there is a price defined for that billing interval:</p>
+
+<ul>
+<li>  When <a href="#register">registering a new customer</a>, <a href="#adding-a-new-subscription">adding a new subscription</a> or <a href="#upgrading-downgrading-a-subscription">upgrading/downgrading a subscription</a>, the billing interval must be enabled on the <em>plan</em> that should be subscribed.</li>
+<li>  When <a href="#updating-a-subscription">updating a subscription</a>, the billing interval must be enabled on the <em>subscription</em> you are about to update. There may be billing intervals available for a specific subscription that are not available for it&rsquo;s plan and vice versa as you, as a merchant, can edit a subscription in you merchant backend and add or remove prices for the subscription. This alters the enabled billing intervals <em>for the subscription</em> without altering the plan.</li>
+</ul>
