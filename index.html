@@ -2544,6 +2544,44 @@ Before making the function call, you must <a href="#merchant-authentication">aut
 </tr>
 </tbody></table>
 
+          <h2 id="create-a-new-customer">Create a new customer</h2>
+<pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/v1/customers</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="c1">// no implementation yet</span>
+</code></pre>
+
+<blockquote>
+<p>Request body / Params</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w">    </span><span class="s2">"customer@example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"success"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"customer_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"100001"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"customer_token"</span><span class="p">:</span><span class="w">  </span><span class="s2">"abc123"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Create a new customer for the merchant. The created customer will not have a billing address, no payment information and no subscription. The customer is also created as <em>confirmed</em> (i.e. no double-opt-in) and can therefore log in immediately after it&rsquo;s creation.</p>
+
+<aside class="warning">
+Using this REST call will bypass the normal customer registration. <b>There will be no emails sent to the customer.</b>
+</aside>
+
+<aside class="success">
+Before making the function call, you must <a href="#merchant-authentication">authenticate yourself</a>.
+</aside>
+
           <h2 id="set-customer-custom-data">Set customer custom data</h2>
 <pre class="highlight http"><code><span class="nf">PATCH</span> <span class="nn">/api/v1/customers/&lt;customer_number&gt;/custom_data</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 </code></pre>
