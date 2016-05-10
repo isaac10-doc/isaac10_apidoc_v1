@@ -49,11 +49,12 @@ includes:
   - 07_billing/02_download_bills
   - 08_merchant_functions/00_headline
   - 08_merchant_functions/01_get_customers
-  - 08_merchant_functions/02_set_customer_custom_data
-  - 08_merchant_functions/03_get_customer_custom_data
-  - 08_merchant_functions/04_get_clearance
-  - 08_merchant_functions/05_clear_bill
-  - 08_merchant_functions/06_create_bill_item
+  - 08_merchant_functions/02_create_customer
+  - 08_merchant_functions/03_set_customer_custom_data
+  - 08_merchant_functions/04_get_customer_custom_data
+  - 08_merchant_functions/05_get_clearance
+  - 08_merchant_functions/06_clear_bill
+  - 08_merchant_functions/07_create_bill_item
   - 09_payment_methods/00_headline
   - 09_payment_methods/01_possible_payment_methods
   - 09_payment_methods/02_invoice
