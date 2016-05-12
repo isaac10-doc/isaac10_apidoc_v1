@@ -62,7 +62,7 @@ Parameter | Description
 **coupon_code** | Code number of the coupon. <ul> <li>optional</li> <li>if coupon code is transferred, must be valuable and activated</li> </ul>
 **email** | Mail adress of the customer. <ul> <li>required</li> <li>has to contain the `@` character</li> <li>must not have already been assigned to this subdomain or this merchant</li> </ul>
 **password** | Customer's password for Login. <ul> <li>required</li> <li>must contain at least 6 characters</li> </ul>
-**locale** | The language of the customer. <ul><li>optional (default: <code>"de"</code>)</li><li>allowed values: <code>"de", "en", "fr", "it", "es"</code></li></ul> When used in the JavaScript library and **locale** is not passed, the transmitted locale of the browser is used.
+**locale** | The language of the customer. <ul><li>optional (default: <code>"de"</code>)</li><li>allowed values: <code>"de", "en", "fr", "it", "es"</code>, depending on the languages enabled in the merchant backend (**Settings > Language Settings** / **Konfiguration > Spracheinstellungen**)</li></ul> When used in the JavaScript library and **locale** is not passed, the transmitted locale of the browser is used.
 
 ### Response
 
