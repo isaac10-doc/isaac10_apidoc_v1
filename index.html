@@ -716,7 +716,7 @@ A description for all parameters will follow.
 </tr>
 <tr>
 <td><strong>locale</strong></td>
-<td>The language of the customer. <ul><li>optional (default: <code>&quot;de&quot;</code>)</li><li>allowed values: <code>&quot;de&quot;, &quot;en&quot;, &quot;fr&quot;, &quot;it&quot;, &quot;es&quot;</code></li></ul> When used in the JavaScript library and <strong>locale</strong> is not passed, the transmitted locale of the browser is used.</td>
+<td>The language of the customer. <ul><li>optional (default: <code>&quot;de&quot;</code>)</li><li>allowed values: <code>&quot;de&quot;, &quot;en&quot;, &quot;fr&quot;, &quot;it&quot;, &quot;es&quot;</code>, depending on the languages enabled in the merchant backend (<strong>Settings &gt; Language Settings</strong> / <strong>Konfiguration &gt; Spracheinstellungen</strong>)</li></ul> When used in the JavaScript library and <strong>locale</strong> is not passed, the transmitted locale of the browser is used.</td>
 </tr>
 </tbody></table>
 
@@ -2547,16 +2547,17 @@ Before making the function call, you must <a href="#merchant-authentication">aut
           <h2 id="create-a-new-customer">Create a new customer</h2>
 <pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/v1/customers</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 </code></pre>
-<pre class="highlight javascript"><code><span class="c1">// no implementation yet</span>
+<pre class="highlight javascript"><code><span class="c1">// not implemented, REST only</span>
 </code></pre>
 
 <blockquote>
-<p>Request body / Params</p>
+<p>Request body</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"email"</span><span class="p">:</span><span class="w">    </span><span class="s2">"customer@example.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="w">
+    </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"locale"</span><span class="p">:</span><span class="w">   </span><span class="s2">"de"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -2581,6 +2582,34 @@ Using this REST call will bypass the normal customer registration. <b>There will
 <aside class="success">
 Before making the function call, you must <a href="#merchant-authentication">authenticate yourself</a>.
 </aside>
+
+<h3 id="params">Params</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>email,</strong><br><strong>password,</strong><br><strong>locale</strong></td>
+<td>The email, password and locale for the new customer. See <a href="#register">Register</a> for further details.</td>
+</tr>
+</tbody></table>
+
+<h3 id="response">Response</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>customer_number,</strong><br><strong>customer_token</strong></td>
+<td>The customer number und customer token of the created customer.</td>
+</tr>
+</tbody></table>
 
           <h2 id="set-customer-custom-data">Set customer custom data</h2>
 <pre class="highlight http"><code><span class="nf">PATCH</span> <span class="nn">/api/v1/customers/&lt;customer_number&gt;/custom_data</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
